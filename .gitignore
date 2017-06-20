@@ -11,7 +11,7 @@ db.sqlite3
 media
 
 ### PyCharm ###
-.idea
+.idea/
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
