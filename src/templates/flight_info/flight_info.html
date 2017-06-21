@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load staticfiles %}
 
-</body>
-</html>
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/flight_info.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1><span class="glyphicon glyphicon-off"></span>Viewing flight_info.html</h1>
+{% endblock %}

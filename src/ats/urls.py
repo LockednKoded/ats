@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^flights/', include('flight_info.urls')),
 ]
 
 if settings.DEBUG:

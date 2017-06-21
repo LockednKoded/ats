@@ -1,0 +1,60 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Website Title & Description for Search Engine purposes -->
+    {% block title %}<title>ATS</title>{% endblock %}
+    <meta name="description" content="">
+    <meta charset="utf-8">
+
+    <!-- Mobile viewport optimized -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+
+    <!-- Custom Base CSS -->
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    <!-- Custom app/module CSS-->
+    {% block style %}{% endblock %}
+
+    <!-- Include Modernizr in the head, before any other Javascript -->
+    <script src="{% static 'bootstrap/js/modernizr-2.6.2.min.js' %}"></script>
+</head>
+
+<body>
+
+    <h1>Viewing base.html</h1>
+    {% block content %}
+    {% endblock %}
+
+
+
+
+
+
+
+
+    <!-- All Javascript at the bottom of the page for faster page loading -->
+
+	<!-- First try for the online version of jQuery-->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<!-- If no online access, fallback to our hardcoded version of jQuery -->
+	<script>window.jQuery || document.write('<script src="{% static 'bootstrap/js/jquery-3.2.1.min.js' %}"><\/script>')</script>
+
+	<!-- Bootstrap JS -->
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+	<!-- Custom Base JS -->
+	<script src="{% static 'js/base.js' %}"></script>
+
+    <!-- Custom app/module JS-->
+    {% block script %}{% endblock %}
+
+</body>
+</html>
