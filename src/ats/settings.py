@@ -56,7 +56,7 @@ ROOT_URLCONF = 'ats.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Looks for 'templates' folder in BASE_DIR ie. src folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
