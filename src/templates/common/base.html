@@ -28,9 +28,30 @@
 
 <body>
 
-    <h1>Viewing base.html</h1>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="bar">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" id="logo" href=""><i class="glyphicon glyphicon-plane"></i> Airport Terminal Services</a>
+		</div>
+		<div class="collapse navbar-collapse" id="mynavbar">
+		<ul class="nav navbar-nav navbar-right">
+		  <li class="tabs"><a href=""><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i> Login</a></li>
+		</ul>
+		</div>
+	  </div>
+	</nav>
+
+    <div class="container-fluid">
+        <div class="row center col-sm-12">
     {% block content %}
     {% endblock %}
+        </div>
+    </div>
 
 
 
