@@ -1,23 +1,49 @@
 # Airport Terminal Services (ats) system
 
-ATS is a system to digitise the services offered by an airport termianl, for both both passengers and employees.
+ATS is a system to digitise the services offered by an airport terminal, for both both passengers and employees.
 
 ### Instructions
+  
+  - Base HTML files are put in <br>
+    `src/templates/common/base.html`
+    
+    And they can be used like:<br>
+    `common/base.html`  
+  
   - Place your template files in 
     `src/templates/your-module-name/your-file.html`
     
     And then in your views refer to them as:
-    `your-module-name/your-file.html`
-    Extend your HTML template from base.html
-
-
-  - Place your static files in 
-    `src/static/js/your-module-name/your-file.js`
-    `src/static/css/your-module-name/your-file.css`
+    `your-module-name/your-file.html`<br>
+    Extend your HTML template from base.html:
+    `{% extends 'common/base.html' %}` as first statement in your template 
+    and write your `{% block content %}`
+  
+  
+  
+  - Base static files (css,javascript,images) are placed in eg.<br> 
+    `src/static/js/common/base.js`<br>
+    `src/static/css/common/base.css`<br>
+    `src/static/images/common/base.jpg`<br>
     
-    And then in your template refer to them as:
-    `{% static 'js/your-module-name/your-file.js' %}`
-    `{% static 'css/your-module-name/your-file.css' %}`
+    And then in your template refer to them as:<br>
+    `{% static 'js/common/base.js' %}`<br>
+    `{% static 'css/common/base.css' %}`<br>
+    `{% static 'images/common/base.jpg' %}`
+
+  - Place your static files (css,javascript,images) in 
+    `src/static/js/your-module-name/your-file.js`<br>
+    `src/static/css/your-module-name/your-file.css`
+    `src/static/images/your-module-name/your-image.jpg`
+    
+    And then in your template refer to them as:<br>
+    `{% static 'js/your-module-name/your-file.js' %}`<br>
+    `{% static 'css/your-module-name/your-file.css' %}`<br>
+    `{% static 'images/your-module-name/your-image.jpg' %}`
+    
+    also load static files at the top of your template, like so:<br>
+    `{% load staticfiles %}` below the `{% extends 'common/base.html' %}`
+    
 
 ### Development
 
