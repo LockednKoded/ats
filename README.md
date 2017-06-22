@@ -4,6 +4,9 @@ ATS is a system to digitise the services offered by an airport terminal, for bot
 
 ### Instructions
   
+  - Name your branches in the pattern <br>
+    `your_module_name - branch_name`
+    
   - Base HTML files are put in <br>
     `src/templates/common/base.html`
     
@@ -37,8 +40,8 @@ ATS is a system to digitise the services offered by an airport terminal, for bot
     `src/static/images/your-module-name/your-image.jpg`
     
     And then in your template refer to them as:<br>
-    `{% static 'js/your-module-name/your-file.js' %}`<br>
-    `{% static 'css/your-module-name/your-file.css' %}`<br>
+    `{% static 'js/your-module-name/your-file.js' %}` within `{% block script %}`<br> 
+    `{% static 'css/your-module-name/your-file.css' %}` within `{% block style %}`<br>
     `{% static 'images/your-module-name/your-image.jpg' %}`
     
     also load static files at the top of your template, like so:<br>
