@@ -16,10 +16,10 @@ class Flight(models.Model):
     operation_days = models.CommaSeparatedIntegerField(max_length=50)
     approved_plan = models.BooleanField(default=False)
     status_delayed = models.BooleanField(default=False)
-    scheduled_arrival = models.DateTimeField(auto_now=False, auto_now_add=False)
-    scheduled_departure = models.DateTimeField(auto_now=False, auto_now_add=False)
-    revised_arrival = models.DateTimeField(auto_now=False, auto_now_add=False)
-    revised_departure = models.DateTimeField(auto_now=False, auto_now_add=False)
+    scheduled_arrival = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
+    scheduled_departure = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
+    revised_arrival = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
+    revised_departure = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
 
     def ___str__(self):
         return self.flight_no
