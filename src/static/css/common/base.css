@@ -1,29 +1,144 @@
-#logo
-{
-    color:white;
-	font-family:sans-serif;
-	font-size:large;
-	font-weight:bold;
-	letter-spacing: 1.2px;
+/*  ******************
+    Global styles
+    ******************
+*/
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
 }
 
-#bar
-{
-	background:#1a237e;
-	border-style:solid;
-	border-color:#e8eaf6;
-	cursor:pointer;
-	position:fixed;
+/*  ******************
+    Navbar Styles
+    ******************
+*/
+
+.navbar {
+    background-color: #0B0B61;
 }
 
-.tabs
-{
-    font-family:sans-serif;
-    font-size:medium;
-    font-weight:bold;
+/* For styling normal nav elements*/
+.navbar .nav li a {
+    color: #EEE;
+}
+.navbar .nav li a:hover {
+    color: #A9E2F3;
 }
 
-.row
-{
-    margin-top:50px;
+/* Styling to override default style for active class*/
+.navbar .navbar-nav li.active a {
+    background-color: #0B0B61;
+    border-bottom: 4px solid #0080FF;
+}
+.navbar .navbar-nav li.active a:hover {
+    background-color: #0B0B61;
+    color: #A9E2F3;
+}
+.navbar .navbar-nav li.active a:focus{
+    background-color: #0B0B61;
+    color: #A9E2F3;
+}
+
+/* For styling nav brand elements*/
+.navbar .navbar-brand {
+    color: #EEE;
+    font-size: 20px;
+}
+.navbar .navbar-brand:hover {
+    color: #A9E2F3;
+}
+
+@media (max-width: 450px) {
+
+    .navbar .navbar-brand {
+        font-size: 17px;
+    }
+}
+@media (max-width: 320px) {
+
+    .navbar .navbar-brand {
+        font-size: 11px;
+    }
+}
+
+
+/* Styling navbar toggle*/
+.navbar .navbar-toggle {
+    border-color: #EEE;
+}
+.navbar .navbar-toggle:hover {
+    background-color: #29088A;
+}
+.navbar .navbar-toggle:focus {
+    background-color: #29088A;
+}
+
+/*Putting border on the right in collapsed state*/
+@media (max-width: 768px) {
+    .navbar .navbar-nav li.active a {
+        border-bottom: 0;
+        border-left: 4px solid #0080FF;
+    }
+}
+
+/*Styling the dropdown*/
+
+/*Overriding default bootstrap styles*/
+.navbar .nav .dropdown.open > a { /*When the drop-down button is clicked*/
+    background-color: #0B0B61;
+    color: #A9E2F3;
+}
+
+.navbar .nav .dropdown .dropdown-menu {
+    background-color: #0B0B61;
+}
+
+.navbar .nav .dropdown .dropdown-menu a {
+    color: #EEE;
+}
+.navbar .nav .dropdown .dropdown-menu a:hover {
+    color: #A9E2F3;
+    background-color: #0B0B61;
+}
+
+.navbar .nav .dropdown .dropdown-menu .divider {
+    background-color: #A9D0F5;
+}
+
+.navbar .nav .dropdown .dropdown-menu .dropdown-header {
+    color: #A9D0F5;
+}
+
+
+/*  ******************
+    Content
+    ******************
+*/
+
+
+.actual_content {
+    margin: 70px 15px;
+}
+
+/*  ******************
+    Footer Styles
+    ******************
+*/
+
+
+footer {
+    background: #333;
+    color: #EEE;
+    font-size: 12px;
+    padding: 20px;
+}
+
+ul.unstyled{
+    list-style: none;
+    padding: 0;
+}
+
+ul.unstyled li a{
+    padding: 5px 0;
+    color: #58ACFA;
 }

@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -14,7 +14,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
 
     <!-- Custom Base CSS -->
     <link href="{% static 'css/common/base.css' %}" rel="stylesheet">
@@ -28,35 +27,143 @@
 
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="bar">
-	  <div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" id="logo" href=""><i class="glyphicon glyphicon-plane"></i> Airport Terminal Services</a>
-		</div>
-		<div class="collapse navbar-collapse" id="mynavbar">
-		<ul class="nav navbar-nav navbar-right">
-		  <li class="tabs"><a href=""><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i> Login</a></li>
-		</ul>
-		</div>
-	  </div>
-	</nav>
+    <div class="container">
 
-    <div class="container-fluid">
-        <div class="row center col-sm-12">
-    {% block content %}
-    {% endblock %}
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+            <!-- Inside container but still occupies full-width because its positioned fixed -->
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar" aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Airport Terminal Services</a>
+                </div><!-- end navbar-header-->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="topNavbar">
+                    <ul class="nav navbar-nav">
+
+                        <li class="{% block about_us_active %}{% endblock %}"><a href="#">About Us</a></li>
+                        <li class="dropdown {% block services_active %}{% endblock %}">
+
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+                                <li><a href="#">Flight Info</a></li>
+								<li><a href="#">Parking</a></li>
+								<li><a href="#">Baggage Handl.</a></li>
+								<li><a href="#">Retitring Rooms</a></li>
+                                <li><a href="#">Security</a></li>
+                                <li><a href="#">Terminals</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header">More Services</li>
+								<li><a href="#">Cargo Ship.</a></li>
+								<li><a href="#">Maintainence</a></li>
+							</ul><!--end opened-menu-->
+
+						</li><!--end dropdown list-->
+                        <li><a href="#" class="{% block contact_us_active %}{% endblock %}">Contact Us</a></li>
+                        <li><a href="#" class="{% block staff_active %}{% endblock %}">Staff</a></li>
+
+                    </ul><!--end nav ul lisr-->
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        {% if request.user.is_authenticated %}
+                            <li><a href="#">Hello,
+                                {{ request.user.username }}
+                            </a></li>
+
+                            <li class="dropdown">
+
+    							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Account<span class="caret"></span></a>
+    							<ul class="dropdown-menu">
+                                    <li><a href="#">Profile</a></li>
+    								<li><a href="#">Logout</a></li>
+    							</ul><!--end opened-menu-->
+
+    						</li><!--end dropdown list-->
+
+                        {% else %}
+                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
+                        {% endif %}
+
+                    </ul><!-- end nav-ul -->
+
+                </div><!--end navbar-collapse-->
+
+            </div><!-- end navbar content container-->
+        </nav><!-- end navbar -->
+
+
+
+
+        <div class="row actual_content">
+            {% block content %}
+            Add your content here.
+            {% endblock %}
         </div>
-    </div>
 
 
 
 
 
+
+
+
+
+    </div><!-- end global container-->
+
+
+    <footer>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-2">
+                    <h6>Copyright &copy; 2017 AAI</h6>
+                </div><!-- end sol-sm-2-->
+
+                <div class="col-sm-4">
+					<h6>About Us</h6>
+					<p>ATS is a system to digitise the services offered by an airport terminal, for both both passengers and employees.</p>
+				</div><!--end col-sm-4-->
+
+                <div class="col-sm-2">
+					<h6>Navigation</h6>
+					<ul class="unstyled">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Services</a></li>
+						<li><a href="#">Coreers</a></li>
+						<li><a href="#">Contact Us</a></li>
+					</ul>
+				</div><!--end colsm-2-->
+
+                <div class="col-sm-2">
+					<h6>Follow Us</h6>
+					<ul class="unstyled">
+						<li><a href="#">Twitter</a></li>
+						<li><a href="#">Facebook</a></li>
+						<li><a href="#">Google+</a></li>
+					</ul>
+				</div><!--end colsm-2-->
+
+                <div class="col-sm-2">
+					<h6>Coded with <span class="glyphicon glyphicon-heart"></span> by AAI Interns 2017</h6>
+
+				</div><!--end colsm-2-->
+
+            </div><!--end row-->
+
+        </div><!--end footter container-->
+
+    </footer><!-- end footer-->
 
 
 
