@@ -1,5 +1,5 @@
-
 from django.db import models
+from django import forms
 
 
 class Flight(models.Model):
@@ -14,7 +14,6 @@ class Flight(models.Model):
     booked_seats = models.PositiveIntegerField(default=0)
     approved_plan = models.BooleanField(default=False)
     operation_days = models.CharField(max_length=13)  # eg. 1,0,1,0,1,0,0 for a flight (M,W,F)
-    status_delayed = models.BooleanField(default=False)
 
     # Time attributes
     scheduled_arrival = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
@@ -25,6 +24,13 @@ class Flight(models.Model):
 
     def ___str__(self):
         return self.flight_no + " - " + self.airline
+
+    def clean(self):
+        # form.is_valid() returns False when ValidationError is raised and user can give correct details then
+        if self.revised_arrival < self.scheduled_arrival:
+            raise forms.ValidationError('Scheduled arrival should be before revised arrival')
+        if self.revised_departure < self.scheduled_departure:
+            raise forms.ValidationError('Scheduled departure should be before revised departure')
 
 
 class Crew(models.Model):
