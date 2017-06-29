@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^login/$', CustomLoginView.as_view(), name="login"),
 
     # /accounts/logout/
-    url(r'^logout/$', auth_views.LogoutView.as_view(), name="logout"),
+    url(r'^logout/$', CustomLogoutView.as_view(), name="logout"),
 
 ]
