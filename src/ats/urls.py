@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^flights/', include('flight_info.urls')),
     url(r'^parking/', include('parking.urls')),
+    url(r'^accounts/', include('accounts.urls')),
 ]
 
 if settings.DEBUG:
