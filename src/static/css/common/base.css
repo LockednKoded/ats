@@ -3,9 +3,16 @@
     ******************
 */
 
+html {
+    height: 100%; /*So that its children elements can have height in %*/
+}
 
 body {
     font-family: 'Open Sans', sans-serif;
+
+    /*Added for fixing footer to bottom of page*/
+    min-height: 100%;
+    position: relative; /*So that we can absoultely position footer inside it*/
 }
 
 /*  ******************
@@ -117,7 +124,10 @@ body {
 
 
 .actual_content {
-    margin: 70px 15px;
+    margin: 70px 15px 0 15px;
+
+    /*Added for fixing footer to bottom of page*/
+    padding-bottom: 12em;
 }
 
 /*  ******************
@@ -125,12 +135,17 @@ body {
     ******************
 */
 
-
 footer {
     background: #333;
     color: #EEE;
     font-size: 12px;
     padding: 20px;
+
+    /*Added for fixing footer to bottom of page*/
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 12em;
 }
 
 ul.unstyled{
