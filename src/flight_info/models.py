@@ -33,6 +33,10 @@ class Flight(models.Model):
             raise forms.ValidationError('Scheduled departure should be before revised departure')
 
 
+def content_file_name(instance):
+    return ' - '.join([instance.crew_id, "photo"])
+
+
 class Crew(models.Model):
     crew_id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -40,6 +44,10 @@ class Crew(models.Model):
     experience = models.PositiveSmallIntegerField(default=0)
     license_no = models.PositiveIntegerField()
     ph_no = models.BigIntegerField()
+    photo = models.ImageField(upload_to=content_file_name, null=True, blank=True,
+                              width_field="width_field", height_field="height_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
 
     # blank=True --> There may be unassigned crew, Crew table doesn't have total participation
     flights = models.ManyToManyField(Flight, blank=True)
