@@ -2,9 +2,13 @@ from django.db import models
 from django import forms
 
 
+class Airline(models.Model):
+    name = models.CharField(max_length=100)
+
+
 class Flight(models.Model):
     flight_no = models.PositiveIntegerField(primary_key=True)
-    airline = models.CharField(max_length=100)
+    airline = models.ForeignKey(Airline)
     origin = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)
     terminal = models.PositiveSmallIntegerField()
