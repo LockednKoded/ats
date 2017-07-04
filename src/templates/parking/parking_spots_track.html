@@ -1,0 +1,16 @@
+<center>
+    <h1><span class="glyphicon glyphicon-map-marker"></span></h1>
+    <h4 class="black thick">Check for Parking Availability</h4><br/>
+{% if spots %}
+    <p> <span class="blue">Spots Available :</span> {{spots.spots_available}}<br/>
+        <span class="blue">Spots Booked :</span> {{spots.spots_occupied}}<br/>
+        <span class="red">Last Updated :</span> {{spots.last_updated}}<br/>
+    </p>
+{% else %}
+    <p> <span class="blue">Spots Available :</span> No Data Available<br/>
+        <span class="blue">Spots Booked :</span> No Data Available<br/>
+        <span class="red">Try Again Later !</span>
+    </p>
+{% endif %}
+    <a href="" ><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-refresh"> Refresh</button></a>
+</center>

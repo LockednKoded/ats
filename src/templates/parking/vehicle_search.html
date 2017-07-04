@@ -1,0 +1,37 @@
+<div id="search_collapse" class="panel-collapse collapse">
+    <form method="get" action="{% url 'search' %}"><br/>
+        Vehicle no:<input type="text" name="vno"/>
+        <input type="submit" value="Search" /><br/><br/>
+    </form>
+</div>
+{% if result %}
+<table>
+    <tr>
+        <td>Vehicle no.</td>
+        <td>Vehicle Type</td>
+        <td>Date</td>
+        <td>Time in</td>
+        <td>Time out</td>
+    </tr>
+    <tr>
+        <td>{{ result.vehicle_no }}</td>
+        <td>{{ result.vehicle_type }}-wheeler</td>
+        <td>{{ result.date }}</td>
+        <td>{{ result.time_in }}</td>
+        <td>{{ result.time_out }}</td>
+    </tr>
+</table>
+{% elif no_match %}
+<table>
+    <tr>
+        <td>Vehicle no.</td>
+        <td>Vehicle Type</td>
+        <td>Date</td>
+        <td>Time in</td>
+        <td>Time out</td>
+    </tr>
+    <tr>
+        <td class="red" colspan="5">NO MATCH FOUND</td>
+    </tr>
+</table>
+{% endif %}
