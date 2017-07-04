@@ -2,6 +2,18 @@
 
 ATS is a system to digitise the services offered by an airport terminal, for both both passengers and employees.
 
+### Dependencies
+To run this project you need to install these packages/dependencies in your virtual environment(preferrably):
+
+- Python 3
+- Django v1.11
+
+- Pillow
+`pip install pillow`
+
+- Django Crispy forms
+`pip install django-crispy-forms`
+
 ### Instructions
   
   - Name your branches in the pattern <br>
