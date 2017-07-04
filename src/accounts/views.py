@@ -1,63 +1,71 @@
-from django.contrib.auth import views as auth_views, authenticate, login
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
-from django.views.generic import FormView
-from django.urls import reverse, reverse_lazy
 
-from .forms import RegisterForm
-# Create your views here.
+from .forms import (LoginForm, RegisterForm,)
 
 
-class CustomLoginView(auth_views.LoginView):
-    # LOGIN_REDIRECT_URL is set to homepage in settings.py
-    template_name = 'accounts/user_form.html'
-    extra_context = {'title_message': 'Login'}
-    redirect_authenticated_user = True  # if a user is already logged in, don't show the form ,just redirect
+def login_view(request):
+    title_message = "Login"
+    submit_message = "Login"
+
+    if not request.user.is_authenticated():
+        if request.method == "POST":
+            form = LoginForm(request.POST)
+
+            if form.is_valid():
+                username = form.cleaned_data.get("username")
+                raw_password = form.cleaned_data.get("password")
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+
+                return redirect("homepage")  # can also write return redirect("/")
+
+        else:
+            form = LoginForm()
+
+        return render(request, 'accounts/user_form.html', {
+            'title_message': title_message,
+            'submit_message': submit_message,
+            'form': form,
+        })
+
+    else:
+        return redirect("homepage")
 
 
-class CustomLogoutView(auth_views.LogoutView):
-    next_page = 'accounts:login'
+def logout_view(request):
+    logout(request)
+    return redirect("homepage")
 
 
-class RegisterView(FormView):
-    form_class = RegisterForm
-    template_name = 'accounts/user_form.html'
-    extra_context = {'title_message': 'Register'}
-    success_url = reverse_lazy('homepage')
+def register_view(request):
+    title_message = "Registration"
+    submit_message = "Register"
 
-    def form_valid(self, form):
-        new_user = form.save(commit=False)
-        user = User.objects.create_user(new_user.username, new_user.email, new_user.password)
-        user.first_name = new_user.first_name
-        user.last_name = new_user.last_name
-        user.save()
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
 
-        user_to_login = authenticate(username=new_user.username,
-                                     password=new_user.password)
-        login(self.request, user_to_login)
-        return super(RegisterView, self).form_valid(form)
+        if form.is_valid():
+            user = form.save(commit=False)
+            raw_password = form.cleaned_data.get("password")
+            user.set_password(raw_password)
+            user.save()
 
-#
-# def register_view(request):
-#     if request.method == "POST":
-#         form = RegisterForm(request.POST)
-#
-#         if form.is_valid():
-#             newuser = form.save(commit=False)
-#             user = User.objects.create_user(newuser.username, newuser.email, newuser.password)
-#             user.first_name = newuser.first_name
-#             user.last_name = newuser.last_name
-#             user.save()
-#
-#             user_to_login = authenticate(username=newuser.username,
-#                                          password=newuser.password)
-#             login(request, user_to_login)
-#             return redirect('homepage')
-#
-#     else:
-#         form = RegisterForm(None)
-#
-#     return render(request, 'accounts/user_form.html', {
-#         'form': form,
-#         'title_message': 'Register'
-#     })
+            # user need to be save before this, signal creates profile on save
+            user_type = form.cleaned_data.get("register_type")
+            user.profile.user_type = user_type
+            user.profile.save()
+
+            new_user = authenticate(username=user.username, password=raw_password)
+            login(request, new_user)
+
+            return redirect('homepage')
+
+    else:
+        form = RegisterForm()
+
+    return render(request, 'accounts/user_form.html', {
+        'title_message': title_message,
+        'submit_message': submit_message,
+        'form': form,
+    })

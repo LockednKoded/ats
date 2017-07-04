@@ -10,7 +10,7 @@
             {% csrf_token %}
             {{ form|crispy }}
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ submit_message }}</button>
         </form>
     </div>
 
