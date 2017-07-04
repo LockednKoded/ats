@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Our apps
     'flight_info.apps.FlightInfoConfig',
     'parking.apps.ParkingConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")  # stores file
 
 # For crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Default login redirect page
+# LOGIN_REDIRECT_URL = 'homepage'
