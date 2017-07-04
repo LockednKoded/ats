@@ -4,18 +4,20 @@ from django.contrib.auth.models import User
 
 from .models import Profile
 
-
+# Reference: https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
+# This class is our profile class
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
-    verbose_name_plural = 'Profile'
-    fk_name = 'user'
+    verbose_name_plural = 'Profile'  # since only a profile is associated with a User model, its plural name will besame
+    fk_name = 'user'  # This is the OneToOne field in the Profile model
 
 
+# This shows our associated profile with the User model, together with the user model edit form in the admin
 class CustomUserAdmin(UserAdmin):
     inlines = (ProfileInline, )
     list_display = ('username', 'first_name', 'is_staff', 'get_user_type')
-    list_select_related = ('profile',)
+    list_select_related = ('profile',)  # To reduce many queries to the database
 
     def get_user_type(self, instance):
         return str(instance.profile.user_type)
@@ -29,6 +31,3 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
-
-# Register your models here.
-# admin.site.register(Profile)

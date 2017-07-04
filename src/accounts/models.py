@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 
 def upload_location(instance, filename):
-    path = "user - {0} - {1}".format(instance.pk, filename)
+    path = "user_{0}-{1}".format(instance.pk, filename)
     return path
 
 
@@ -15,12 +15,15 @@ class BaseProfile(models.Model):
         (1, 'Traveller'),
         (2, 'Employee'),
     )
+
+    # primary_key = True added to deal with concurrency issues in PostGRE SQL
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     user_type = models.IntegerField(default=0, blank=True, choices=USER_TYPES)
     contact_no = models.BigIntegerField(null=True, blank=True)
-    # TODO: File upload not working
     photo = models.ImageField(upload_to=upload_location, null=True, blank=True,
                               width_field="width_field", height_field="height_field")
+
+    # These field are filled automatically when an image is uploaded
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
 
@@ -41,10 +44,12 @@ class TravellerProfile(models.Model):
 
 class EmployeeProfile(models.Model):
     DESIGNATIONS = (
-        (0, 'Small'),
-        (1, 'Medium'),
-        (2, 'High'),
-        (3, 'Very High'),
+        (0, 'Worker'),
+        (1, 'Clerk'),
+        (2, 'Assistant'),
+        (3, 'Manager'),
+        (4, 'Assistant Manager'),
+        (5, 'General Manager')
     )
     DEPARTMENTS = (
         (0, 'Flight/Ticketing'),
@@ -67,10 +72,12 @@ class EmployeeProfile(models.Model):
         abstract = True
 
 
+# This class doesn't have any fields of its own, just inherits form three abstract classes
 class Profile(BaseProfile, TravellerProfile, EmployeeProfile):
     pass
 
 
+# This creates the associated profile when a User model instance is created
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
