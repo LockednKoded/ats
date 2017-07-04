@@ -1,13 +1,14 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django import forms
+from .models import Profile
 
 
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-    def clean(self,*args,**kwargs):  # *args, **kwargs to handle any additional arguments that may be passes
+    def clean(self, *args, **kwargs):  # *args, **kwargs to handle any additional arguments that may be passes
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
 
@@ -71,3 +72,25 @@ class RegisterForm(forms.ModelForm):
         else:
             print("Emails matched")
         return email
+
+
+class TravellerProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = [
+            'contact_no',
+            'photo',
+            'ticket_no',
+            'flight_no',
+        ]
+
+
+class EmployeeProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = [
+            'contact_no',
+            'photo',
+        ]

@@ -4,8 +4,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-def content_file_name(instance):
-    return ' - '.join([instance.user.username, 'photo'])
+def upload_location(instance, filename):
+    path = "user - {0} - {1}".format(instance.pk, filename)
+    return path
 
 
 class BaseProfile(models.Model):
@@ -17,7 +18,8 @@ class BaseProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     user_type = models.IntegerField(default=0, blank=True, choices=USER_TYPES)
     contact_no = models.BigIntegerField(null=True, blank=True)
-    photo = models.ImageField(upload_to=content_file_name, null=True, blank=True,
+    # TODO: File upload not working
+    photo = models.ImageField(upload_to=upload_location, null=True, blank=True,
                               width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
