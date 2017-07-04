@@ -7,8 +7,6 @@ from .forms import (LoginForm, RegisterForm, TravellerProfileForm, EmployeeProfi
 
 
 def login_view(request):
-    title_message = "Login"
-    submit_message = "Login"
 
     if not request.user.is_authenticated():
         if request.method == "POST":
@@ -23,16 +21,16 @@ def login_view(request):
                 return redirect("homepage")  # can also write return redirect("/")
 
         else:
-            form = LoginForm()
+            form = LoginForm()  # deliver empty form on GET request
 
         return render(request, 'accounts/user_form.html', {
-            'title_message': title_message,
-            'submit_message': submit_message,
+            'title_message': "Login",
+            'submit_message': "Login",
             'form': form,
         })
 
     else:
-        return redirect("homepage")
+        return redirect("homepage")  # redirect is user if already authenticated
 
 
 def logout_view(request):
@@ -41,8 +39,6 @@ def logout_view(request):
 
 
 def register_view(request):
-    title_message = "Registration"
-    submit_message = "Register"
 
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -55,7 +51,7 @@ def register_view(request):
 
             user.refresh_from_db()  # Just added in case, no effect observed
 
-            # user need to be save before this, signal creates profile on save
+            # user needs to be save before this, as signal creates profile on user save
             user_type = form.cleaned_data.get("register_type")
             user.profile.user_type = user_type
             user.profile.save()
@@ -66,11 +62,11 @@ def register_view(request):
             return redirect('homepage')
 
     else:
-        form = RegisterForm()
+        form = RegisterForm()  # deliver empty form on get request
 
     return render(request, 'accounts/user_form.html', {
-        'title_message': title_message,
-        'submit_message': submit_message,
+        'title_message': "Registration",
+        'submit_message': "Register",
         'form': form,
     })
 
@@ -80,15 +76,18 @@ def profile_edit_view(request, pk):
     if request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser or (str(request.user.pk) == pk)):
         # pk received from url pattern is a str, hence need to convert request.user's pk also to str
 
-        user = get_object_or_404(User, pk=pk)
+        user = get_object_or_404(User, pk=pk)  # raise 404 error if that specified user isn't found
         profile_instance = user.profile
 
+        # Deliver correct form, depending on user_type
         if profile_instance.user_type == 1:
             form_class = TravellerProfileForm
         else:
             form_class = EmployeeProfileForm
 
         if request.method == "POST":
+
+            # instance = profile_instance fills the form with the current values from database
             form = form_class(request.POST, request.FILES, instance=profile_instance)
             if form.is_valid():
                 profile_instance = form.save(commit=False)
@@ -114,6 +113,8 @@ def profile_detail_view(request, pk):
         # pk received from url pattern is a str, hence need to convert request.user's pk also to str
 
         user = get_object_or_404(User, pk=pk)
+
+        # need to pass this in context to show the correct corresponding fields in detail view
         if user.profile.user_type == 1:
             is_traveller = True
         else:
