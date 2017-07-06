@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'flight_info.apps.FlightInfoConfig',
     'parking.apps.ParkingConfig',
     'accounts.apps.AccountsConfig',
+    'maintenance.apps.MaintenanceConfig',
 ]
 
 MIDDLEWARE = [
