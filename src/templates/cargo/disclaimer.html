@@ -15,12 +15,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="/cargo/try1" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
+    <a href="#" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white"></a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Manage Shipment</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Cargo Booking</a>
     <a href="/cargo/aboutus" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About us</a>
-    <a href="/cargo/helpandsupport" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Help and Support</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Help and Support</a>
 </div>
 
 <!-- Sidebar -->
@@ -29,11 +29,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Quick Links</b></h4>
-  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/guideline">Guideline</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Guideline</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="#">Cargo Procedure</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Fare Table</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/disclaimer">Disclaimer</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/faq">FAQ</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Charge Calculator</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Disclaimer</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">FAQ</a>
 </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->
@@ -41,25 +41,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
+
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Cargo at IGIA</h1>
-      <p>Indira Gandhi International Airport is the largest airport in India by value and our ambition is to become one of world's best airports for cargo. We have listened to our customers and developed a cargo strategy that will take us there.
-Our customers have told us about the bottlenecks caused by some of the infrastructure, inefficient facilities and processes that are slower and more arduous than those of our competitors. Our stakeholders rate us as poor for our facilities and value for money.
-Our cargo strategy will lift freight volumes to 3 million tonnes a year by 2040 through improved service and increased capacity from a third runway. With two runways or three, for cargo customers our aim is to become a trusted partner – timely, reliable and easy to do business with.
-Our plan for cargo
-Halve current throughput times to be more efficient
-Make cargo throughput times predictable to reduce costs
-Grow cargo capacity at the airport to generate additional cargo volumes for our airline partners
-Work with the cargo community, including through engagement and discussion
-Be 100% e-freight compliant to reduce waste, costs and delays
-Be a great airport of choice for cargo
-Provide a safe working environment.</p>
+      <h1 class="w3-text-teal">Disclaimer</h1>
+      <p>“The information at this site is provided by Delhi International Airport Pvt. Ltd. (DIAL) purely as a measure of public facilitation, subject to constant review in accordance with all applicable laws. Although every effort has been made by DIAL to ensure accuracy and correctness, there may be error in the information provided at this site for reasons beyond the control of DIAL. The users of the site are advised to check the validity of the information from their respective authorised sources. Neither DIAL nor any of its directors, employees etc. take any responsibility or liability for any loss or damage suffered by anyone due to any error in the information provided at this site.”</p>
     </div>
    <div class="w3-third w3-container">
-	<img src="C:" style="width:100%;margin-bottom:-6px">
 	      <p></p>
-	<img src="cargo/inventory.jpg" style="width:100%;margin-top:-6px">
 
     </div>
   </div>
@@ -77,11 +66,17 @@ Provide a safe working environment.</p>
   <!-- Pagination -->
 
 
+  <footer id="myFooter">
+    <div>
+      <h4></h4>
+    </div>
 
+    <div class="w3-container w3-theme-l1">
+    </div>
+  </footer>
 
 <!-- END MAIN -->
 </div>
-
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
@@ -106,6 +101,5 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-</div>
 </body>
 </html>
