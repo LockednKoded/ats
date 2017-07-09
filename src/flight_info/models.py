@@ -2,8 +2,17 @@ from django.db import models
 from django import forms
 
 
+class FlightManager(models.Manager):
+
+    def active(self, *args, **kwargs):
+        return super(FlightManager, self).filter(approved_plan=True)
+
+
 class Airline(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class Flight(models.Model):
@@ -26,8 +35,8 @@ class Flight(models.Model):
     revised_departure = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
     time_last_updated = models.DateField(auto_now_add=True)
 
-    def ___str__(self):
-        return self.flight_no + " - " + self.airline
+    objects = FlightManager()
+    # need to be called objects for Flight."objects".all or .active
 
     def clean(self):
         # form.is_valid() returns False when ValidationError is raised and user can give correct details then
@@ -35,6 +44,9 @@ class Flight(models.Model):
             raise forms.ValidationError('Scheduled arrival should be before revised arrival')
         if self.revised_departure < self.scheduled_departure:
             raise forms.ValidationError('Scheduled departure should be before revised departure')
+
+    def __str__(self):
+        return str(self.flight_no) + " - " + self.airline.name
 
 
 def content_file_name(instance):

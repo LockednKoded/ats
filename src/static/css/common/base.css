@@ -12,7 +12,7 @@ body {
 
     /*Added for fixing footer to bottom of page*/
     min-height: 100%;
-    position: relative; /*So that we can absoultely position footer inside it*/
+    position: relative; /*So that we can absolutely position footer inside it*/
 }
 
 /*  ******************
@@ -116,6 +116,17 @@ body {
     color: #A9D0F5;
 }
 
+/* Stopping navbar from breaking into 2 lines in sm size screens*/
+
+@media (max-width: 994px) {
+
+    .navbar .nav li a {
+       padding-left: 6px;
+       padding-right: 6px;
+       font-size: 13px;
+    }
+}
+
 
 /*  ******************
     Content
@@ -127,7 +138,8 @@ body {
     margin: 70px 15px 0 15px;
 
     /*Added for fixing footer to bottom of page*/
-    padding-bottom: 12em;
+    /*Increase this value if footer is covering any content*/
+    padding-bottom: 30em;
 }
 
 /*  ******************
@@ -145,7 +157,8 @@ footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 12em;
+
+    /* height: 12em; // Not adding constant height, because footer takes different size in xs resolution */
 }
 
 ul.unstyled{

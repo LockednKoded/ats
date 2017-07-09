@@ -1,0 +1,107 @@
+{% extends 'common/base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--need to add this, as its enclosed in a table-->
+<div class="col-sm-12">
+
+    <div class="tabbable">
+
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#departureTab" data-toggle="tab">Departure</a></li>
+          <li role="presentation" class=""><a href="#arrivalTab" data-toggle="tab">Arrival</a></li>
+        </ul>
+
+        <br>
+
+        <div class="tab-content">
+
+            <div class="tab-pane active" id="departureTab">
+
+                <!-- Table headers -->
+                <div class="list-group-item row active">
+                    <div class="col-xs-2 display-small-25"><h5>Airline</h5></div>
+                    <div class="col-xs-1 display-small-15"><h5>Flight No</h5></div>
+                    <div class="col-xs-2 display-small-30"><h5>Destination</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>Terminal</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>Concourse</h5></div>
+                    <div class="col-xs-3 display-small-30"><h5>Departure Time</h5></div>
+                    <div class="col-xs-2 not-display-small"><h5>Status</h5></div>
+                </div>
+
+                {% for flight in flight_list %}
+                {% if flight.revised_departure < current_time %}
+
+                <a href="#" class="list-group-item row {% if flight.revised_departure == flight.scheduled_departure %}on-time{% else %}delayed{% endif %}">
+                    <div class="col-xs-2 display-small-25"><h5>{{ flight.airline.name }}</h5></div>
+                    <div class="col-xs-1 display-small-15"><h5>{{ flight.flight_no }}</h5></div>
+                    <div class="col-xs-2 display-small-30"><h5>{{ flight.destination }}</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>{{ flight.terminal }}</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>{{ flight.concourse }}</h5></div>
+                    <div class="col-xs-3 display-small-30"><h5>{{ flight.revised_departure|date:'d M H:i' }} hrs</h5></div>
+                    <div class="col-xs-2 not-display-small">
+                    {% if flight.revised_departure == flight.scheduled_departure %}
+                    <div class="label label-success"><span>On Time</span></div>
+                    {% else %}
+                    <div class="label label-warning"><span>Delayed</span></div>
+                    {% endif %}
+                    </div>
+                </a>
+
+                {% endif %}
+
+                {% empty %}
+                    <p>No flights yet</p>
+                {% endfor %}
+            </div><!-- end tab pane 1 -->
+
+            <div class="tab-pane" id="arrivalTab">
+
+                <!-- Table headers -->
+                <div class="list-group-item row active">
+                    <div class="col-xs-2 display-small-25"><h5>Airline</h5></div>
+                    <div class="col-xs-1 display-small-15"><h5>Flight No</h5></div>
+                    <div class="col-xs-2 display-small-30"><h5>Origin</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>Terminal</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>Concourse</h5></div>
+                    <div class="col-xs-3 display-small-30"><h5>Arrival Time</h5></div>
+                    <div class="col-xs-2 not-display-small"><h5>Status</h5></div>
+                </div>
+
+                {% for flight in flight_list %}
+                {% if flight.revised_arrival > current_time %}
+
+                <a href="#" class="list-group-item row {% if flight.revised_arrival == flight.scheduled_arrival %}on-time{% else %}delayed{% endif %}">
+                    <div class="col-xs-2 display-small-25"><h5>{{ flight.airline.name }}</h5></div>
+                    <div class="col-xs-1 display-small-15"><h5>{{ flight.flight_no }}</h5></div>
+                    <div class="col-xs-2 display-small-30"><h5>{{ flight.origin }}</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>{{ flight.terminal }}</h5></div>
+                    <div class="col-xs-1 not-display-small"><h5>{{ flight.concourse }}</h5></div>
+                    <div class="col-xs-3 display-small-30"><h5>{{ flight.revised_arrival|date:'d M H:i' }} hrs</h5></div>
+                    <div class="col-xs-2 not-display-small">
+                    {% if flight.revised_arrival == flight.scheduled_arrival %}
+                    <div class="label label-success"><span>On Time</span></div>
+                    {% else %}
+                    <div class="label label-warning"><span>Delayed</span></div>
+                    {% endif %}
+                    </div>
+                </a>
+
+                {% endif %}
+
+                {% empty %}
+                    <p>No flights yet</p>
+                {% endfor %}
+            </div><!-- end tab pane 2 -->
+
+        </div><!-- end tab-content -->
+    </div><!-- end tabbable -->
+
+</div>
+{% endblock %}
