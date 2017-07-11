@@ -8,6 +8,13 @@ from .models import Flight, Crew
 from .forms import FlightForm, CrewForm
 
 
+"""
+    /////////////////////
+        Flights views
+    /////////////////////
+"""
+
+
 def list_flights(request):
 
     current_time = timezone.now()
@@ -95,6 +102,13 @@ def edit_flight(request, pk):
         raise PermissionDenied
 
 
+"""
+    /////////////////////
+        Crew views
+    /////////////////////
+"""
+
+
 def list_crew(request):
     queryset = Crew.objects.active()
 
@@ -169,3 +183,30 @@ def edit_crew(request, pk):
 
     else:
         raise PermissionDenied
+
+
+"""
+    /////////////////////
+        Airlines views
+    /////////////////////
+"""
+
+
+def list_airlines(request):
+    return HttpResponse("<h1>List of all airlines</h1>")
+
+
+def add_airlines(request):
+    return HttpResponse("<h1>Add a new airline</h1>")
+
+
+def view_airlines(request,pk):
+    return HttpResponse("<h1>Details for airline " + pk + "</h1>")
+
+
+def delete_airlines(request,pk):
+    return HttpResponse("<h1>Delete airline " + pk + "</h1>")
+
+
+def edit_airlines(request,pk):
+    return HttpResponse("<h1>Edit details of airline " + pk + "</h1>")

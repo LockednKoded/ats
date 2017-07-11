@@ -6,22 +6,38 @@ from django.utils import timezone
 
 # Need tp instantiate these model managers in their respective classes
 class FlightManager(models.Manager):
-
     def active(self, *args, **kwargs):
         return super(FlightManager, self).filter(approved_plan=True)
 
 
 class CrewManager(models.Manager):
-
     def active(self, *args, **kwargs):
         return super(CrewManager, self).filter(in_service=True)
 
 
+
+
+
+def airline_file_name(instance):
+    return ' - '.join(["airline", instance.id, "logo"])
+
+
 class Airline(models.Model):
     name = models.CharField(max_length=100)
+    flight_prefix = models.CharField(max_length=5)
+    license_no = models.PositiveIntegerField()
+    no_of_aircrafts = models.PositiveIntegerField(default=0)
+    logo = models.ImageField(upload_to=airline_file_name, null=True, blank=True,
+                              width_field="width_field", height_field="height_field")
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("flight_info:view-airlines", kwargs={"pk": self.id})
+
 
 
 class Flight(models.Model):
@@ -64,8 +80,10 @@ class Flight(models.Model):
         return reverse("flight_info:view-flight", kwargs={"pk": self.flight_no})
 
 
-def content_file_name(instance):
-    return ' - '.join([instance.crew_id, "photo"])
+
+
+def crew_file_name(instance):
+    return ' - '.join(["crew", instance.crew_id, "photo"])
 
 
 class Crew(models.Model):
@@ -75,7 +93,7 @@ class Crew(models.Model):
     experience = models.PositiveSmallIntegerField(default=0)
     license_no = models.PositiveIntegerField()
     ph_no = models.BigIntegerField()
-    photo = models.ImageField(upload_to=content_file_name, null=True, blank=True,
+    photo = models.ImageField(upload_to=crew_file_name, null=True, blank=True,
                               width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
