@@ -4,10 +4,17 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 
+# Need tp instantiate these model managers in their respective classes
 class FlightManager(models.Manager):
 
     def active(self, *args, **kwargs):
         return super(FlightManager, self).filter(approved_plan=True)
+
+
+class CrewManager(models.Manager):
+
+    def active(self, *args, **kwargs):
+        return super(CrewManager, self).filter(in_service=True)
 
 
 class Airline(models.Model):
@@ -72,13 +79,19 @@ class Crew(models.Model):
                               width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
+    in_service = models.BooleanField(default=True)
 
     # blank=True --> There may be unassigned crew, Crew table doesn't have total participation
     flights = models.ManyToManyField(Flight, blank=True)
 
-    def ___str__(self):
+    objects = CrewManager()
+
+    def __str__(self):
 
         if self.pilot:
-            return self.crew_id + " " + self.name + " - " + "Pilot"
+            return str(self.crew_id) + " " + self.name + " - " + "Pilot"
         else:
-            return self.crew_id + " " + self.name + " - " + "Crew"
+            return str(self.crew_id) + " " + self.name + " - " + "Crew"
+
+    def get_absolute_url(self):
+        return reverse("flight_info:view-crew", kwargs={"pk": self.crew_id})

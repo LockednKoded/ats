@@ -96,7 +96,20 @@ def edit_flight(request, pk):
 
 
 def list_crew(request):
-    return HttpResponse("<h1>Crew list</h1>")
+    queryset = Crew.objects.active()
+
+    if request.user.is_superuser or request.user.is_staff:
+        queryset = Crew.objects.all()
+
+    query = request.GET.get("q")
+    if query:
+        queryset = queryset.filter(
+            Q(crew_id__icontains=query) |
+            Q(name__icontains=query) |
+            Q(flights__flight_no__icontains=query)
+        ).distinct()
+
+    return render(request, 'flight_info/list_crew.html', {'crew_list': queryset, })
 
 
 def add_crew(request):
