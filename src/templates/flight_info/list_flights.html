@@ -11,7 +11,26 @@
 <!--need to add this, as its enclosed in a table-->
 <div class="col-sm-12">
 
-    <h3>Flights' Schedule</h3><br>
+    <div class="row page-header">
+        <div class="col-sm-8">
+            <h3>Flights' Schedule</h3><br>
+        </div>
+        <div class="col-sm-4">
+
+            <form id="search" method="GET" action="">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-12">
 
