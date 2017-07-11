@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 
 from .models import Flight, Crew
-from .forms import FlightForm
+from .forms import FlightForm, CrewForm
 
 
 def list_flights(request):
@@ -113,7 +113,25 @@ def list_crew(request):
 
 
 def add_crew(request):
-    return HttpResponse("<h1>Add crew</h1>")
+    if request.user.is_superuser or request.user.is_staff:
+        if request.method == "POST":
+            form = CrewForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                crew = form.save(commit=False)
+                crew.save()
+
+                return redirect("flight_info:list-crew")
+        else:
+            form = CrewForm()
+
+        return render(request, 'flight_info/form.html', {
+            'title_message': 'Add new crew',
+            'submit_message': 'Add',
+            'form':form,
+        })
+    else:
+        raise PermissionDenied
 
 
 def view_crew(request, pk):
@@ -121,8 +139,33 @@ def view_crew(request, pk):
 
 
 def delete_crew(request, pk):
-    return HttpResponse("<h1>Delete " + pk + " crew</h1>")
+    if request.user.is_superuser or request.user.is_staff:
+        crew = get_object_or_404(Crew, crew_id=pk)
+        crew.delete()
+        return redirect("flight_info:list-crew")
+    else:
+        raise PermissionDenied
 
 
 def edit_crew(request, pk):
-    return HttpResponse("<h1>Edit " + pk + " crew</h1>")
+    if request.user.is_superuser or request.user.is_staff:
+        crew_instance = get_object_or_404(Crew,crew_id=pk)
+        if request.method == "POST":
+
+            form = CrewForm(request.POST, request.FILES, instance=crew_instance)
+            if form.is_valid():
+                crew = form.save(commit=False)
+                crew.save()
+
+                return redirect("flight_info:list-crew")
+        else:
+            form = CrewForm(instance=crew_instance)
+
+        return render(request, 'flight_info/form.html', {
+            'title_message': 'Add new crew',
+            'submit_message': 'Add',
+            'form': form,
+        })
+
+    else:
+        raise PermissionDenied

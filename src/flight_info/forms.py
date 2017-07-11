@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Flight
+from .models import Flight, Crew
 
 
 class FlightForm(forms.ModelForm):
@@ -31,3 +31,27 @@ class FlightForm(forms.ModelForm):
             flights_qs = Flight.objects.get(flight_no=flight_no)
             if flights_qs.exists():
                 raise forms.ValidationError("Flight with same no. already exists")
+
+
+class CrewForm(forms.ModelForm):
+
+    class Meta:
+        model = Crew
+        fields = [
+            'crew_id',
+            'name',
+            'pilot',
+            'experience',
+            'license_no',
+            'ph_no',
+            'photo',
+            'in_service',
+            'flights',
+        ]
+
+        def clean__crew_id(self):
+            crew_id = self.cleaned_data.get('crew_id')
+
+            crew_qs = Crew.objects.get(crew_id=crew_id)
+            if crew_qs.exists():
+                raise forms.ValidationError("Crew with same id already exists")
