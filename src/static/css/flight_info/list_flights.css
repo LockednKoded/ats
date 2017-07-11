@@ -1,90 +1,21 @@
-/* Styles of On-time/Delayed labels */
+/* Styles of On-time/Delayed/Un-Approved labels */
 
 .label {
     display: inline-block; /*by default display:inline, hence need to change to apply margin top/bottom correctly*/
-    padding: 7px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding: 3px;
 }
 .label span {
-    font-size: 13px;
-}
-
-/* To bold the table header */
-.list-group-item.active h5 {
-    font-weight: 600;
-}
-
-
-/* ///////////////////////////////////////
-    To handle sizes on medium screen sizes
-   /////////////////////////////////////// */
-
-@media (max-width: 990px) {
-    h5 {
-        font-size: 13px;
-    }
-
-    .label {
-        padding: 5px;
-    }
-    .label span {
-        font-size: 11px;
-    }
-
-    .list-group-item.active h5 {
-        overflow: hidden;
-    }
-
-    /*
-    .ellipses {
-    white-space: nowrap;
-    overflow: hidden;
-    //text-overflow: ellipsis;
-    }*/
+    font-size: 11px;
 }
 
 /* ///////////////////////////
-    Styles on list group items
+    Styles for table rows
    /////////////////////////// */
 
-.on-time {
-    background: #DFF0D8;
+/* Override this to change table ow hover color
+.table-hover > tbody > tr.success:hover > td {
+    background-color: #1870da;
 }
+*/
 
-.delayed {
-    background: #FCF8E3;
-}
-
-
-/* Overriding bootstrap default style of grey color for hover */
-a.list-group-item.on-time:hover {
-    background: #a4d491;
-}
-
-a.list-group-item.delayed:hover {
-    background: #f3e28c;
-}
-
-
-
-/* ////////////////////////////////////////////////////////////////////////////////
-    On small screen size, hide some columns of the table, and redistribute the grid
-   //////////////////////////////////////////////////////////////////////////////// */
-
-
-@media (max-width: 560px) {
-    .not-display-small {
-        display: none;
-    }
-
-    .display-small-15 {
-        width: 15%;
-    }
-    .display-small-25 {
-        width: 25%;
-    }
-    .display-small-30 {
-        width: 30%;
-    }
-}
+tr[data-href] { cursor: pointer }

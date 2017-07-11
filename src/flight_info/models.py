@@ -1,5 +1,7 @@
 from django.db import models
 from django import forms
+from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 
 class FlightManager(models.Manager):
@@ -44,9 +46,15 @@ class Flight(models.Model):
             raise forms.ValidationError('Scheduled arrival should be before revised arrival')
         if self.revised_departure < self.scheduled_departure:
             raise forms.ValidationError('Scheduled departure should be before revised departure')
+        # if self.scheduled_arrival < timezone.now or self.scheduled_departure < timezone.now:
+        #     raise forms.ValidationError('Cannot set timings in the past')
 
     def __str__(self):
         return str(self.flight_no) + " - " + self.airline.name
+
+    def get_absolute_url(self):
+        # generating url that matches the specified url function name
+        return reverse("flight_info:view-flight", kwargs={"pk": self.flight_no})
 
 
 def content_file_name(instance):
