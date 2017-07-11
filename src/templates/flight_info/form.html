@@ -1,5 +1,10 @@
 {% extends 'common/base.html' %}
 {% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/common/jquery.datetimepicker.min.css' %}">
+{% endblock %}
 
 {% block content %}
 
@@ -16,4 +21,11 @@
         </form>
     </div>
 
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/common/jquery.datetimepicker.full.min.js' %}"></script>
+<script>
+    $(".datetimeinput").datetimepicker();
+</script>
 {% endblock %}
