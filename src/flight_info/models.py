@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 def airline_img_path(instance, filename):
-    path = ' - '.join(["airline", str(instance.id), "logo"])
+    path = ' - '.join(["airline", str(instance.id), "logo", filename])
     return path
 
 
@@ -69,7 +69,7 @@ class CrewManager(models.Manager):
 
 
 def crew_img_path(instance, filename):
-    path = ' - '.join(["crew", str(instance.crew_id), "photo"])
+    path = ' - '.join(["crew", str(instance.crew_id), "photo", filename])
     return path
 
 
