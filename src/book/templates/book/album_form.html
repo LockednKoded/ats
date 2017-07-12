@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<html>
+   <body>
+
+      <form name = "form"
+         method = "POST" >{% csrf_token %}
+          <br>
+
+          <div style = "max-width:470px;">
+            <center>
+             ROOM <select name="Room"style = "margin-left:20%;">
+
+        <option>AC</option>
+
+        <option>NON-AC</option>
+
+
+
+
+            </center>
+         </div>
+
+         <br>
+
+
+
+         <div style = "max-width:470px;">
+            <center>
+              DURATION <input type = "text" style = "margin-left:20%;"
+                   name = "duration" />
+            </center>
+         </div>
+
+         <br>
+           <div style = "max-width:470px;">
+            <center>CHECK-IN TIME
+                <input type = "text" style = "margin-left:20%;"
+                   name = "check_in"/>
+            </center>
+         </div>
+
+         <br><br>
+           <div style = "max-width:470px;">
+            <center>CHECK-OUT TIME
+             <input type = "text" style = "margin-left:20%;"
+                   name = "check_out"/>
+            </center>
+         </div>
+
+
+
+
+
+         <div style = "max-width:470px;">
+            <center>
+
+               <button style = "border:0px; background-color:#4285F4; margin-top:8%;
+                  height:35px; width:80%;margin-left:19%;" type = "submit"
+                  value = "BOOK" >
+                  <strong>BOOK</strong>
+               </button>
+
+            </center>
+         </div>
+
+      </form>
+
+   </body>
+</html>
+
+
+
+</body>
+</html>

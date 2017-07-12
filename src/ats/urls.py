@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^parking/', include('parking.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^$', homepage, name='homepage'),
+    url(r'^book/', include('book.urls')),
 ]
 
 if settings.DEBUG:
