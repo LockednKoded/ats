@@ -5,6 +5,16 @@ from .models import Flight, Crew
 
 class FlightForm(forms.ModelForm):
 
+    DAY_LIST = (
+        ('mon', 'Monday'),
+        ('tue', 'Tuesday'),
+        ('wed', 'Wednesday'),
+        ('thu', 'Thursday'),
+        ('fri', 'Friday'),
+        ('sat', 'Saturday'),
+        ('sun', 'Sunday'),
+    )
+    days_operational = forms.MultipleChoiceField(choices=DAY_LIST, widget=forms.CheckboxSelectMultiple)
     flight_no = forms.IntegerField(help_text="Enter a unique flight no", label="Flight No")
     approved_plan = forms.BooleanField(help_text="Check if plan is approved", label="Plan approved", required=False)
 
@@ -21,7 +31,6 @@ class FlightForm(forms.ModelForm):
             'total_seats',
             'booked_seats',
             'approved_plan',
-            'operation_days',
             'scheduled_arrival',
             'scheduled_departure',
             'revised_arrival',
