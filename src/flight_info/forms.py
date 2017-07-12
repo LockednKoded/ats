@@ -5,6 +5,9 @@ from .models import Flight, Crew
 
 class FlightForm(forms.ModelForm):
 
+    flight_no = forms.IntegerField(help_text="Enter a unique flight no", label="Flight No")
+    approved_plan = forms.BooleanField(help_text="Check if plan is approved", label="Plan approved")
+
     class Meta:
         model = Flight
         fields = [
@@ -46,6 +49,12 @@ class FlightForm(forms.ModelForm):
 
 
 class CrewForm(forms.ModelForm):
+
+    crew_id = forms.IntegerField(help_text="Enter a unique ID", label="ID")
+    pilot = forms.BooleanField(help_text="Check for pilot, leave unchecked for crew")
+    experience = forms.IntegerField(help_text="Enter experience in years")
+    flights = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Flight.objects.active(),
+                                             required=False, help_text="Select all flights where you work")
 
     class Meta:
         model = Crew

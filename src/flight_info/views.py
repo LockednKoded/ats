@@ -133,6 +133,7 @@ def add_crew(request):
 
             if form.is_valid():
                 crew = form.save(commit=False)
+                crew.flights = form.cleaned_data['flights']
                 crew.save()
 
                 return redirect("flight_info:list-crew")
@@ -169,6 +170,7 @@ def edit_crew(request, pk):
             form = CrewForm(request.POST, request.FILES, instance=crew_instance)
             if form.is_valid():
                 crew = form.save(commit=False)
+                crew.flights = form.cleaned_data['flights']
                 crew.save()
 
                 return redirect("flight_info:list-crew")
