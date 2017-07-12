@@ -4,22 +4,9 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 
-# Need tp instantiate these model managers in their respective classes
-class FlightManager(models.Manager):
-    def active(self, *args, **kwargs):
-        return super(FlightManager, self).filter(approved_plan=True)
-
-
-class CrewManager(models.Manager):
-    def active(self, *args, **kwargs):
-        return super(CrewManager, self).filter(in_service=True)
-
-
-
-
-
-def airline_file_name(instance):
-    return ' - '.join(["airline", instance.id, "logo"])
+def airline_img_path(instance, filename):
+    path = ' - '.join(["airline", str(instance.id), "logo"])
+    return path
 
 
 class Airline(models.Model):
@@ -27,8 +14,8 @@ class Airline(models.Model):
     flight_prefix = models.CharField(max_length=5)
     license_no = models.PositiveIntegerField()
     no_of_aircrafts = models.PositiveIntegerField(default=0)
-    logo = models.ImageField(upload_to=airline_file_name, null=True, blank=True,
-                              width_field="width_field", height_field="height_field")
+    logo = models.ImageField(upload_to=airline_img_path, null=True, blank=True,
+                             width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
 
@@ -38,6 +25,11 @@ class Airline(models.Model):
     def get_absolute_url(self):
         return reverse("flight_info:view-airlines", kwargs={"pk": self.id})
 
+
+# Need to instantiate these model managers in their respective classes
+class FlightManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(FlightManager, self).filter(approved_plan=True)
 
 
 class Flight(models.Model):
@@ -61,16 +53,6 @@ class Flight(models.Model):
     time_last_updated = models.DateField(auto_now_add=True)
 
     objects = FlightManager()
-    # need to be called objects for Flight."objects".all or .active
-
-    def clean(self):
-        # form.is_valid() returns False when ValidationError is raised and user can give correct details then
-        if self.revised_arrival < self.scheduled_arrival:
-            raise forms.ValidationError('Scheduled arrival should be before revised arrival')
-        if self.revised_departure < self.scheduled_departure:
-            raise forms.ValidationError('Scheduled departure should be before revised departure')
-        # if self.scheduled_arrival < timezone.now or self.scheduled_departure < timezone.now:
-        #     raise forms.ValidationError('Cannot set timings in the past')
 
     def __str__(self):
         return str(self.flight_no) + " - " + self.airline.name
@@ -80,10 +62,15 @@ class Flight(models.Model):
         return reverse("flight_info:view-flight", kwargs={"pk": self.flight_no})
 
 
+# Need to instantiate these model managers in their respective classes
+class CrewManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(CrewManager, self).filter(in_service=True)
 
 
-def crew_file_name(instance):
-    return ' - '.join(["crew", instance.crew_id, "photo"])
+def crew_img_path(instance, filename):
+    path = ' - '.join(["crew", str(instance.crew_id), "photo"])
+    return path
 
 
 class Crew(models.Model):
@@ -93,7 +80,7 @@ class Crew(models.Model):
     experience = models.PositiveSmallIntegerField(default=0)
     license_no = models.PositiveIntegerField()
     ph_no = models.BigIntegerField()
-    photo = models.ImageField(upload_to=crew_file_name, null=True, blank=True,
+    photo = models.ImageField(upload_to=crew_img_path, null=True, blank=True,
                               width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)

@@ -25,6 +25,18 @@ class FlightForm(forms.ModelForm):
             'revised_departure',
         ]
 
+        def clean(self):
+            scheduled_arrival = self.cleaned_data.get('scheduled_arrival')
+            scheduled_departure = self.cleaned_data.get('scheduled_departure')
+            revised_arrival = self.cleaned_data.get('revised_arrival')
+            revised_departure = self.cleaned_data.get('revised_departure')
+
+            if revised_arrival < scheduled_arrival:
+                raise forms.ValidationError('Scheduled arrival should be before revised arrival')
+            if revised_departure < scheduled_departure:
+                raise forms.ValidationError('Scheduled departure should be before revised departure')
+            return super(FlightForm, self).clean()
+
         def clean__flight_no(self):
             flight_no = self.cleaned_data.get('flight_no')
 
