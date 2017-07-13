@@ -1,0 +1,51 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+
+{% block title %}
+<title>ATS - baggage_handling</title>
+{% endblock %}
+
+
+
+{% block content %}
+<h2 style="font-size:200%;color: black;
+    font-family: verdana;">Baggage Handling Systems</h2>
+<br><br>
+
+<marquee> Welcome to Baggage Handling Website!!!</marquee>
+<p style="font-size:20px"> <img src="{% static 'images/baggage_handling/cargo.jpg' %}" width="300" height="300" align="left" border="4"><b>OVERVIEW</b><br><br>
+Delivering passengers bags from A to B sounds easy, but as we all know, it’s very easy for things to go wrong and given that passengers spend a lot of time worrying that their bags will go astray, baggage management is unsurprisingly a leading investment priority for airlines and airports.<br>
+This Baggage Management is the most advanced, comprehensive and flexible baggage solution ever developed. It offers you greater efficiencies, reduced costs and happier passengers.
+You’ll know precisely where every bag in your care is at every step of its journey and, if it should be mishandled, how to return it to its owner fast.</p>
+<br><br>
+<hr>
+<h2 style="font-size:150%;color: black;font-family: verdana;">Introduction</h2>
+
+<p style="color: black;font-family: verdana;font-size: 20px;">A Baggage Handling System(BHS) is a type of conveyor installed in airports that transports checked luggage from ticket counters to areas where the bags can be loaded onto the airplanes.<br>
+Although the primary function of a BHS is the transportation of bags, a typical BHS will serve other functions involved in making sure that a bag gets to the correct location in the airport. The process of identifying a bag, and the information associated with it, to make a decision on where the bag should be directed within the system is known as sortation.
+
+<br><br>
+<hr>
+
+
+<h2 style="font-size:150%;color: black;font-family: verdana;">Main Functions of BHS</h2>
+
+<p style="color: black;font-family: verdana;font-size: 20px;">
+1. Detection of bag jams<br>
+2. Volume regulation (to ensure that input points are controlled to avoid overloading system)<br>
+3. Load balancing (to evenly distribute bag volume between conveyor sub-systems)<br>
+4. Bag counting<br>
+5. Bag tracking<br>
+6. Redirection of bags via pusher or diverter<br>
+7. Automatic Tag Reader (ATR) (Reads the tags on the luggage provided by the airlines)<br>
+</p>
+<br><br>
+<hr>
+
+<h2 style="font-size:150%;color: black;
+    font-family: verdana;">Processes</h2>
+    <br><br>
+
+<img src="{% static 'images/baggage_handling/type.png' %}" width="500" height="250" align="centre" border="4">
+{% endblock %}
