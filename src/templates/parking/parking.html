@@ -14,11 +14,17 @@
 <div class="row">
   <div class="col-sm-8">
       {% include 'parking/parking_content.html' %}
-      {% if request.user.is_authenticated %}
+      {% if request.user.is_superuser or request.user.is_staff %}
+      <div class="panel panel-primary">
+          <div class="panel-heading">
+              <span class="glyphicon glyphicon-plus"></span>
+              <a class="white"  href="/parking/add/"> Add New Vehicle Entry - Click Here </a>
+          </div>
+      </div>
       <div class="panel panel-primary">
           <div class="panel-heading">
               <span class="glyphicon glyphicon-search"></span>
-              <a class="white" data-toggle="collapse" href="#search_collapse"> Search Vehicle Details - Click Here </a>
+              <a class="white" data-toggle="collapse" href="#search_collapse"> Search & Delete Vehicle Entry - Click Here </a>
           </div>
           <div class="center">{% include 'parking/vehicle_search.html' %}</div>
       </div>

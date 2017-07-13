@@ -1,7 +1,7 @@
 <div id="search_collapse" class="panel-collapse collapse">
-    <form method="get" action="{% url 'search' %}"><br/>
+    <form method="get" action="{% url 'parking:search' %}"><br/>
         Vehicle no:<input type="text" name="vno"/>
-        <input type="submit" value="Search" /><br/><br/>
+        <input class="btn btn-default" type="submit" value="Search" /><br/><br/>
     </form>
 </div>
 {% if result %}
@@ -21,6 +21,9 @@
         <td>{{ result.time_out }}</td>
     </tr>
 </table>
+<form action="/parking/{{result.vehicle_no}}/delete"><br/>
+        <input class="btn btn-default" type="submit" value="Delete" /><br/><br/>
+</form>
 {% elif no_match %}
 <table>
     <tr>
