@@ -8,5 +8,5 @@ class BaggageHandling(models.Model):
     conveyor_no = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return self.pnr_no + ' - ' + str(self.conveyor_no)
+        return self.pnr_no + ' - ' + str(self.conveyor_no) + " - " + str(self.pk)
 
