@@ -7,13 +7,13 @@ urlpatterns = [
 
     # Flight Options:
 
-    # Homepage for flights, showing a list of all scheduled flights, /flights/
+    # Homepage for flights, showing a list of all scheduled flights, /flights/   #done view
     url(r'^$', list_flights, name="list-flights"),
 
-    # Option to add new flights, /flights/add/
+    # Option to add new flights, /flights/add/                   #done view
     url(r'^add/$', add_flight, name="add-flight"),
 
-    # Option to view flight details, /flights/5/
+    # Option to view flight details, /flights/5/                    #doing view
     url(r'^(?P<pk>[0-9]+)/$', view_flight, name="view-flight"),
 
     # Option to delete flight, /flights/5/delete/

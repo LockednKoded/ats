@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details of Flight</title>
+</head>
+<body>
+    {% extends 'common/base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>Airline</th>
+                                    <th>Flight No</th>
+                                    <th>Destination</th>
+                                    <th>Terminal</th>
+                                    <th>Concourse</th>
+                                    <th>Departure Time</th>
+                                    <th>Status</th>
+                                </thead>
+                                <tbody>
+
+                                    <tr class=>
+                                        <td>{{ post.airline.name }}</td>
+                                        <td>{{ post.flight_no }}</td>
+                                        <td>{{ post.destination }}</td>
+                                        <td>{{ post.terminal }}</td>
+                                        <td>{{ post.concourse }}</td>
+                                        <td>{{ post.revised_departure|date:'d M H:i' }} hrs</td>
+                                        <td>
+                                            {% if flight.approved_plan == True %}
+                                                {% if flight.revised_departure == flight.scheduled_departure %}
+                                                    <div class="label label-success"><span>On Time</span></div>
+                                                {% else %}
+                                                    <div class="label label-warning"><span>Delayed</span></div>
+                                                {% endif %}
+                                            {% else %}
+                                                <div class="label label-info"><span>Un-Approved</span></div>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+
+
+{% endblock %}
+</body>
+</html>

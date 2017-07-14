@@ -66,8 +66,12 @@ def add_flight(request):
         raise PermissionDenied
 
 
-def view_flight(request, pk):
-    return HttpResponse("<h1>Details for " + pk + " flight</h1>")
+# working on /flights/101
+def view_flight(request, pk):   # pk is primary key, the flight no passed
+    current_time = timezone.now()
+    Flight.objects.get(pk=pk)
+    post = get_object_or_404(Flight, pk=pk)
+    return render(request, 'flight_info/detail_flights.html', {'post': post})
 
 
 def delete_flight(request, pk):
@@ -202,13 +206,13 @@ def add_airlines(request):
     return HttpResponse("<h1>Add a new airline</h1>")
 
 
-def view_airlines(request,pk):
+def view_airlines(request, pk):
     return HttpResponse("<h1>Details for airline " + pk + "</h1>")
 
 
-def delete_airlines(request,pk):
+def delete_airlines(request, pk):
     return HttpResponse("<h1>Delete airline " + pk + "</h1>")
 
 
-def edit_airlines(request,pk):
+def edit_airlines(request, pk):
     return HttpResponse("<h1>Edit details of airline " + pk + "</h1>")
