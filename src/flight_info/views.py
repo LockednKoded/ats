@@ -43,6 +43,46 @@ def list_flights(request):
     return render(request, 'flight_info/list_flights.html', context)
 
 
+def get_days_field(days):
+
+    if 'mon' in days:
+        binary_days = '1,'
+    else:
+        binary_days = '0,'
+
+    if 'tue' in days:
+        binary_days += '1,'
+    else:
+        binary_days += '0,'
+
+    if 'wed' in days:
+        binary_days += '1,'
+    else:
+        binary_days += '0,'
+
+    if 'thu' in days:
+        binary_days += '1,'
+    else:
+        binary_days += '0,'
+
+    if 'fri' in days:
+        binary_days += '1,'
+    else:
+        binary_days += '0,'
+
+    if 'sat' in days:
+        binary_days += '1,'
+    else:
+        binary_days += '0,'
+
+    if 'sun' in days:
+        binary_days += '1'
+    else:
+        binary_days += '0'
+
+    return binary_days
+
+
 def add_flight(request):
     if request.user.is_superuser or request.user.is_superuser:
         if request.method == "POST":
@@ -50,6 +90,11 @@ def add_flight(request):
 
             if form.is_valid():
                 flight = form.save(commit=False)
+
+                days = form.cleaned_data.get('days_operational')
+                binary_days = get_days_field(days)
+                flight.operation_days = binary_days
+
                 flight.save()
 
                 return redirect("flight_info:list-flights")
