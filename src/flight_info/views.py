@@ -66,8 +66,7 @@ def add_flight(request):
         raise PermissionDenied
 
 
-# working on /flights/101
-def view_flight(request, pk):   # pk is primary key, the flight no passed
+def view_flight(request, pk):   # pk is primary key, the flight number passed
     current_time = timezone.now()
     Flight.objects.get(pk=pk)
     post = get_object_or_404(Flight, pk=pk)
