@@ -97,7 +97,7 @@ def add_flight(request):
 
                 flight.save()
 
-                return redirect("flight_info:list-flights")
+                return redirect("flight_info:list-flights")  # TODO: Redirect to detail view for that flight
         else:
             form = FlightForm()
 
@@ -112,7 +112,6 @@ def add_flight(request):
 
 
 def view_flight(request, pk):   # pk is primary key, the flight number passed
-    current_time = timezone.now()
     Flight.objects.get(pk=pk)
     post = get_object_or_404(Flight, pk=pk)
     return render(request, 'flight_info/detail_flights.html', {'post': post})
@@ -120,10 +119,10 @@ def view_flight(request, pk):   # pk is primary key, the flight number passed
 
 def delete_flight(request, pk):
     if request.user.is_superuser or request.user.is_staff:
-        flight = get_object_or_404(Flight, pk=pk)
-        post = get_object_or_404(Flight, flight_no=pk)
-        post.delete()
-        return render(request, 'flight_info/delete_flight.html', {'flight': flight})
+        flight_instance = get_object_or_404(Flight, flight_no=pk)
+        flight_instance.delete()
+        return render(request, 'flight_info/delete_flight.html', {'flight': flight_instance})
+        # TODO: Need to change this, because flight_instance has already been deleted and cannot be retreived now
     else:
         raise PermissionDenied
 
@@ -136,14 +135,19 @@ def edit_flight(request, pk):
             form = FlightForm(request.POST, instance=flight_instance)
             if form.is_valid():
                 flight = form.save(commit=False)
+
+                days = form.cleaned_data.get('days_operational')
+                binary_days = get_days_field(days)
+                flight.operation_days = binary_days
+
                 flight.save()
 
-                return redirect("flight_info:list-flights")
+                return redirect("flight_info:list-flights")  # TODO: Redirect to detail view for that flight
         else:
             form = FlightForm(instance=flight_instance)
 
         return render(request, 'flight_info/form.html', {
-            'title_message': 'Edit edit flight details',
+            'title_message': 'Edit flight details',
             'submit_message': 'Save',
             'form': form,
         })
@@ -160,7 +164,6 @@ def edit_flight(request, pk):
 
 def list_crew(request):
     queryset = Crew.objects.active()
-
     if request.user.is_superuser or request.user.is_staff:
         queryset = Crew.objects.all()
 
@@ -185,14 +188,14 @@ def add_crew(request):
                 crew.flights = form.cleaned_data['flights']
                 crew.save()
 
-                return redirect("flight_info:list-crew")
+                return redirect("flight_info:list-crew")  # TODO: Redirect to detail view for that crew member
         else:
             form = CrewForm()
 
         return render(request, 'flight_info/form.html', {
             'title_message': 'Add new crew',
             'submit_message': 'Add',
-            'form':form,
+            'form': form,
         })
     else:
         raise PermissionDenied
@@ -204,8 +207,8 @@ def view_crew(request, pk):
 
 def delete_crew(request, pk):
     if request.user.is_superuser or request.user.is_staff:
-        crew = get_object_or_404(Crew, crew_id=pk)
-        crew.delete()
+        crew_instance = get_object_or_404(Crew, crew_id=pk)
+        crew_instance.delete()
         return redirect("flight_info:list-crew")
     else:
         raise PermissionDenied
@@ -213,7 +216,7 @@ def delete_crew(request, pk):
 
 def edit_crew(request, pk):
     if request.user.is_superuser or request.user.is_staff:
-        crew_instance = get_object_or_404(Crew,crew_id=pk)
+        crew_instance = get_object_or_404(Crew, crew_id=pk)
         if request.method == "POST":
 
             form = CrewForm(request.POST, request.FILES, instance=crew_instance)
@@ -222,7 +225,7 @@ def edit_crew(request, pk):
                 crew.flights = form.cleaned_data['flights']
                 crew.save()
 
-                return redirect("flight_info:list-crew")
+                return redirect("flight_info:list-crew")  # TODO: Redirect to detail view for that crew member
         else:
             form = CrewForm(instance=crew_instance)
 
