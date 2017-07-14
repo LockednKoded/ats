@@ -21,10 +21,18 @@
                                 <thead>
                                     <th>Airline</th>
                                     <th>Flight No</th>
+                                    <th>Origin</th>
                                     <th>Destination</th>
                                     <th>Terminal</th>
                                     <th>Concourse</th>
-                                    <th>Departure Time</th>
+                                    <th>Fare</th>
+                                    <th>Scheduled Departure Time</th>
+                                    <th>Revised Departure Time</th>
+                                    <th>Scheduled Arrival Time</th>
+                                    <th>Revised Arrival Time</th>
+                                    <th>Operation Days</th>
+                                    <th>Total Seats</th>
+                                    <th>Booked Seats</th>
                                     <th>Status</th>
                                 </thead>
                                 <tbody>
@@ -32,13 +40,21 @@
                                     <tr class=>
                                         <td>{{ post.airline.name }}</td>
                                         <td>{{ post.flight_no }}</td>
+                                        <td>{{ post.origin }}</td>
                                         <td>{{ post.destination }}</td>
                                         <td>{{ post.terminal }}</td>
                                         <td>{{ post.concourse }}</td>
+                                        <td>{{ post.fare }}</td>
+                                        <td>{{ post.scheduled_departure|date:'d M H:i' }} hrs</td>
                                         <td>{{ post.revised_departure|date:'d M H:i' }} hrs</td>
+                                        <td>{{ post.scheduled_arrival|date:'d M H:i' }} hrs</td>
+                                        <td>{{ post.revised_arrival|date:'d M H:i' }} hrs</td>
+                                        <td>{{ post.operation_days }}</td>
+                                        <td>{{ post.total_seats }}</td>
+                                        <td>{{ post.booked_seats }}</td>
                                         <td>
-                                            {% if flight.approved_plan == True %}
-                                                {% if flight.revised_departure == flight.scheduled_departure %}
+                                            {% if post.approved_plan == True %}
+                                                {% if post.revised_departure == post.scheduled_departure %}
                                                     <div class="label label-success"><span>On Time</span></div>
                                                 {% else %}
                                                     <div class="label label-warning"><span>Delayed</span></div>
