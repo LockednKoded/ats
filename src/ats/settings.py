@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'flight_info.apps.FlightInfoConfig',
-    'parking.apps.ParkingConfig'
+    'parking.apps.ParkingConfig',
+    'terminal_info',
 ]
 
 MIDDLEWARE = [

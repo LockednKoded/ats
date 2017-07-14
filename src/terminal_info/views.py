@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def terminal_info(request):
-    return render(request, "terminal_info/terminal_info.html", {})
+    return render(request, "terminal_info/terminal.html", {})
