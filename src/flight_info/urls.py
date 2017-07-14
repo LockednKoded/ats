@@ -16,7 +16,7 @@ urlpatterns = [
     # Option to view flight details, /flights/5/                    #done view
     url(r'^(?P<pk>[0-9]+)/$', view_flight, name="view-flight"),
 
-    # Option to delete flight, /flights/5/delete/
+    # Option to delete flight, /flights/5/delete/                       #done view
     url(r'^(?P<pk>[0-9]+)/delete/$', delete_flight, name="delete-flight"),
 
     # Option to edit flight details, /flights/5/edit
