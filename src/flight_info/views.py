@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 
-from .models import Flight, Crew
+from .models import Flight, Crew,  Airline
 from .forms import FlightForm, CrewForm
 
 
@@ -244,7 +244,21 @@ def edit_crew(request, pk):
 
 
 def list_airlines(request):
-    return HttpResponse("<h1>List of all airlines</h1>")
+    queryset = Airline.objects.all()
+
+    query = request.GET.get("q")
+    if query:
+        queryset = queryset.filter(
+            Q(name__icontains=query) |
+            Q(flight_prefix__icontains=query) |
+            Q(license_no__icontains=query) |
+            Q(no_of_aircrafts__icontains=query)
+        ).distinct()
+
+    context = {
+        'airline_list': queryset
+    }
+    return render(request, 'flight_info/list_airlines.html', context)
 
 
 def add_airlines(request):

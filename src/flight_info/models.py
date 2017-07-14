@@ -4,6 +4,11 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 
+class AirlineManager(models.Manager):
+    def active(self, *args, **kwargs):
+        return super(AirlineManager, self).all()
+
+
 def airline_img_path(instance, filename):
     path = '-'.join(["airline", str(instance.id), "logo", filename])
     return path
@@ -18,6 +23,8 @@ class Airline(models.Model):
                              width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
+
+    objects = AirlineManager()
 
     def __str__(self):
         return self.name
