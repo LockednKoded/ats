@@ -97,7 +97,7 @@ def add_flight(request):
 
                 flight.save()
 
-                return redirect("flight_info:list-flights")  # TODO: Redirect to detail view for that flight
+                return redirect("flight_info:view-flight", pk=flight.flight_no)
         else:
             form = FlightForm()
 
@@ -141,7 +141,7 @@ def edit_flight(request, pk):
 
                 flight.save()
 
-                return redirect("flight_info:list-flights")  # TODO: Redirect to detail view for that flight
+                return redirect("flight_info:view-flight", pk=flight.flight_no)
         else:
             form = FlightForm(instance=flight_instance)
 
@@ -187,8 +187,8 @@ def add_crew(request):
                 crew.flights = form.cleaned_data['flights']
                 crew.save()
 
-                return redirect("flight_info:list-crew")  # TODO: Redirect to detail view for that crew member
-        else:
+                return redirect("flight_info:view-crew", pk=crew.crew_id)
+
             form = CrewForm()
 
         return render(request, 'flight_info/form.html', {
@@ -224,7 +224,7 @@ def edit_crew(request, pk):
                 crew.flights = form.cleaned_data['flights']
                 crew.save()
 
-                return redirect("flight_info:list-crew")  # TODO: Redirect to detail view for that crew member
+                return redirect("flight_info:view-crew", pk=crew.crew_id)
         else:
             form = CrewForm(instance=crew_instance)
 
