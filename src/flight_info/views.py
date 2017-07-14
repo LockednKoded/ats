@@ -120,9 +120,10 @@ def view_flight(request, pk):   # pk is primary key, the flight number passed
 
 def delete_flight(request, pk):
     if request.user.is_superuser or request.user.is_staff:
-        flight = get_object_or_404(Flight, flight_no=pk)
-        flight.delete()
-        return redirect("flight_info:list-flights")
+        flight = get_object_or_404(Flight, pk=pk)
+        post = get_object_or_404(Flight, flight_no=pk)
+        post.delete()
+        return render(request, 'flight_info/delete_flight.html', {'flight': flight})
     else:
         raise PermissionDenied
 
