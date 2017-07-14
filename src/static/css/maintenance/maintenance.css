@@ -1,0 +1,55 @@
+.glyphicon-cog
+{
+	color:#0B0B61;
+	margin-left: 5px;
+}
+p
+{   text-align: justify;
+    text-justify: inter-word;
+}
+.m-top
+{
+ margin-top: 25px;
+}
+.blue
+{   color:#0B0B61;
+}
+.thick
+{
+    font-weight:bold;
+}
+.black
+{
+    color:black;
+}
+.white
+{   color: white;
+}
+.padding
+{
+    padding:2%;
+}
+table
+{
+    width:  100%;
+}
+td,th
+{
+    border: 1px solid black;
+}
+tr:nth-child(even)
+{
+    background-color: #f2f2f2
+}
+.panel
+{
+    margin:5%;
+}
+.panel-heading
+{
+    background-color:#0B0B61!important
+}
+a:hover,a:visited,a:active,a:link
+{
+    color:white;
+}

@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^flights/', include('flight_info.urls')),
     url(r'^parking/', include('parking.urls')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^maintenance/', include('maintenance.urls')),
     url(r'^$', homepage, name='homepage'),
 ]
 

@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+<div id="search_collapse" class="panel-collapse collapse padding">
+    <form action="{% url 'maintenance:search_worker' %}" method="get" enctype="multipart/form-data">
+            {{ form | crispy }}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ submit_message }}</button>
+    </form>
+</div>
+
+<table>
+    {% if result %}
+    <tr>
+        <td>Emp ID</td>
+        <td>User</td>
+        <td>Contact</td>
+        <td>DOB</td>
+        <td>DOJ</td>
+        <td>Salary</td>
+    </tr>
+    {% for r in result %}
+    {% if r.user.profile.user_type == 2 %}<!-- show only employees -->
+    <tr>
+        <td>{{ r.user.profile.employee_id }}</td>
+        <td>{{ r.user }}</td>
+        <td>{{ r.user.profile.contact_no }}</td>
+        <td>{{ r.user.profile.DOB }}</td>
+        <td>{{ r.user.profile.DOJ }}</td>
+        <td>{{ r.user.profile.salary }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</table>

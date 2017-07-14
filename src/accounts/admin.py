@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 from .models import Profile
+from maintenance.admin import WorkerInline
 
 # Reference: https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
 # This class is our profile class
@@ -15,9 +16,9 @@ class ProfileInline(admin.StackedInline):
 
 # This shows our associated profile with the User model, together with the user model edit form in the admin
 class CustomUserAdmin(UserAdmin):
-    inlines = (ProfileInline, )
+    inlines = (ProfileInline, WorkerInline, )
     list_display = ('username', 'first_name', 'is_staff', 'get_user_type')
-    list_select_related = ('profile',)  # To reduce many queries to the database
+    list_select_related = ('profile', 'worker', )  # To reduce many queries to the database
 
     def get_user_type(self, instance):
         return str(instance.profile.user_type)
