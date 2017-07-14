@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from .models import ParkingSpot, VehicleDetail
 from .forms import VehicleForm, ParkingForm
-
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import render, redirect, get_object_or_404
 # Create your views here.
 
 
@@ -10,6 +9,7 @@ def parking_details(request):
 
     try:
         spots = ParkingSpot.objects.latest('last_updated')
+
     except (KeyError, ParkingSpot.DoesNotExist):
         return render(request, "parking/parking.html", {})
 
@@ -18,9 +18,12 @@ def parking_details(request):
 
 def update_spots(request):
     if request.user.is_superuser or request.user.is_staff:
+
         try:
             parking_instance = ParkingSpot.objects.latest('last_updated')
+
         except (KeyError, ParkingSpot.DoesNotExist):
+
             if request.method == "POST":
                 form = ParkingForm(request.POST, request.FILES)
 
@@ -37,6 +40,7 @@ def update_spots(request):
                 'submit_message': 'Add',
                 'form': form,
             })
+
         if request.method == "POST":
 
             form = ParkingForm(request.POST, request.FILES, instance=parking_instance)
@@ -61,11 +65,13 @@ def update_spots(request):
 def search_vehicle(request):
 
     if request.user.is_superuser or request.user.is_superuser:
+
         try:
             spots = ParkingSpot.objects.latest('last_updated')
             context = {'spots': spots}
         except (KeyError, ParkingSpot.DoesNotExist):
             context = {}
+
         try:
             query = request.GET.get('vno')
             if query != '\0':
@@ -81,7 +87,9 @@ def search_vehicle(request):
 
 
 def add_vehicle(request):
+
     if request.user.is_superuser or request.user.is_staff:
+
         if request.method == "POST":
             form = VehicleForm(request.POST, request.FILES)
 
@@ -90,6 +98,7 @@ def add_vehicle(request):
                 vehicle.save()
 
                 return redirect("parking:details")
+
         else:
             form = VehicleForm()
 
@@ -98,14 +107,17 @@ def add_vehicle(request):
             'submit_message': 'Add',
             'form': form,
         })
+
     else:
         raise PermissionDenied
 
 
 def delete_vehicle(request, pk):
+
     if request.user.is_superuser or request.user.is_staff:
         vehicle = get_object_or_404(VehicleDetail, vehicle_no=pk)
         vehicle.delete()
         return redirect("parking:details")
+
     else:
         raise PermissionDenied
