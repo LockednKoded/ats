@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class BaggageHandling(models.Model):
@@ -9,4 +10,7 @@ class BaggageHandling(models.Model):
 
     def __str__(self):
         return self.pnr_no + ' - ' + str(self.conveyor_no) + " - " + str(self.pk)
+
+    def get_absolute_url(self):
+        return reverse("baggage_handling:view-baggage", kwargs={'pk':self.pk})
 

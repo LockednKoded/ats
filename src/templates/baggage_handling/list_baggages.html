@@ -1,0 +1,94 @@
+{% extends 'common/base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/baggage_handling/list_baggages.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--need to add this, as its enclosed in a table-->
+<div class="col-sm-12">
+
+    <div class="row page-header">
+        <div class="col-sm-8">
+            <h3>Baggages List</h3><br>
+        </div>
+
+        <div class="col-sm-4">
+
+            <form id="search" method="GET" action="">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="tabbable">
+
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#baggageTab" data-toggle="tab">Baggages</a></li>
+                </ul>
+
+                <br>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="baggageTab">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>Baggage ID</th>
+                                    <th>PNR No</th>
+                                    <th>Quantity</th>
+                                    <th>Weight</th>
+                                    <th>Conveyor No</th>
+                                </thead>
+                                <tbody>
+                                    {% for baggage in baggage_list%}
+
+                                    <tr class="info" data-href="{{ baggage.get_absolute_url }}">
+                                        <td> {{baggage.pk }} </td>
+                                        <td> {{baggage.pnr_no }} </td>
+                                        <td> {{baggage.quantity }} </td>
+                                        <td> {{baggage.weight}} </td>
+                                        <td> {{baggage.conveyor_no}} </td>
+                                    </tr>
+
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="7">No Baggages</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+                    </div><!-- end tab pane departure -->
+
+                </div><!-- end tab-content -->
+            </div><!-- end tabbable -->
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'js/baggage_handling/list_baggages.js' %}"></script>
+{% endblock %}
