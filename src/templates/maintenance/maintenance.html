@@ -1,0 +1,61 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>ATS - Maintenance Service</title>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/maintenance/maintenance.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+      <div class="col-sm-12">
+          {% include 'maintenance/maintenance_content.html' %}
+      </div>
+    </div>
+
+    {% if request.user.is_superuser or request.user.is_staff %}
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+              <span class="glyphicon glyphicon-plus"></span>
+              <a class="white" data-toggle="collapse" href="#assign_collapse"> Assign Work to Workers(User) - Click Here </a>
+          </div>
+
+          <div class="center">
+                <div id="assign_collapse" class="panel-collapse collapse padding">
+                <form action="{% url 'maintenance:assign_worker' %}" method="get" enctype="multipart/form-data">
+                 {{ form2 | crispy }}
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">{{ submit_message2 }}</button>
+                </form>
+                </div>
+          </div>
+
+    </div>
+
+    <div class="panel panel-primary">
+
+        <div class="panel-heading">
+              <span class="glyphicon glyphicon-search"></span>
+              <a class="white" data-toggle="collapse" href="#search_collapse"> Search Workers - Click Here </a>
+        </div>
+        <div class="center">{% include 'maintenance/worker_search.html' %}</div>
+
+    </div>
+
+    {% endif %}
+
+    <div class="row m-top">
+      <div class="col-sm-12">
+          <p class="blue">
+              " We produces high quality maintenance services without taking the cookie cutter approach. We know that service reflects your image. Therefore, we customize our delivery in order to provide you with unmatched responsiveness in handling your specific needs and critical schedules. Our goal is to deliver flawless service from the ground up. Proof comes through our continuous measurement and improvement of service results."
+          </p>
+      </div>
+    </div>
+
+{% endblock %}
