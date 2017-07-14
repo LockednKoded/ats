@@ -112,9 +112,8 @@ def add_flight(request):
 
 
 def view_flight(request, pk):   # pk is primary key, the flight number passed
-    Flight.objects.get(pk=pk)
-    post = get_object_or_404(Flight, pk=pk)
-    return render(request, 'flight_info/detail_flights.html', {'post': post})
+    flight_instance = get_object_or_404(Flight, flight_no=pk)
+    return render(request, 'flight_info/detail_flights.html', {'flight': flight_instance})
 
 
 def delete_flight(request, pk):
