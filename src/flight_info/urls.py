@@ -41,7 +41,7 @@ urlpatterns = [
 
     # Airline Options:
 
-    # Option to view all airlines, /flights/airlines
+    # Option to view all airlines, /flights/airlines                #done view
     url(r'^airlines/$', list_airlines, name="list-airlines"),
 
     # Option to add airlines, /flights/airlines/add

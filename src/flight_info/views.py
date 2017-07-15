@@ -119,8 +119,9 @@ def view_flight(request, pk):   # pk is primary key, the flight number passed
 def delete_flight(request, pk):
     if request.user.is_superuser or request.user.is_staff:
         flight_instance = get_object_or_404(Flight, flight_no=pk)
+        post = get_object_or_404(Flight, flight_no=pk)
         flight_instance.delete()
-        return render(request, 'flight_info/delete_flight.html', {'flight': flight_instance})
+        return render(request, 'flight_info/delete_flight.html', {'flight': post})
         # TODO: Need to change this, because flight_instance has already been deleted and cannot be retreived now
     else:
         raise PermissionDenied
