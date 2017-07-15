@@ -9,8 +9,15 @@ from .models import BaggageHandling
 def index(request):
     return render(request, 'baggage_handling/baggage_handling.html',{})
 
-
+# detail view
 def view_baggage(request,pk):
+    baggage_instance = get_object_or_404(BaggageHandling, pk=pk)
+    context = {'baggage': baggage_instance,}
+
+    return render(request, 'baggage_handling/baggage_detail.html',context)
+
+
+
     return HttpResponse("Details for " + pk + "baggage")
 
 
