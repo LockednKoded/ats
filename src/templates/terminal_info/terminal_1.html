@@ -1,0 +1,48 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/terminal_info/terminal.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <h1>Airport Terminal 1</h1>
+    <p>Terminal 1, is used by low cost carriers such as GoAir, IndiGo and SpiceJet, and is divided in Terminal 1-C,
+        used for domestic arrivals, and Terminal 1-D, used for departures, it can handle 10 million passengers annually.
+    </p>
+</div>
+<div class="container">
+  <h2>Domestic flights</h2>
+  <p>Information regarding the flights to be take off at which terminal</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>City</th>
+        <th>Terminal</th>
+        <th>In-use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Delhi</td>
+        <td>Terminal 1</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Indore</td>
+        <td>Terminal 1</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Jaipur</td>
+        <td>Terminal 1</td>
+        <td>Yes</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

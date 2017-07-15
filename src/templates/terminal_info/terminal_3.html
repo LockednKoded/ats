@@ -1,0 +1,55 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/terminal_info/terminal.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>Airport Terminal 3</h1>
+    <p>
+        Terminal 3 is the newest terminal, it was opened in 2010 and is one of the biggest terminals in the world, being
+        able to handle 40 million passengers per year. Other terminals like T1A, T1B, T2 are unused nowadays.
+    </p>
+    <p>
+All International flights are operated from T3, Domestic Flights are operated in T1 or T3, depending of the Carrier.
+        Lowcost Carriers (GoAir, IndiGo and SpiceJet) are operated from Terminal 1, while the other carriers are operated
+        from T3. Check below some information you must now of both terminals.
+    </p>
+
+    </div>
+
+<div class="container">
+  <h2>International flights</h2>
+  <p>Information regarding the flights to be take off at which terminal</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Terminal</th>
+        <th>In-use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nepal</td>
+        <td>Terminal 3</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>China</td>
+        <td>Terminal 3</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Pakistan</td>
+        <td>Terminal 3</td>
+        <td>Yes</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
