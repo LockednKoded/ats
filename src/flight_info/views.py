@@ -185,7 +185,7 @@ def add_crew(request):
     if request.user.is_superuser or request.user.is_staff:
 
         if request.method == "POST":
-            form = CrewForm(request.POST, request.FILES)
+            form = CrewForm(request.POST)  # , request.FILES
 
             if form.is_valid():
                 crew = form.save(commit=False)
@@ -193,8 +193,8 @@ def add_crew(request):
                 crew.save()
 
                 return redirect("flight_info:view-crew", pk=crew.crew_id)
-
-            form = CrewForm()
+        else:
+                form = CrewForm()
 
         return render(request, 'flight_info/form.html', {
             'title_message': 'Add new crew',
@@ -294,9 +294,29 @@ def add_airlines(request):
         raise PermissionDenied
 
 
-
 def edit_airlines(request, pk):
-    return HttpResponse("<h1>Edit details of airline " + pk + "</h1>")
+    if request.user.is_superuser or request.user.is_staff:
+
+        airline_instance = get_object_or_404(Airline, flight_prefix=pk)
+        if request.method == "POST":
+
+            form = AirlineForm(request.POST, instance=airline_instance)
+            if form.is_valid():
+                airline = form.save(commit=False)
+
+                airline.save()
+
+                return redirect("flight_info:view-airlines", pk=airline.flight_prefix)
+        else:
+            form = AirlineForm(instance=airline_instance)
+
+        return render(request, 'flight_info/form.html', {
+            'title_message': 'Edit Airline Details',
+            'submit_message': 'Save',
+            'form': form,
+        })
+    else:
+        raise PermissionDenied
 
 
 def view_airlines(request, pk):
@@ -305,4 +325,12 @@ def view_airlines(request, pk):
 
 
 def delete_airlines(request, pk):
-    return HttpResponse("<h1>Delete airline " + pk + "</h1>")
+    if request.user.is_superuser or request.user.is_staff:
+
+        airline_instance = get_object_or_404(Airline, flight_prefix=pk)
+        airline_instance_2 = get_object_or_404(Airline, flight_prefix=pk)  # fetch the instance twice, as one is del
+        airline_instance.delete()
+        return render(request, 'flight_info/delete_airline.html', {'airline': airline_instance_2})
+
+    else:
+        raise PermissionDenied

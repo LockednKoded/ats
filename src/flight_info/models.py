@@ -11,7 +11,7 @@ def airline_img_path(instance, filename):
 
 class Airline(models.Model):
     name = models.CharField(max_length=100)
-    flight_prefix = models.CharField(max_length=5)
+    flight_prefix = models.CharField(max_length=5, primary_key=True)
     license_no = models.PositiveIntegerField()
     no_of_aircrafts = models.PositiveIntegerField(default=0)
     logo = models.ImageField(upload_to=airline_img_path, null=True, blank=True,
@@ -23,7 +23,7 @@ class Airline(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("flight_info:view-airlines", kwargs={"pk": self.id})
+        return reverse("flight_info:view-airlines", kwargs={"pk": self.flight_prefix})
 
 
 # Need to instantiate these model managers in their respective classes

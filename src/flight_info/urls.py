@@ -44,16 +44,17 @@ urlpatterns = [
     # Option to view all airlines, /flights/airlines                #done view
     url(r'^airlines/$', list_airlines, name="list-airlines"),
 
-    # Option to add airlines, /flights/airlines/add
+    # Option to add airlines, /flights/airlines/add                 #done view
     url(r'^airlines/add/$', add_airlines, name="add-airlines"),
 
-    # Option to view airline details, /flights/airlines/5
+    # Option to view airline details, /flights/airlines/pk          #done view
     url(r'^airlines/(?P<pk>[0-9A-Z]+)/$', view_airlines, name="view-airlines"),
 
-    # Option to delete airlines, /flights/airlines/5/delete
-    url(r'^airlines/(?P<pk>[0-9]+)/delete/$', delete_airlines, name="delete-airlines"),
+    # Option to delete airlines, /flights/airlines/pk/delete         #done view
+    url(r'^airlines/(?P<pk>[0-9A-Z]+)/delete/$', delete_airlines, name="delete-airlines"),
 
-    # Option to edit crew details, /flights/airlines/5/edit
-    url(r'^airlines/(?P<pk>[0-9]+)/edit/$', edit_airlines, name="edit-airlines"),
+    # Option to edit crew details, /flights/airlines/pk/edit         #done view
+    url(r'^airlines/(?P<pk>[0-9A-Z]+)/edit/$', edit_airlines, name="edit-airlines"),
 
 ]
+
