@@ -185,7 +185,7 @@ def add_crew(request):
     if request.user.is_superuser or request.user.is_staff:
 
         if request.method == "POST":
-            form = CrewForm(request.POST, request.FILES)
+            form = CrewForm(request.POST)  # , request.FILES
 
             if form.is_valid():
                 crew = form.save(commit=False)
@@ -193,8 +193,8 @@ def add_crew(request):
                 crew.save()
 
                 return redirect("flight_info:view-crew", pk=crew.crew_id)
-
-            form = CrewForm()
+        else:
+                form = CrewForm()
 
         return render(request, 'flight_info/form.html', {
             'title_message': 'Add new crew',
