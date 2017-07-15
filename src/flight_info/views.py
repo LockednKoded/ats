@@ -189,6 +189,7 @@ def add_crew(request):
 
             if form.is_valid():
                 crew = form.save(commit=False)
+                crew.save()
                 crew.flights = form.cleaned_data['flights']
                 crew.save()
 
