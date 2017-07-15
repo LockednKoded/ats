@@ -1,0 +1,22 @@
+.options-div {
+    display: table;
+    margin: 0 auto;
+}
+
+.caption-title {
+    font-size: 50px;
+}
+
+.caption-fields span {
+    color: #0B0B61;
+}
+
+.label {
+    display: inline-block; /*by default display:inline, hence need to change to apply margin top/bottom correctly*/
+    padding: 3px;
+}
+.label span {
+    font-size: 11px;
+}
+
+tr[data-href] { cursor: pointer }

@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 def airline_img_path(instance, filename):
-    path = '-'.join(["airline", str(instance.id), "logo", filename])
+    path = '-'.join(["airline", instance.flight_prefix, "logo", filename])
     return path
 
 
@@ -18,6 +18,7 @@ class Airline(models.Model):
                              width_field="width_field", height_field="height_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
+    info = models.TextField(default="")
 
     def __str__(self):
         return self.name

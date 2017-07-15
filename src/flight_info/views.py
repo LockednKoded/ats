@@ -268,7 +268,7 @@ def list_airlines(request):
         ).distinct()
 
     context = {
-        'airline_list': queryset
+        'airline_list': queryset,
     }
     return render(request, 'flight_info/list_airlines.html', context)
 
@@ -323,8 +323,12 @@ def edit_airlines(request, pk):
 
 
 def view_airlines(request, pk):
+    current_time = timezone.now()
     airline_instance = get_object_or_404(Airline, flight_prefix=pk)
-    return render(request, 'flight_info/detail_airline.html', {'airline': airline_instance})
+    return render(request, 'flight_info/detail_airline.html', {
+        'airline': airline_instance,
+        'current_time': current_time,
+    })
 
 
 def delete_airlines(request, pk):

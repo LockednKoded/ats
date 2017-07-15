@@ -121,6 +121,7 @@ class AirlineForm(forms.ModelForm):
             'license_no',
             'no_of_aircrafts',
             'logo',
+            'info',
         ]
 
         def clean__flight_prefix(self):

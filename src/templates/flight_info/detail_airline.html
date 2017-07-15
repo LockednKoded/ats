@@ -1,54 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Details of Airline</title>
-</head>
-<body>
-    {% extends 'common/base.html' %}
+{% extends 'common/base.html' %}
 
 {% load staticfiles %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+<link rel="stylesheet" href="{% static 'css/flight_info/detail_view.css' %}">
 {% endblock %}
 
 {% block content %}
 
-    <div class="table-responsive">
+    <div class="col-xs-12">
 
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <th>Airline</th>
-                                    <th>Flight Preix</th>
-                                    <th>License No</th>
-                                    <th>No of Aircrafts</th>
-                                    <th>Logo</th>
-                                </thead>
-                                <tbody>
+        <div class="col-md-5 col-sm-6">
+            <div class="thumbnail">
 
-                                    <tr class=>
-                                        <td>{{ airline.name }}</td>
-                                        <td>{{ airline.flight_prefix }}</td>
-                                        <td>{{ airline.license_no }}</td>
-                                        <td>{{ airline.no_of_aircrafts }}</td>
-                                        <td>
-                                            {% if airline.logo %}
-                                            <img src="{{ airline.logo.url }}" height="50" alt="Airline Logo">
-                                            {% endif %}
-                                        </td>
-                                    </tr>
+                {% if airline.logo %}
+                <img src="{{ airline.logo.url }}" alt="Airline logo" class="img-responsive">
+                {% endif %}
 
-                                </tbody>
-                            </table>
+                <div class="caption">
 
-                        </div><!-- end table responsive -->
+                    <h1 class="caption-title">{{ airline.name }} <span><small>{{ airline.flight_prefix }}</small></span></h1>
+                    <h4 class="caption-fields"><span>License No:</span> {{ airline.license_no }}</h4>
+                    <h4 class="caption-fields"><span>Aircrafts:<span> {{ airline.no_of_aircrafts }}</h4>
+                    <h4 class="caption-fields"><span>Flights:<span> {{ airline.flight_set.count }}</h4>
+                    <br>
+                    <p>{{ airline.info }}</p>
 
-    <a href="../"> <button name="back" class="myButton">Back to All Airlines</button></a>
-    <a href="delete"> <button name="delete" class="myButton">Delete This Airline</button></a>
-    <a href="edit"> <button name="edit" class="myButton">Edit This Airline</button></a>
+                    {% if request.user.is_superuser or request.user.is_staff %}
+                        <div class="btn-group options-div" role="group" aria-label="...">
+                            <a href="edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
+                            <a href="delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span>&nbsp; Delete</a>
+                        </div>
+                    {% endif %}
+
+                </div><!-- end caption -->
+
+            </div><!-- end thumbnail -->
+
+        </div><!-- end div left pane -->
+        <div class="col-md-7 col-sm-6">
+
+            <h3>Current Flights: </h3>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+                        <th>Flight</th>
+                        <th>Arrival/Departure</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        {% for flight in airline.flight_set.all %}
+                        {% if flight.revised_departure >= current_time %}
+
+                            <tr data-href="{{ flight.get_absolute_url }}">
+                                <td>{{ airline.flight_prefix }}&nbsp;{{ flight.flight_no }}</td>
+                                <td>
+                                    {% if flight.revised_arrival > current_time %}
+                                        To Arrive
+                                    {% elif flight.revised_departure > current_time and flight.revised_arrival < current_time %}
+                                        To Depart
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if flight.approved_plan == True %}
+                                        {% if flight.revised_departure == flight.scheduled_departure %}
+                                            <div class="label label-success"><span>On Time</span></div>
+                                        {% else %}
+                                            <div class="label label-warning"><span>Delayed</span></div>
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="label label-info"><span>Un-Approved</span></div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="3">No flights</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- end current flights div -->
+
+            <br>
+            <br>
+
+            <h3>Past Flights: </h3>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+                        <th>Flight</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        {% for flight in airline.flight_set.all %}
+                        {% if flight.revised_departure < current_time %}
+
+                            <tr data-href="{{ flight.get_absolute_url }}">
+                                <td>{{ airline.flight_prefix }}&nbsp;{{ flight.flight_no }}</td>
+                                <td>
+                                    {% if flight.approved_plan == True %}
+                                        {% if flight.revised_departure == flight.scheduled_departure %}
+                                            <div class="label label-success"><span>On Time</span></div>
+                                        {% else %}
+                                            <div class="label label-warning"><span>Delayed</span></div>
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="label label-info"><span>Un-Approved</span></div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="2">No flights</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- end past flights div -->
+
+        </div><!-- end div right pane -->
+
+    </div>
 
 {% endblock %}
 
-</body>
-</html>
+{% block script %}
+<script src="{% static 'js/flight_info/detail_view.js' %}"></script>
+{% endblock %}
