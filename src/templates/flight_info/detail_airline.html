@@ -21,17 +21,18 @@
 
                     <h1 class="caption-title">{{ airline.name }} <span><small>{{ airline.flight_prefix }}</small></span></h1>
                     <h4 class="caption-fields"><span>License No:</span> {{ airline.license_no }}</h4>
-                    <h4 class="caption-fields"><span>Aircrafts:<span> {{ airline.no_of_aircrafts }}</h4>
-                    <h4 class="caption-fields"><span>Flights:<span> {{ airline.flight_set.count }}</h4>
+                    <h4 class="caption-fields"><span>Aircrafts:</span> {{ airline.no_of_aircrafts }}</h4>
+                    <h4 class="caption-fields"><span>Flights:</span> {{ airline.flight_set.count }}</h4>
                     <br>
                     <p>{{ airline.info }}</p>
 
-                    {% if request.user.is_superuser or request.user.is_staff %}
                         <div class="btn-group options-div" role="group" aria-label="...">
+                            <a href="../" class="btn btn-success" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
+                            {% if request.user.is_superuser or request.user.is_staff %}
                             <a href="edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
                             <a href="delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span>&nbsp; Delete</a>
+                            {% endif %}
                         </div>
-                    {% endif %}
 
                 </div><!-- end caption -->
 

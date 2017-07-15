@@ -1,80 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Details of Flight</title>
-</head>
-<body>
-    {% extends 'common/base.html' %}
+{% extends 'common/base.html' %}
 
 {% load staticfiles %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+<link rel="stylesheet" href="{% static 'css/flight_info/detail_view.css' %}">
 {% endblock %}
 
 {% block content %}
 
-    <div class="table-responsive">
+    <div class="col-xs-12">
 
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <th>Airline</th>
-                                    <th>Flight No</th>
-                                    <th>Origin</th>
-                                    <th>Destination</th>
-                                    <th>Terminal</th>
-                                    <th>Concourse</th>
-                                    <th>Fare</th>
-                                    <th>Scheduled Departure Time</th>
-                                    <th>Revised Departure Time</th>
-                                    <th>Scheduled Arrival Time</th>
-                                    <th>Revised Arrival Time</th>
-                                    <th>Operation Days</th>
-                                    <th>Total Seats</th>
-                                    <th>Booked Seats</th>
-                                    <th>Status</th>
-                                </thead>
-                                <tbody>
+        <div class="col-md-5 col-sm-6">
+            <div class="thumbnail">
 
-                                    <tr class=>
-                                        <td>{{ flight.airline.name }}</td>
-                                        <td>{{ flight.flight_no }}</td>
-                                        <td>{{ flight.origin }}</td>
-                                        <td>{{ flight.destination }}</td>
-                                        <td>{{ flight.terminal }}</td>
-                                        <td>{{ flight.concourse }}</td>
-                                        <td>{{ flight.fare }}</td>
-                                        <td>{{ flight.scheduled_departure|date:'d M H:i' }} hrs</td>
-                                        <td>{{ flight.revised_departure|date:'d M H:i' }} hrs</td>
-                                        <td>{{ flight.scheduled_arrival|date:'d M H:i' }} hrs</td>
-                                        <td>{{ flight.revised_arrival|date:'d M H:i' }} hrs</td>
-                                        <td>{{ flight.operation_days }}</td>
-                                        <td>{{ flight.total_seats }}</td>
-                                        <td>{{ flight.booked_seats }}</td>
-                                        <td>
-                                            {% if flight.approved_plan == True %}
-                                                {% if flight.revised_departure == flight.scheduled_departure %}
-                                                    <div class="label label-success"><span>On Time</span></div>
-                                                {% else %}
-                                                    <div class="label label-warning"><span>Delayed</span></div>
-                                                {% endif %}
-                                            {% else %}
-                                                <div class="label label-info"><span>Un-Approved</span></div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
+                {% if flight.airline.logo %}
+                <img src="{{ flight.airline.logo.url }}" alt="Airline logo" class="img-responsive">
+                {% endif %}
 
-                                </tbody>
-                            </table>
+                <div class="caption">
 
-                        </div><!-- end table responsive -->
+                    <h1 class="caption-title">
+                        <small><em>{{ flight.airline.name }}</em></small>
+                        <br>
+                        {{ flight.airline.flight_prefix }}&nbsp;{{ flight.flight_no }}
+                    </h1>
+                    <h4 class="caption-fields"><span>Origin:</span> {{ flight.origin }}</h4>
+                    <h4 class="caption-fields"><span>Destination:</span> {{ flight.destination }}</h4>
+                    <h4 class="caption-fields"><span>Operation Days:</span></h4>
+                    {% for day in days %}
+                            <span class="day">{{ day }}</span>
+                    {% endfor %}
+                    <h4 class="caption-fields"><span>Fare:</span> &#8377; {{ flight.fare }}</h4>
+                    <br>
 
-    <a href="../"> <button name="back" class="myButton">Back to All Flights</button></a>
-    <a href="delete"> <button name="delete" class="myButton">Delete This Flight</button></a>
-    <a href="edit"> <button name="edit" class="myButton">Edit This Flight</button></a>
+                    <div class="timings-terminal">
+                    <h4 class="caption-fields"><span>Terminal:</span> {{ flight.terminal }}</h4>
+                    <h4 class="caption-fields"><span>Concourse:</span> {{ flight.concourse }}</h4>
+                    <h4 class="caption-fields"><span>Scheduled Departure:</span> {{ flight.scheduled_departure|date:'d M H:i' }} hrs</h4>
+                    <h4 class="caption-fields"><span>Scheduled Arrival:</span> {{ flight.scheduled_arrival|date:'d M H:i' }} hrs</h4>
+                    <h4 class="caption-fields"><span>Revised Departure:</span> {{ flight.revised_departure|date:'d M H:i' }} hrs</h4>
+                    <h4 class="caption-fields"><span>Revised Arrival:</span> {{ flight.revised_arrival|date:'d M H:i' }} hrs</h4>
+                    <span><small><em>Last Updated: {{ flight.time_last_updated }}</em></small></span>
+                    </div>
+
+                    <br>
+                    <h4 class="caption-fields"><span>Total Seats:</span> {{ flight.total_seats }}</h4>
+                    <h4 class="caption-fields"><span>Booked Seats:</span> {{ flight.booked_seats }}</h4>
+
+
+                    <br>
+
+                        <div class="btn-group options-div" role="group" aria-label="...">
+                            <a href="../" class="btn btn-success" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
+                            {% if request.user.is_superuser or request.user.is_staff %}
+                            <a href="edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
+                            <a href="delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span>&nbsp; Delete</a>
+                            {% endif %}
+                        </div>
+
+                </div><!-- end caption -->
+
+            </div><!-- end thumbnail -->
+
+        </div><!-- end div left pane -->
+        <div class="col-md-7 col-sm-6">
+
+            <h3>Pilots: </h3>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+                        <th>Name</th>
+                        <th>Experience (yrs)</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        {% for crew in flight.crew_set.all %}
+                        {% if crew.pilot == True %}
+
+                            <tr data-href="{{ crew.get_absolute_url }}">
+                                <td>{{ crew.name }}</td>
+                                <td>{{ crew.experience }}</td>
+                                <td>
+                                    {% if crew.in_service == True %}
+                                        <div class="label label-info"><span>In Service</span></div>
+                                    {% else %}
+                                        <div class="label label-warning"><span>Off Service</span></div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="3">No Pilots</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- end pilots div -->
+
+            <br>
+            <br>
+
+            <h3>Other Crew: </h3>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+                        <th>Name</th>
+                        <th>Experience (yrs)</th>
+                        <th>Status</th>
+                    </thead>
+                    <tbody>
+                        {% for crew in flight.crew_set.all %}
+                        {% if crew.pilot == False %}
+
+                            <tr data-href="{{ crew.get_absolute_url }}">
+                                <td>{{ crew.name }}</td>
+                                <td>{{ crew.experience }}</td>
+                                <td>
+                                    {% if crew.in_service == True %}
+                                        <div class="label label-info"><span>In Service</span></div>
+                                    {% else %}
+                                        <div class="label label-warning"><span>Off Service</span></div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="3">No other crew</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- end other div -->
+
+        </div><!-- end div right pane -->
+
+    </div>
 
 {% endblock %}
 
-</body>
-</html>
+{% block script %}
+<script src="{% static 'js/flight_info/detail_view.js' %}"></script>
+{% endblock %}

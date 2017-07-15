@@ -1,8 +1,10 @@
+/* Buttons section : Back/Delete/Edit*/
 .options-div {
     display: table;
     margin: 0 auto;
 }
 
+/* Data in thumbnail apart from image*/
 .caption-title {
     font-size: 50px;
 }
@@ -11,6 +13,7 @@
     color: #0B0B61;
 }
 
+/* Labels for displaying within tables */
 .label {
     display: inline-block; /*by default display:inline, hence need to change to apply margin top/bottom correctly*/
     padding: 3px;
@@ -18,5 +21,29 @@
 .label span {
     font-size: 11px;
 }
+
+/* Styles for terminal/concourse and timing section */
+.timings-terminal {
+    background: #e1f2f4;
+    padding: 10px;
+    border: 2px dashed #598ef1;
+    border-radius: 10px;
+}
+
+.timings-terminal h4 {
+    font-size: 17px;
+}
+
+/* Styles for operation days */
+.day {
+    background: #276df1;
+    color: #fff;
+    border-radius: 5px;
+    padding: 6px 8px;
+    display: inline-block;
+    margin: 5px 5px 5px 5px;
+}
+
+
 
 tr[data-href] { cursor: pointer }

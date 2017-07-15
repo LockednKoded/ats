@@ -140,9 +140,43 @@ def edit_flight(request, pk):
         raise PermissionDenied
 
 
+def get_operation_days(days_binary_list):
+
+    days_list = []
+
+    if days_binary_list[0] == '1':
+        days_list.append("Monday")
+
+    if days_binary_list[1] == '1':
+        days_list.append("Tuesday")
+
+    if days_binary_list[2] == '1':
+        days_list.append("Wedesday")
+
+    if days_binary_list[3] == '1':
+        days_list.append("Thursday")
+
+    if days_binary_list[4] == '1':
+        days_list.append("Friday")
+
+    if days_binary_list[5] == '1':
+        days_list.append("Saturday")
+
+    if days_binary_list[6] == '1':
+        days_list.append("Sunday")
+
+    return days_list
+
+
 def view_flight(request, pk):
     flight_instance = get_object_or_404(Flight, flight_no=pk)
-    return render(request, 'flight_info/detail_flights.html', {'flight': flight_instance})
+    days_binary_list = flight_instance.operation_days.split(',')
+    days_list = get_operation_days(days_binary_list)
+
+    return render(request, 'flight_info/detail_flights.html', {
+        'flight': flight_instance,
+        'days': days_list,
+    })
 
 
 def delete_flight(request, pk):
