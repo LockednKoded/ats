@@ -185,7 +185,7 @@ def add_crew(request):
     if request.user.is_superuser or request.user.is_staff:
 
         if request.method == "POST":
-            form = CrewForm(request.POST)  # , request.FILES
+            form = CrewForm(request.POST, request.FILES)  #
 
             if form.is_valid():
                 crew = form.save(commit=False)
@@ -232,7 +232,8 @@ def edit_crew(request, pk):
 
 
 def view_crew(request, pk):
-    return HttpResponse("<h1>Details for " + pk + " crew</h1>")
+    crew_instance = get_object_or_404(Crew, crew_id=pk)
+    return render(request, 'flight_info/detail_crew.html', {'crew': crew_instance})
 
 
 def delete_crew(request, pk):

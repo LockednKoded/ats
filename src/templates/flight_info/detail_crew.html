@@ -2,9 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Details of Crew Member</title>
 </head>
 <body>
+    {% extends 'common/base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>Crew ID</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Experience</th>
+                                    <th>License no</th>
+                                    <th>Phone No</th>
+                                    <th>Flights</th>
+                                    <th>Photo</th>
+                                </thead>
+                                <tbody>
+
+                                    <tr class="
+                                                {% if airline.pilot == True %}
+                                                        success
+                                                    {% else %}
+                                                    info
+                                                {% endif %}
+                                              ">
+                                        <td>{{ crew.crew_id }}</td>
+                                        <td>{{ crew.name }}</td>
+                                        <td>
+                                            {% if crew.pilot == True %}
+                                                    <div class="label label-success"><span>Pilot</span></div>
+                                            {% else %}
+                                                <div class="label label-info"><span>Crew</span></div>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ crew.experience }}</td>
+                                        <td>{{ crew.license_no }}</td>
+                                        <td>{{ crew.ph_no }}</td>
+                                        <td>
+                                            {% for flight in crew.flights.all %}
+                                                {{ flight.flight_no }}&nbsp;
+                                            {% empty %}
+                                                Not assigned
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{ crew.photo }}</td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+
+    <a href="../"> <button name="back" class="myButton">Back to All Crew</button></a>
+    <a href="delete"> <button name="delete" class="myButton">Delete This Crew Member</button></a>
+    <a href="edit"> <button name="edit" class="myButton">Edit This Crew Member</button></a>
+
+{% endblock %}
 
 </body>
 </html>
