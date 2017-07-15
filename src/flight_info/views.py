@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 
 from .models import Flight, Crew,  Airline
-from .forms import FlightForm, CrewForm
+from .forms import FlightForm, CrewForm, AirlineForm
 
 
 """
@@ -265,11 +265,33 @@ def list_airlines(request):
 
 
 def add_airlines(request):
-    return HttpResponse("<h1>Add a new airline</h1>")
+    if request.user.is_superuser or request.user.is_staff:
+        if request.method == "POST":
+            form = AirlineForm(request.POST)
+
+            if form.is_valid():
+                airline = form.save(commit=False)
+
+                airline.save()
+
+                # return redirect("airline_info:view-airline", pk=airline.flight_prefix)
+                return redirect("flight-info:list-airlines", )
+        else:
+            form = AirlineForm()
+
+        return render(request, 'flight_info/form.html', {
+            'title_message': 'Add new Airline',
+            'submit_message': 'Add',
+            'form': form,
+        })
+
+    else:
+        raise PermissionDenied
 
 
 def view_airlines(request, pk):
-    return HttpResponse("<h1>Details for airline " + pk + "</h1>")
+    airline_instance = get_object_or_404(Airline, flight_prefix=pk)
+    return render(request, 'flight_info/detail_flights.html', {'flight': airline_instance})
 
 
 def delete_airlines(request, pk):

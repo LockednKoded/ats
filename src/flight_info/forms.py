@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Flight, Crew
+from .models import Flight, Crew, Airline
 
 
 class FlightForm(forms.ModelForm):
@@ -106,3 +106,27 @@ class CrewForm(forms.ModelForm):
             crew_qs = Crew.objects.get(crew_id=crew_id)
             if crew_qs.exists():
                 raise forms.ValidationError("Crew with same id already exists")
+
+
+class AirlineForm(forms.ModelForm):
+
+    name = forms.CharField(help_text="Enter a unique name", label="name")
+    flight_prefix = forms.CharField()
+    license_no = forms.IntegerField()
+    no_of_aircrafts = forms.IntegerField()
+
+    class Meta:
+        model = Airline
+        fields = [
+            'name',
+            'flight_prefix',
+            'license_no',
+            'no_of_aircrafts',
+        ]
+
+        def clean__flight_prefix(self):
+            flight_prefix = self.cleaned_data.get('flight_prefix')
+
+            airline_qs = Airline.objects.get(flight_prefix=flight_prefix)
+            if airline_qs.exists():
+                raise forms.ValidationError("Airline with same prefix already exists")
