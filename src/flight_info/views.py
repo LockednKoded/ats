@@ -16,7 +16,6 @@ from .forms import FlightForm, CrewForm, AirlineForm
 
 
 def list_flights(request):
-
     current_time = timezone.now()
 
     queryset = Flight.objects.active()
@@ -85,6 +84,7 @@ def get_days_field(days):
 
 def add_flight(request):
     if request.user.is_superuser or request.user.is_superuser:
+
         if request.method == "POST":
             form = FlightForm(request.POST)
 
@@ -111,24 +111,9 @@ def add_flight(request):
         raise PermissionDenied
 
 
-def view_flight(request, pk):   # pk is primary key, the flight number passed
-    flight_instance = get_object_or_404(Flight, flight_no=pk)
-    return render(request, 'flight_info/detail_flights.html', {'flight': flight_instance})
-
-
-def delete_flight(request, pk):
-    if request.user.is_superuser or request.user.is_staff:
-        flight_instance = get_object_or_404(Flight, flight_no=pk)
-        post = get_object_or_404(Flight, flight_no=pk)
-        flight_instance.delete()
-        return render(request, 'flight_info/delete_flight.html', {'flight': post})
-        # TODO: Need to change this, because flight_instance has already been deleted and cannot be retreived now
-    else:
-        raise PermissionDenied
-
-
 def edit_flight(request, pk):
     if request.user.is_superuser or request.user.is_staff:
+
         flight_instance = get_object_or_404(Flight, flight_no=pk)
         if request.method == "POST":
 
@@ -155,6 +140,23 @@ def edit_flight(request, pk):
         raise PermissionDenied
 
 
+def view_flight(request, pk):
+    flight_instance = get_object_or_404(Flight, flight_no=pk)
+    return render(request, 'flight_info/detail_flights.html', {'flight': flight_instance})
+
+
+def delete_flight(request, pk):
+    if request.user.is_superuser or request.user.is_staff:
+
+        flight_instance = get_object_or_404(Flight, flight_no=pk)
+        flight_instance_2 = get_object_or_404(Flight, flight_no=pk)  # need to fetch the instance twice, as one is del
+        flight_instance.delete()
+        return render(request, 'flight_info/delete_flight.html', {'flight': flight_instance_2})
+
+    else:
+        raise PermissionDenied
+
+
 """
     /////////////////////
         Crew views
@@ -163,6 +165,7 @@ def edit_flight(request, pk):
 
 
 def list_crew(request):
+
     queryset = Crew.objects.active()
     if request.user.is_superuser or request.user.is_staff:
         queryset = Crew.objects.all()
@@ -180,6 +183,7 @@ def list_crew(request):
 
 def add_crew(request):
     if request.user.is_superuser or request.user.is_staff:
+
         if request.method == "POST":
             form = CrewForm(request.POST, request.FILES)
 
@@ -201,21 +205,9 @@ def add_crew(request):
         raise PermissionDenied
 
 
-def view_crew(request, pk):
-    return HttpResponse("<h1>Details for " + pk + " crew</h1>")
-
-
-def delete_crew(request, pk):
-    if request.user.is_superuser or request.user.is_staff:
-        crew_instance = get_object_or_404(Crew, crew_id=pk)
-        crew_instance.delete()
-        return redirect("flight_info:list-crew")
-    else:
-        raise PermissionDenied
-
-
 def edit_crew(request, pk):
     if request.user.is_superuser or request.user.is_staff:
+
         crew_instance = get_object_or_404(Crew, crew_id=pk)
         if request.method == "POST":
 
@@ -235,6 +227,20 @@ def edit_crew(request, pk):
             'form': form,
         })
 
+    else:
+        raise PermissionDenied
+
+
+def view_crew(request, pk):
+    return HttpResponse("<h1>Details for " + pk + " crew</h1>")
+
+
+def delete_crew(request, pk):
+    if request.user.is_superuser or request.user.is_staff:
+
+        crew_instance = get_object_or_404(Crew, crew_id=pk)
+        crew_instance.delete()
+        return redirect("flight_info:list-crew")
     else:
         raise PermissionDenied
 
@@ -289,6 +295,10 @@ def add_airlines(request):
         raise PermissionDenied
 
 
+def edit_airlines(request, pk):
+    return HttpResponse("<h1>Edit details of airline " + pk + "</h1>")
+
+
 def view_airlines(request, pk):
     airline_instance = get_object_or_404(Airline, flight_prefix=pk)
     return render(request, 'flight_info/detail_flights.html', {'flight': airline_instance})
@@ -296,7 +306,3 @@ def view_airlines(request, pk):
 
 def delete_airlines(request, pk):
     return HttpResponse("<h1>Delete airline " + pk + "</h1>")
-
-
-def edit_airlines(request, pk):
-    return HttpResponse("<h1>Edit details of airline " + pk + "</h1>")
