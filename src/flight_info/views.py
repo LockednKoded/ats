@@ -272,12 +272,12 @@ def list_airlines(request):
 
 def add_airlines(request):
     if request.user.is_superuser or request.user.is_staff:
+
         if request.method == "POST":
-            form = AirlineForm(request.POST)
+            form = AirlineForm(request.POST, request.FILES)
 
             if form.is_valid():
                 airline = form.save(commit=False)
-
                 airline.save()
 
                 return redirect("flight_info:view-airlines", pk=airline.flight_prefix)
