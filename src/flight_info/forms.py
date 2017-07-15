@@ -82,7 +82,7 @@ class FlightForm(forms.ModelForm):
 class CrewForm(forms.ModelForm):
 
     crew_id = forms.IntegerField(help_text="Enter a unique ID", label="ID")
-    pilot = forms.BooleanField(help_text="Check for pilot, leave unchecked for crew")
+    pilot = forms.BooleanField(help_text="Check for pilot, leave unchecked for crew", required=False)
     experience = forms.IntegerField(help_text="Enter experience in years")
     flights = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Flight.objects.active(),
                                              required=False, help_text="Select all flights where you work")
