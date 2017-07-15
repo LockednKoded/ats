@@ -280,8 +280,8 @@ def add_airlines(request):
 
                 airline.save()
 
-                # return redirect("airline_info:view-airline", pk=airline.flight_prefix)
-                return redirect("flight-info:list-airlines", )
+                return redirect("flight_info:view-airlines", pk=airline.flight_prefix)
+                # return redirect("flight-info:list-airlines", )
         else:
             form = AirlineForm()
 
@@ -290,9 +290,9 @@ def add_airlines(request):
             'submit_message': 'Add',
             'form': form,
         })
-
     else:
         raise PermissionDenied
+
 
 
 def edit_airlines(request, pk):
@@ -301,7 +301,7 @@ def edit_airlines(request, pk):
 
 def view_airlines(request, pk):
     airline_instance = get_object_or_404(Airline, flight_prefix=pk)
-    return render(request, 'flight_info/detail_flights.html', {'flight': airline_instance})
+    return render(request, 'flight_info/detail_airline.html', {'airline': airline_instance})
 
 
 def delete_airlines(request, pk):

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details of Airline</title>
+</head>
+<body>
+    {% extends 'common/base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>Airline</th>
+                                    <th>Flight Preix</th>
+                                    <th>License No</th>
+                                    <th>No of Aircrafts</th>
+                                </thead>
+                                <tbody>
+
+                                    <tr class=>
+                                        <td>{{ airline.name }}</td>
+                                        <td>{{ airline.flight_prefix }}</td>
+                                        <td>{{ airline.license_no }}</td>
+                                        <td>{{ airline.no_of_aircrafts }}</td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+
+    <a href="../"> <button name="back" class="myButton">Back to All Airlines</button></a>
+    <a href="delete"> <button name="delete" class="myButton">Delete This Airline</button></a>
+    <a href="edit"> <button name="edit" class="myButton">Edit This Airline</button></a>
+
+{% endblock %}
+
+</body>
+</html>

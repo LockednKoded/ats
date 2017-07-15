@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'^airlines/add/$', add_airlines, name="add-airlines"),
 
     # Option to view airline details, /flights/airlines/5
-    url(r'^airlines/(?P<pk>[0-9]+)/$', view_airlines, name="view-airlines"),
+    url(r'^airlines/(?P<pk>[0-9A-Z]+)/$', view_airlines, name="view-airlines"),
 
     # Option to delete airlines, /flights/airlines/5/delete
     url(r'^airlines/(?P<pk>[0-9]+)/delete/$', delete_airlines, name="delete-airlines"),
