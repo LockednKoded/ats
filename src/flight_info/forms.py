@@ -14,6 +14,7 @@ class FlightForm(forms.ModelForm):
         ('sat', 'Saturday'),
         ('sun', 'Sunday'),
     )
+
     days_operational = forms.MultipleChoiceField(choices=DAY_LIST, widget=forms.CheckboxSelectMultiple)
     flight_no = forms.IntegerField(help_text="Enter a unique flight no", label="Flight No")
     approved_plan = forms.BooleanField(help_text="Check if plan is approved", label="Plan approved", required=False)
@@ -110,10 +111,7 @@ class CrewForm(forms.ModelForm):
 
 class AirlineForm(forms.ModelForm):
 
-    name = forms.CharField(help_text="Enter a unique name", label="name")
-    flight_prefix = forms.CharField()
-    license_no = forms.IntegerField()
-    no_of_aircrafts = forms.IntegerField()
+    name = forms.CharField(help_text="Enter a unique name")
 
     class Meta:
         model = Airline
@@ -122,6 +120,7 @@ class AirlineForm(forms.ModelForm):
             'flight_prefix',
             'license_no',
             'no_of_aircrafts',
+            'logo',
         ]
 
         def clean__flight_prefix(self):

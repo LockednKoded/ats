@@ -23,6 +23,7 @@
                                     <th>Flight Preix</th>
                                     <th>License No</th>
                                     <th>No of Aircrafts</th>
+                                    <th>Logo</th>
                                 </thead>
                                 <tbody>
 
@@ -31,7 +32,11 @@
                                         <td>{{ airline.flight_prefix }}</td>
                                         <td>{{ airline.license_no }}</td>
                                         <td>{{ airline.no_of_aircrafts }}</td>
-
+                                        <td>
+                                            {% if airline.logo %}
+                                            <img src="{{ airline.logo.url }}" height="50" alt="Airline Logo">
+                                            {% endif %}
+                                        </td>
                                     </tr>
 
                                 </tbody>
