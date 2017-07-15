@@ -240,8 +240,9 @@ def delete_crew(request, pk):
     if request.user.is_superuser or request.user.is_staff:
 
         crew_instance = get_object_or_404(Crew, crew_id=pk)
+        crew_instance_2 = get_object_or_404(Crew, crew_id=pk)
         crew_instance.delete()
-        return redirect("flight_info:list-crew")
+        return render(request, 'flight_info/delete_crew.html', {'crew': crew_instance_2})
     else:
         raise PermissionDenied
 
