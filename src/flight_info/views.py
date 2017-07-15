@@ -294,7 +294,6 @@ def add_airlines(request):
         raise PermissionDenied
 
 
-
 def edit_airlines(request, pk):
     return HttpResponse("<h1>Edit details of airline " + pk + "</h1>")
 

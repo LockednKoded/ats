@@ -54,7 +54,7 @@
                                 <tbody>
                                     {% for line in airline_list %}
 
-                                    <tr >
+                                    <tr data-href="{{ line.get_absolute_url }}">
                                         <td>{{ line.name }}</td>
                                         <td>{{ line.flight_prefix }}</td>
                                         <td>{{ line.license_no }}</td>
