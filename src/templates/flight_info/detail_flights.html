@@ -9,6 +9,10 @@
 {% block content %}
 
     <div class="col-xs-12">
+        <a href="../" class="btn btn-success btn-sm back-btn" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
+    </div>
+
+    <div class="col-xs-12">
 
         <div class="col-md-5 col-sm-6">
             <div class="thumbnail">
@@ -50,13 +54,12 @@
 
                     <br>
 
+                        {% if request.user.is_superuser or request.user.is_staff %}
                         <div class="btn-group options-div" role="group" aria-label="...">
-                            <a href="../" class="btn btn-success" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
-                            {% if request.user.is_superuser or request.user.is_staff %}
                             <a href="edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
                             <a href="delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span>&nbsp; Delete</a>
-                            {% endif %}
                         </div>
+                        {% endif %}
 
                 </div><!-- end caption -->
 
@@ -68,9 +71,10 @@
             <h3>Pilots: </h3>
             <br>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-condensed table-hover">
 
                     <thead>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Experience (yrs)</th>
                         <th>Status</th>
@@ -80,6 +84,13 @@
                         {% if crew.pilot == True %}
 
                             <tr data-href="{{ crew.get_absolute_url }}">
+                                <td>
+                                    {% if crew.photo %}
+                                    <img src="{{ crew.photo.url }}" class="img-circle" alt="Crew Photo">
+                                    {% else %}
+                                    <img src="{% static 'images/flight_info/no_profile_img.gif' %}" class="img-circle" alt="Crew Photo">
+                                    {% endif %}
+                                </td>
                                 <td>{{ crew.name }}</td>
                                 <td>{{ crew.experience }}</td>
                                 <td>
@@ -107,9 +118,10 @@
             <h3>Other Crew: </h3>
             <br>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-condensed table-hover">
 
                     <thead>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Experience (yrs)</th>
                         <th>Status</th>
@@ -119,6 +131,13 @@
                         {% if crew.pilot == False %}
 
                             <tr data-href="{{ crew.get_absolute_url }}">
+                                <td>
+                                    {% if crew.photo %}
+                                    <img src="{{ crew.photo.url }}" class="img-circle" alt="Crew Photo">
+                                    {% else %}
+                                    <img src="{% static 'images/flight_info/no_profile_img.gif' %}" class="img-circle" alt="Crew Photo">
+                                    {% endif %}
+                                </td>
                                 <td>{{ crew.name }}</td>
                                 <td>{{ crew.experience }}</td>
                                 <td>

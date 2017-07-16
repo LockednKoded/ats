@@ -9,6 +9,10 @@
 {% block content %}
 
     <div class="col-xs-12">
+        <a href="../" class="btn btn-success btn-sm back-btn" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
+    </div>
+
+    <div class="col-xs-12">
 
         <div class="col-md-5 col-sm-6">
             <div class="thumbnail">
@@ -26,13 +30,12 @@
                     <br>
                     <p>{{ airline.info }}</p>
 
+                        {% if request.user.is_superuser or request.user.is_staff %}
                         <div class="btn-group options-div" role="group" aria-label="...">
-                            <a href="../" class="btn btn-success" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
-                            {% if request.user.is_superuser or request.user.is_staff %}
                             <a href="edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
                             <a href="delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span>&nbsp; Delete</a>
-                            {% endif %}
                         </div>
+                        {% endif %}
 
                 </div><!-- end caption -->
 
@@ -44,7 +47,7 @@
             <h3>Current Flights: </h3>
             <br>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-condensed table-hover">
 
                     <thead>
                         <th>Flight</th>
@@ -93,7 +96,7 @@
             <h3>Past Flights: </h3>
             <br>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-condensed table-hover">
 
                     <thead>
                         <th>Flight</th>

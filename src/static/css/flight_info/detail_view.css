@@ -22,6 +22,13 @@
     font-size: 11px;
 }
 
+/* Need to specific here to override bootstrap default styles
+    To vertically centre text in table row
+*/
+.table tbody tr td {
+    line-height: 3.5;
+}
+
 /* Styles for terminal/concourse and timing section */
 .timings-terminal {
     background: #e1f2f4;
@@ -43,7 +50,23 @@
     display: inline-block;
     margin: 5px 5px 5px 5px;
 }
+/* Making days smaller on smaller screen sizes*/
+@media (max-width: 487px) {
+    .day {
+      font-size: 12px;
+      padding: 3px 4px;
+    }
+}
 
+.back-btn {
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
 
+/* Circle profile images */
+.img-circle {
+    height: 50px;
+    width: 50px;
+}
 
 tr[data-href] { cursor: pointer }

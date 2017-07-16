@@ -61,10 +61,10 @@ body {
         font-size: 17px;
     }
 }
-@media (max-width: 320px) {
+@media (max-width: 329px) {
 
     .navbar .navbar-brand {
-        font-size: 11px;
+        font-size: 14px;
     }
 }
 
