@@ -197,16 +197,16 @@ def delete_flight(request, pk):
 """
 
 
-def list_crew(request):
+def list_force_employee(request):
 
-    queryset = Crew.objects.active()
+    queryset = force_employee.objects.active()
     if request.user.is_superuser or request.user.is_staff:
-        queryset = Crew.objects.all()
+        queryset = force_employee.objects.all()
 
     query = request.GET.get("q")
     if query:
         queryset = queryset.filter(
-            Q(crew_id__icontains=query) |
+            Q(employee_id__icontains=query) |
             Q(name__icontains=query) |
             Q(flights__flight_no__icontains=query)
         ).distinct()
@@ -214,11 +214,11 @@ def list_crew(request):
     return render(request, 'flight_info/list_crew.html', {'crew_list': queryset, })
 
 
-def add_crew(request):
+def add_force_employee(request):
     if request.user.is_superuser or request.user.is_staff:
 
         if request.method == "POST":
-            form = CrewForm(request.POST, request.FILES)  #
+            form = force_Form(request.POST, request.FILES)  #
 
             if form.is_valid():
                 crew = form.save(commit=False)
@@ -228,7 +228,7 @@ def add_crew(request):
 
                 return redirect("flight_info:view-crew", pk=crew.crew_id)
         else:
-                form = CrewForm()
+                form = force_Form()
 
         return render(request, 'flight_info/form.html', {
             'title_message': 'Add new crew',
@@ -239,21 +239,21 @@ def add_crew(request):
         raise PermissionDenied
 
 
-def edit_crew(request, pk):
+def edit_force_employee(request, pk):
     if request.user.is_superuser or request.user.is_staff:
 
-        crew_instance = get_object_or_404(Crew, crew_id=pk)
+        crew_instance = get_object_or_404(force_employee, employee_id=pk)
         if request.method == "POST":
 
-            form = CrewForm(request.POST, request.FILES, instance=crew_instance)
+            form = force_Form(request.POST, request.FILES, instance=crew_instance)
             if form.is_valid():
                 crew = form.save(commit=False)
                 crew.flights = form.cleaned_data['flights']
                 crew.save()
 
-                return redirect("flight_info:view-crew", pk=crew.crew_id)
+                return redirect("security:view-force_employee", pk=force_employee.employee_id)
         else:
-            form = CrewForm(instance=crew_instance)
+            form = force_Form(instance=crew_instance)
 
         return render(request, 'flight_info/form.html', {
             'title_message': 'Add new crew',
@@ -265,112 +265,119 @@ def edit_crew(request, pk):
         raise PermissionDenied
 
 
-def view_crew(request, pk):
-    crew_instance = get_object_or_404(Crew, crew_id=pk)
+def view_force_employee(request, pk):
+    crew_instance = get_object_or_404(force_employee, employee_id=pk)
     return render(request, 'flight_info/detail_crew.html', {'crew': crew_instance})
 
 
-def delete_crew(request, pk):
+def delete_force_employee(request, pk):
     if request.user.is_superuser or request.user.is_staff:
 
-        crew_instance = get_object_or_404(Crew, crew_id=pk)
-        crew_instance_2 = get_object_or_404(Crew, crew_id=pk)
+        crew_instance = get_object_or_404(force_employee, employee_id=pk)
+        crew_instance_2 = get_object_or_404(force_employee, employee_id=pk)
         crew_instance.delete()
         return render(request, 'flight_info/delete_crew.html', {'crew': crew_instance_2})
     else:
         raise PermissionDenied
 
 
-"""
-    /////////////////////
-        Airlines views
-    /////////////////////
-"""
 
 
-def list_airlines(request):
-    queryset = Airline.objects.all()
+
+
+
+
+
+
+
+
+
+
+
+def list_security_forces(request):
+
+
+    queryset = security_forces.objects.active()
+    if request.user.is_staff or request.user.is_superuser:
+        queryset = security_forces.objects.all()  # Show un-approved flights to authorised people
 
     query = request.GET.get("q")
     if query:
         queryset = queryset.filter(
             Q(name__icontains=query) |
-            Q(flight_prefix__icontains=query) |
-            Q(license_no__icontains=query) |
-            Q(no_of_aircrafts__icontains=query)
+            Q(license_no__icontains=query)
+
         ).distinct()
 
-    context = {
-        'airline_list': queryset,
-    }
-    return render(request, 'flight_info/list_airlines.html', context)
 
 
-def add_airlines(request):
-    if request.user.is_superuser or request.user.is_staff:
+
+    return render(request, 'flight_info/list_security_forces.html',{'security_forces_list': queryset, })
+
+
+
+def add_security_forces(request):
+    if request.user.is_superuser or request.user.is_superuser:
 
         if request.method == "POST":
-            form = AirlineForm(request.POST, request.FILES)
-
+            form = AirlineForm(request.POST)
             if form.is_valid():
-                airline = form.save(commit=False)
-                airline.save()
+                crew = form.save(commit=False)
+                crew.save()
+                crew.flights = form.cleaned_data['flights']
+                crew.save()
 
-                return redirect("flight_info:view-airlines", pk=airline.flight_prefix)
-                # return redirect("flight-info:list-airlines", )
+                return redirect("security:view-security_forces", pk=crew.license_no)
+
         else:
             form = AirlineForm()
 
-        return render(request, 'flight_info/form.html', {
-            'title_message': 'Add new Airline',
+        return render(request, 'flight_info/security_force_form.html', {
+            'title_message': 'Add new security force',
             'submit_message': 'Add',
             'form': form,
         })
+
     else:
         raise PermissionDenied
 
 
-def edit_airlines(request, pk):
+def edit_security_forces(request, pk):
     if request.user.is_superuser or request.user.is_staff:
 
-        airline_instance = get_object_or_404(Airline, flight_prefix=pk)
+        crew_instance = get_object_or_404(security_forces, license_no=pk)
         if request.method == "POST":
 
-            form = AirlineForm(request.POST, instance=airline_instance)
+            form = AirlineForm(request.POST, request.FILES, instance=crew_instance)
             if form.is_valid():
-                airline = form.save(commit=False)
+                crew = form.save(commit=False)
+                crew.flights = form.cleaned_data['flights']
+                crew.save()
 
-                airline.save()
-
-                return redirect("flight_info:view-airlines", pk=airline.flight_prefix)
+                return redirect("security:view-security_forces", pk=crew.license_no)
         else:
-            form = AirlineForm(instance=airline_instance)
+            form = AirlineForm(instance=crew_instance)
 
-        return render(request, 'flight_info/form.html', {
-            'title_message': 'Edit Airline Details',
-            'submit_message': 'Save',
+        return render(request, 'flight_info/security_force_form.html', {
+            'title_message': 'Add new Security forces',
+            'submit_message': 'Add',
             'form': form,
         })
+
     else:
         raise PermissionDenied
 
-
-def view_airlines(request, pk):
-    current_time = timezone.now()
-    airline_instance = get_object_or_404(Airline, flight_prefix=pk)
-    return render(request, 'flight_info/detail_airline.html', {
-        'airline': airline_instance,
-        'current_time': current_time,
-    })
+    def view_security_forces(request, pk):
+        crew_instance = get_object_or_404(security_forces, license_no=pk)
+        return render(request, 'flight_info/detail_security_forces.html', {'crew': crew_instance})
 
 
-def delete_airlines(request, pk):
+def delete_security_forces(request, pk):
     if request.user.is_superuser or request.user.is_staff:
 
-        airline_instance = get_object_or_404(Airline, flight_prefix=pk)
-        airline_instance_2 = get_object_or_404(Airline, flight_prefix=pk)  # fetch the instance twice, as one is del
-        airline_instance.delete()
-        return render(request, 'flight_info/delete_airline.html', {'airline': airline_instance_2})
-
+        crew_instance = get_object_or_404(security_forces, license_no=pk)
+        crew_instance_2 = get_object_or_404(security_forces, license_no=pk)
+        crew_instance.delete()
+        return render(request, 'flight_info/delete_security_forces.html', {'crew': crew_instance_2})
     else:
         raise PermissionDenied
