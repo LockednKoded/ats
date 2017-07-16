@@ -42,7 +42,7 @@ class Flight(models.Model):
 
     def get_absolute_url(self):
         # generating url that matches the specified url function name
-        return reverse("security_info:view-flight", kwargs={"pk": self.flight_no})
+        return reverse("security:view-flight", kwargs={"pk": self.flight_no})
 
 
 # Need to instantiate these model managers in their respective classes
@@ -69,4 +69,4 @@ class force_employee(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse("security_info:view-force_employee", kwargs={"pk": self.employee_id})
+        return reverse("security:view-force_employee", kwargs={"pk": self.employee_id})
