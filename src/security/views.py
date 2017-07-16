@@ -38,7 +38,7 @@ def list_flights(request):
         'flight_list': queryset,
         'current_time': current_time,
     }
-    return render(request, 'flight_info/list_flights.html', context)
+    return render(request, 'security_info/list_flights_.html', context)
 
 
 def get_days_field(days):
@@ -172,7 +172,7 @@ def view_flight(request, pk):
     days_binary_list = flight_instance.operation_days.split(',')
     days_list = get_operation_days(days_binary_list)
 
-    return render(request, 'flight_info/detail_flights.html', {
+    return render(request, 'security_info/detail_flights_.html', {
         'flight': flight_instance,
         'days': days_list,
     })
@@ -184,7 +184,7 @@ def delete_flight(request, pk):
         flight_instance = get_object_or_404(Flight, flight_no=pk)
         flight_instance_2 = get_object_or_404(Flight, flight_no=pk)  # need to fetch the instance twice, as one is del
         flight_instance.delete()
-        return render(request, 'flight_info/delete_flight.html', {'flight': flight_instance_2})
+        return render(request, 'security_info/delete_flight_.html', {'flight': flight_instance_2})
 
     else:
         raise PermissionDenied
@@ -211,7 +211,7 @@ def list_force_employee(request):
             Q(flights__flight_no__icontains=query)
         ).distinct()
 
-    return render(request, 'flight_info/list_crew.html', {'crew_list': queryset, })
+    return render(request, 'security_info/list_force_employee.html', {'crew_list': queryset, })
 
 
 def add_force_employee(request):
@@ -230,7 +230,7 @@ def add_force_employee(request):
         else:
                 form = force_Form()
 
-        return render(request, 'flight_info/form.html', {
+        return render(request, 'security_info/form_1.html', {
             'title_message': 'Add new crew',
             'submit_message': 'Add',
             'form': form,
@@ -255,7 +255,7 @@ def edit_force_employee(request, pk):
         else:
             form = force_Form(instance=crew_instance)
 
-        return render(request, 'flight_info/form.html', {
+        return render(request, 'security_info/form_1.html', {
             'title_message': 'Add new crew',
             'submit_message': 'Add',
             'form': form,
@@ -267,7 +267,7 @@ def edit_force_employee(request, pk):
 
 def view_force_employee(request, pk):
     crew_instance = get_object_or_404(force_employee, employee_id=pk)
-    return render(request, 'flight_info/detail_crew.html', {'crew': crew_instance})
+    return render(request, 'security_info/detail_force_employee.html', {'crew': crew_instance})
 
 
 def delete_force_employee(request, pk):
@@ -276,7 +276,7 @@ def delete_force_employee(request, pk):
         crew_instance = get_object_or_404(force_employee, employee_id=pk)
         crew_instance_2 = get_object_or_404(force_employee, employee_id=pk)
         crew_instance.delete()
-        return render(request, 'flight_info/delete_crew.html', {'crew': crew_instance_2})
+        return render(request, 'security_info/delete_force_employee.html', {'crew': crew_instance_2})
     else:
         raise PermissionDenied
 
@@ -312,7 +312,7 @@ def list_security_forces(request):
 
 
 
-    return render(request, 'flight_info/list_security_forces.html',{'security_forces_list': queryset, })
+    return render(request, 'security_info/list_security_forces.html',{'security_forces_list': queryset, })
 
 
 
@@ -332,7 +332,7 @@ def add_security_forces(request):
         else:
             form = AirlineForm()
 
-        return render(request, 'flight_info/security_force_form.html', {
+        return render(request, 'security_info/form_1.html', {
             'title_message': 'Add new security force',
             'submit_message': 'Add',
             'form': form,
@@ -358,7 +358,7 @@ def edit_security_forces(request, pk):
         else:
             form = AirlineForm(instance=crew_instance)
 
-        return render(request, 'flight_info/security_force_form.html', {
+        return render(request, 'security_info/form_1.html', {
             'title_message': 'Add new Security forces',
             'submit_message': 'Add',
             'form': form,
@@ -369,7 +369,7 @@ def edit_security_forces(request, pk):
 
     def view_security_forces(request, pk):
         crew_instance = get_object_or_404(security_forces, license_no=pk)
-        return render(request, 'flight_info/detail_security_forces.html', {'crew': crew_instance})
+        return render(request, 'security_info/detail_security_forces.html', {'crew': crew_instance})
 
 
 def delete_security_forces(request, pk):
@@ -378,6 +378,6 @@ def delete_security_forces(request, pk):
         crew_instance = get_object_or_404(security_forces, license_no=pk)
         crew_instance_2 = get_object_or_404(security_forces, license_no=pk)
         crew_instance.delete()
-        return render(request, 'flight_info/delete_security_forces.html', {'crew': crew_instance_2})
+        return render(request, 'security_info/delete_security_forces.html', {'crew': crew_instance_2})
     else:
         raise PermissionDenied
