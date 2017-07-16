@@ -32,7 +32,7 @@ class Flight(models.Model):
 
 class force_employee(models.Model):
     employee_id = models.IntegerField(primary_key=True)
-    force = models.ForeignKey(security_forces,on_delete=)
+    force = models.ForeignKey(security_forces,on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     experience = models.PositiveSmallIntegerField(default=0)
     license_no = models.PositiveIntegerField()
@@ -40,7 +40,7 @@ class force_employee(models.Model):
     in_service = models.BooleanField(default=True)
 
     # blank=True --> There may be unassigned crew, Crew table doesn't have total participation
-    flights = models.ManyToManyField(Flight, blank=True)
+    flights = models.ManyToManyField('flight_info.Flight', blank=True)
 
 
     def get_absolute_url(self):
