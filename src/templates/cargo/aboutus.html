@@ -15,8 +15,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
- <a href="/cargo/try1" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
-    <a href="/cargo/bookcargo" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Book Cargo</a>
+    <a href="/cargo" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
+    <a href="/cargo/add" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Book Cargo</a>
     <a href="/cargo/cargolist" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Cargo List</a>
     <a href="/cargo/aboutus" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About us</a>
     <a href="/cargo/helpandsupport" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Help and Support</a>
@@ -27,20 +27,21 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
     <i class="fa fa-remove"></i>
   </a>
-  <h4 class="w3-bar-item"><b>Quick Links</b></h4>
+    <h4 class="w3-bar-item"><b>Quick Links</b></h4>
 <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/guideline">Guideline</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Cargo Procedure</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Fare Table</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/procedure">Cargo Procedure</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/faretable">Fare Table</a>
    <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/export">Export Cargo</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/disclaimer">Disclaimer</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/faq">FAQ</a>
+</nav>
+
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
-
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal">ABOUT US</h1>
@@ -50,8 +51,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	  <p>The new terminal has a modern 4 level in-line baggage handling system to eliminate baggage X-ray prior to check in, spacious security hold area with extensive F&B and retail facilities, special contact zone for passengers with special needs and baggage handling area on a separate level allowing greater space for passenger amenities.</p>
         <p>In March 2010, DIAL has completed the construction of integrated passenger terminal (Terminal 3). The first phase of the airport is designed and capable to handle 60 million passengers per annum (mppa).</p>
 
+    </div>
    <div class="w3-third w3-container">
+	<img src="C:\Users\Lakshay Suri\Documents\GitHub\env1\ats\src\static\images\cargo\inventory.jpg" style="width:100%;margin-bottom:-6px">
 	      <p></p>
+	<img src="C:\Users\Lakshay Suri\Documents\GitHub\env1\ats\src\static\images\cargo\load.jpg" style="width:100%;margin-top:-6px">
 
     </div>
   </div>
@@ -69,14 +73,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <!-- Pagination -->
 
 
-  <footer id="myFooter">
-    <div>
-      <h4></h4>
-    </div>
 
-    <div class="w3-container w3-theme-l1">
-    </div>
-  </footer>
 
 <!-- END MAIN -->
 </div>
@@ -105,6 +102,6 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-
+</div>
 </body>
 </html>

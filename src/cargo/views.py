@@ -87,12 +87,16 @@ def faq(request):
 def guideline(request):
     return render(request, "cargo/guideline.html", {})
 
+def procedure(request):
+    return render(request, "cargo/procedure.html", {})
+
+
 def cargolist(request):
     return render(request, "cargo/list_cargo.html", {})
 
 
 def faretable(request):
-    return render(request, "cargo/list.html", {})
+    return render(request, "cargo/faretable.html", {})
 
 
 def export(request):

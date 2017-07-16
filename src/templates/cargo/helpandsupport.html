@@ -15,31 +15,33 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
- <a href="/cargo/try1" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
-    <a href="/cargo/bookcargo" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Book Cargo</a>
+    <a href="/cargo" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
+    <a href="/cargo/add" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Book Cargo</a>
     <a href="/cargo/cargolist" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Cargo List</a>
     <a href="/cargo/aboutus" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About us</a>
     <a href="/cargo/helpandsupport" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Help and Support</a>
+</div>
 
 <!-- Sidebar -->
 <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" style="z-index:3;width:250px;margin-top:43px;" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
     <i class="fa fa-remove"></i>
   </a>
-  <h4 class="w3-bar-item"><b>Quick Links</b></h4>
+   <h4 class="w3-bar-item"><b>Quick Links</b></h4>
 <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/guideline">Guideline</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Cargo Procedure</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Fare Table</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/procedure">Cargo Procedure</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/faretable">Fare Table</a>
    <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/export">Export Cargo</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/disclaimer">Disclaimer</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/faq">FAQ</a>
+</nav>
+
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
-
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal">Help and Suppport</h1>
@@ -48,12 +50,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	  <p><br><b># Business Development:</b><br>Mr. Abhishek Nigam – (E) abhisheknigam@gmrgroup.in, (T) +91-11-47197783</p>
 	  <p><br><b>#Registered Office Address:</b><br>Delhi International Airport Limited<br>New Udaan Bhawan,<br> Opp. Terminal-3,Indira Gandhi International Airport<br>New Delhi – 110 037<br>www.newdelhiairport.in</p>
 
-
     </div>
-   <div class="w3-third w3-container">
-	      <p></p>
 
-    </div>
   </div>
 
   <div class="w3-row">
@@ -69,14 +67,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <!-- Pagination -->
 
 
-  <footer id="myFooter">
-    <div>
-      <h4></h4>
-    </div>
 
-    <div class="w3-container w3-theme-l1">
-    </div>
-  </footer>
 
 <!-- END MAIN -->
 </div>
@@ -105,6 +96,6 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
-
+</div>
 </body>
 </html>

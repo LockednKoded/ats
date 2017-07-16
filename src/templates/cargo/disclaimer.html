@@ -15,8 +15,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
     <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-      <a href="/cargo/try1" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
-    <a href="/cargo/bookcargo" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Book Cargo</a>
+    <a href="/cargo" class="w3-bar-item w3-button w3-theme-l1">HOME</a>
+    <a href="/cargo/add" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Book Cargo</a>
     <a href="/cargo/cargolist" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Cargo List</a>
     <a href="/cargo/aboutus" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About us</a>
     <a href="/cargo/helpandsupport" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Help and Support</a>
@@ -28,31 +28,28 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Quick Links</b></h4>
-  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/guideline">Guideline</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Cargo Procedure</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Fare Table</a>
+<a class="w3-bar-item w3-button w3-hover-black" href="/cargo/guideline">Guideline</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/procedure">Cargo Procedure</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/faretable">Fare Table</a>
    <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/export">Export Cargo</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/disclaimer">Disclaimer</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/cargo/faq">FAQ</a>
 </nav>
+
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
-
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Disclaimer</h1>
+    <h1 class="w3-text-teal">Disclaimer</h1>
       <p>“The information at this site is provided by Delhi International Airport Pvt. Ltd. (DIAL) purely as a measure of public facilitation, subject to constant review in accordance with all applicable laws. Although every effort has been made by DIAL to ensure accuracy and correctness, there may be error in the information provided at this site for reasons beyond the control of DIAL. The users of the site are advised to check the validity of the information from their respective authorised sources. Neither DIAL nor any of its directors, employees etc. take any responsibility or liability for any loss or damage suffered by anyone due to any error in the information provided at this site.”</p>
-    </div>
-   <div class="w3-third w3-container">
-	      <p></p>
 
     </div>
-  </div>
 
+    </div>
   <div class="w3-row">
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal"></h1>
@@ -66,17 +63,11 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
   <!-- Pagination -->
 
 
-  <footer id="myFooter">
-    <div>
-      <h4></h4>
-    </div>
 
-    <div class="w3-container w3-theme-l1">
-    </div>
-  </footer>
 
 <!-- END MAIN -->
 </div>
+
 <script>
 // Get the Sidebar
 var mySidebar = document.getElementById("mySidebar");
@@ -101,5 +92,6 @@ function w3_close() {
     overlayBg.style.display = "none";
 }
 </script>
+</div>
 </body>
 </html>

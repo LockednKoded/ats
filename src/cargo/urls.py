@@ -15,6 +15,8 @@ urlpatterns = [
 
     url(r'^disclaimer$' , views.disclaimer , name="disclaimer"),
 
+    url(r'^procedure$', views.procedure, name="procedure"),
+
     url(r'^cargolist$', views.cargolist, name="cargolist"),
 
     url(r'^list$' , views.list_cargo, name="cargo_list"),
