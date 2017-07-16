@@ -1,75 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Details of Crew Member</title>
-</head>
-<body>
-    {% extends 'common/base.html' %}
+{% extends 'common/base.html' %}
 
 {% load staticfiles %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+<link rel="stylesheet" href="{% static 'css/flight_info/detail_crew.css' %}">
 {% endblock %}
 
 {% block content %}
 
-    <div class="table-responsive">
+<div class="col-xs-12">
 
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <th>Crew ID</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Experience</th>
-                                    <th>License no</th>
-                                    <th>Phone No</th>
-                                    <th>Flights</th>
-                                    <th>Photo</th>
-                                </thead>
-                                <tbody>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 user-content-div">
+            <div class="row user-background" style='background-image: url("/static/images/flight_info/user_back_img.jpg");'>
 
-                                    <tr class="
-                                                {% if airline.pilot == True %}
-                                                        success
-                                                    {% else %}
-                                                    info
-                                                {% endif %}
-                                              ">
-                                        <td>{{ crew.crew_id }}</td>
-                                        <td>{{ crew.name }}</td>
-                                        <td>
-                                            {% if crew.pilot == True %}
-                                                    <div class="label label-success"><span>Pilot</span></div>
-                                            {% else %}
-                                                <div class="label label-info"><span>Crew</span></div>
-                                            {% endif %}
-                                        </td>
-                                        <td>{{ crew.experience }}</td>
-                                        <td>{{ crew.license_no }}</td>
-                                        <td>{{ crew.ph_no }}</td>
-                                        <td>
-                                            {% for flight in crew.flights.all %}
-                                                {{ flight.flight_no }}&nbsp;
-                                            {% empty %}
-                                                Not assigned
-                                            {% endfor %}
-                                        </td>
-                                        <td>{{ crew.photo }}</td>
+            </div>
+            <div class="row user-detail">
 
-                                    </tr>
+                <div class="col-xs-12">
+                    <div class="img-section">
+                        {% if crew.photo %}
+                        <img src="{{ crew.photo.url }}" class="img-circle" alt="Crew Photo">
+                        {% else %}
+                        <img src="{% static 'images/flight_info/no_profile_img.gif' %}" class="img-circle" alt="Crew Photo">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row detail-header">
+                        <h2>{{ crew.name }}</h2>
+                        <h4><em>
+                            {% if crew.pilot == True %}
+                                Pilot
+                            {% else %}
+                                Crew
+                            {% endif %}
+                        </em></h4>
+                    </div>
+                    <div class="row detail-content">
+                        <div class="col-sm-6">
+                            <ul class="left-list">
+                                <li><span>Crew ID:</span> {{ crew.crew_id }}</li>
+                                <li><span>Experience:</span> {{ crew.experience }}</li>
+                                <li><span>License No:</span> {{ crew.license_no }}</li>
+                                <li><span>Contact No:</span> {{ crew.ph_no }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="right-list">
+                                <li>
+                                    <span>Status:</span>&nbsp;
+                                    {% if crew.in_service == True %}
+                                    <span class="label label-info">In Service</span>
+                                    {% else %}
+                                    <span class="label label-warning">Off Service</span>
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    <span>Flights:</span>
+                                    <ul>
+                                        {% for flight in crew.flights.all %}
+                                        <li>{{ flight.airline.flight_prefix }}&nbsp;{{ flight.flight_no }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            </ul>
 
-                                </tbody>
-                            </table>
+                        </div>
+                    </div>
+                </div>
 
-                        </div><!-- end table responsive -->
+            </div>
+        </div>
+    </div>
 
-    <a href="../"> <button name="back" class="myButton">Back to All Crew</button></a>
-    <a href="delete"> <button name="delete" class="myButton">Delete This Crew Member</button></a>
-    <a href="edit"> <button name="edit" class="myButton">Edit This Crew Member</button></a>
+</div>
 
 {% endblock %}
-
-</body>
-</html>

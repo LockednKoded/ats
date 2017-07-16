@@ -1,0 +1,118 @@
+/*
+   //////////////////////////
+        Basic Grid Style
+   //////////////////////////
+
+.user-background {
+    height: 180px;
+    background: blue;
+}
+
+.user-detail {
+    height: 300px;
+    background: red;
+}
+
+.img-section {
+    height: 170px;
+    width: 170px;
+    margin: -80px auto 0 auto;
+    background: yellow;
+}
+
+@media (max-width: 615px)
+{
+    .user-background {
+        height: 120px;
+        background: green;
+    }
+
+    .user-detail {
+        height: 200px;
+        background: black;
+    }
+
+    .img-section {
+        height: 100px;
+        width: 100px;
+        margin: -50px auto 0 auto;
+        background: yellow;
+    }
+
+}
+*/
+
+/* Style for complete card */
+.user-content-div {
+    box-shadow: 5px 5px 8px #999;
+}
+
+/* Style for detail section of card */
+.user-detail {
+    background: #FFFFEB;
+}
+
+/* Style for header in detail in card */
+.detail-header h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+.detail-header h4 {
+    text-align: center;
+}
+
+/* Style for detail in card */
+.detail-content {
+    padding-bottom: 20px;
+}
+
+
+/* Style for list in detail in card */
+ul li {
+    list-style: none;
+    font-size: 17px;
+    padding: 3px;
+}
+ul li > span {
+    color: #0B0B61;
+}
+@media (max-width: 760px) {
+
+    ul li {
+        font-size: 15px;
+        padding: 2px;
+    }
+
+}
+
+
+/* Style for GRID/LAYOUT */
+.user-background {
+    height: 180px;
+}
+.img-section {
+    height: 170px;
+    width: 170px;
+    margin: -80px auto 0 auto;
+}
+.img-section img {
+    height: 170px;
+    width: 170px;
+}
+
+@media (max-width: 615px)
+{
+    .user-background {
+        height: 120px;
+    }
+    .img-section {
+        height: 100px;
+        width: 100px;
+        margin: -50px auto 0 auto;
+        background: yellow;
+    }
+    .img-section img {
+        height: 100px;
+        width: 100px;
+    }
+}
