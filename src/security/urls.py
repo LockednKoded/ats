@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from .views import *
 
-app_name = "security_info"
+app_name = "security"
 
 urlpatterns = [
 
@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^force_employee/(?P<pk>[0-9]+)/$', view_force_employee, name="view-force_employee"),
 
     # Option to delete crew, /flights/crew/5/delete
-    url(r'^force_employee/(?P<pk>[0-9]+)/delete/$', delete_crew, name="delete-force_employee"),
+    url(r'^force_employee/(?P<pk>[0-9]+)/delete/$', delete_force_employee, name="delete-force_employee"),
 
     # Option to edit crew details, /flights/crew/5/edit
     url(r'^force_employee/(?P<pk>[0-9]+)/edit/$', edit_force_employee, name="edit-force_employee"),

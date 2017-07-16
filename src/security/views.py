@@ -26,7 +26,7 @@ def view_force_employee(request, pk):
     return HttpResponse("<h1>Details for " + pk + " Force employee</h1>")
 
 
-def delete_crew(request, pk):
+def delete_force_employee(request, pk):
     return HttpResponse("<h1>Delete " + pk + " crew</h1>")
 
 
