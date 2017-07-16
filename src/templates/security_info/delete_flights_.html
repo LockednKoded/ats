@@ -2,9 +2,93 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Deleted Flight</title>
 </head>
 <body>
+
+{% extends 'common/base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--need to add this, as its enclosed in a table-->
+<div class="col-sm-12">
+
+    <div class="row page-header">
+        <div class="col-sm-8">
+            <h3>This Flight Has Been Deleted</h3><br>
+        </div>
+        <div class="col-sm-4">
+
+            <form id="search" method="GET" action="">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+
+
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>Airline</th>
+                                    <th>Flight No</th>
+                                    <th>Destination</th>
+                                    <th>Terminal</th>
+                                    <th>Concourse</th>
+
+                                </thead>
+                                <tbody>
+
+                                    <tr class="
+                                                {% if flight.approved_plan == True %}
+                                                    {% if flight.revised_departure == flight.scheduled_departure %}
+                                                        success
+                                                    {% else %}
+                                                        warning
+                                                    {% endif %}
+                                                {% else %}
+                                                    info
+                                                {% endif %}
+                                              " data-href="{{ flight.get_absolute_url }}">
+                                        <td>{{ flight.airline.name }}</td>
+                                        <td>{{ flight.flight_no }}</td>
+                                        <td>{{ flight.destination }}</td>
+                                        <td>{{ flight.terminal }}</td>
+                                        <td>{{ flight.concourse }}</td>
+                                        <td>
+                                            DELETED
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+         </div>
+    </div>
+
+</div>
+<br/>
+<a href="../../"> <button name="back" class="myButton">Back to All Flights</button></a>
+{% endblock %}
 
 </body>
 </html>

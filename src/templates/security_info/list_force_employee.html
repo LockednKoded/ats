@@ -1,10 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/list_crew.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--need to add this, as its enclosed in a row-->
+<div class="col-sm-12">
+
+    <div class="row page-header">
+        <div class="col-sm-8">
+            <h3>Force Employee List</h3><br>
+        </div>
+        <div class="col-sm-4">
+
+            <form id="search" method="GET" action="">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="tabbable">
+
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#pilotsTab" data-toggle="tab">Pilots</a></li>
+                    <li role="presentation" class=""><a href="#otherCrewTab" data-toggle="tab">Other Crew</a></li>
+                </ul>
+
+                <br>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="pilotsTab">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    {% if request.user.is_staff or request.user.is_superuser %}<th>Status</th>{% endif %}
+                                </thead>
+                                <tbody>
+                                    {% for crew in crew_list %}
+                                    {% if crew.pilot == True %}
+
+                                    <tr class=" {% if request.user.is_staff or request.user.is_superuser %}
+                                                {% if crew.in_service == True %}
+                                                    info
+                                                {% else %}
+                                                    warning
+                                                {% endif %}
+                                                {% endif %}
+                                              " data-href="{{ crew.get_absolute_url }}">
+                                        <td class="logo">
+                                            {% if crew.photo %}
+                                            <img src="{{ crew.photo.url }}" class="img-circle" height="50" width="50" alt="Crew Photo">
+                                            {% else %}
+                                            <img src="{% static 'images/flight_info/no_profile_img.gif' %}" class="img-circle" height="50" width="50" alt="Crew Photo">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ crew.crew_id }}</td>
+                                        <td>{{ crew.name }}</td>
+                                        <td>
+                                            {% for flight in crew.flights.all %}
+                                                {{ flight.flight_no }}&nbsp;
+                                            {% empty %}
+                                                Not assigned
+                                            {% endfor %}
+                                        </td>
+
+                                        {% if request.user.is_staff or request.user.is_superuser %}
+                                        <td>
+                                            {% if crew.in_service == True %}
+                                                <div class="label label-info"><span>In Service</span></div>
+                                            {% else %}
+                                                <div class="label label-warning"><span>Off Service</span></div>
+                                            {% endif %}
+                                        </td>
+                                        {% endif %}
+
+                                    </tr>
+                                    {% endif %}
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="7">No Force Employee  </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+                    </div><!-- end tab pane pilots -->
+
+
+                    <div class="tab-pane" id="otherCrewTab">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    {% if request.user.is_staff or request.user.is_superuser %}<th>Status</th>{% endif %}
+                                </thead>
+                                <tbody>
+                                    {% for crew in crew_list %}
+                                    {% if crew.pilot == False %}
+
+                                    <tr class="
+                                                {% if crew.in_service == True %}
+                                                    info
+                                                {% else %}
+                                                    warning
+                                                {% endif %}
+                                              " data-href="{{ crew.get_absolute_url }}">
+                                        <td class="logo">
+                                            {% if crew.photo %}
+                                            <img src="{{ crew.photo.url }}" class="img-circle" height="50" width="50" alt="Crew Photo">
+                                            {% else %}
+                                            <img src="{% static 'images/flight_info/no_profile_img.gif' %}" class="img-circle" height="50" width="50" alt="Crew Photo">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ crew.crew_id }}</td>
+                                        <td>{{ crew.name }}</td>
+                                        <td>
+                                            {% for flight in crew.flights.all %}
+                                                {{ flight.flight_no }}&nbsp;
+                                            {% empty %}
+                                                Not assigned
+                                            {% endfor %}
+                                        </td>
+
+                                        {% if request.user.is_staff or request.user.is_superuser %}
+                                        <td>
+                                            {% if crew.in_service == True %}
+                                                <div class="label label-info"><span>In Service</span></div>
+                                            {% else %}
+                                                <div class="label label-warning"><span>Off Service</span></div>
+                                            {% endif %}
+                                        </td>
+                                        {% endif %}
+
+                                    </tr>
+                                    {% endif %}
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="7">No other crew</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+                    </div><!-- end tab pane other crew -->
+
+                </div><!-- end tab-content -->
+            </div><!-- end tabbable -->
+
+
+        </div>
+    </div>
+
+</div>
+<a href="add"> <button name="add" class="myButton">Add A Crew Member</button></a>
+<a href="../"> <button name="airlines" class="myButton">View Flights</button></a>
+<a href="../airlines"> <button name="airlines" class="myButton">View Airlines</button></a>
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'js/flight_info/list_crew.js' %}"></script>
+{% endblock %}

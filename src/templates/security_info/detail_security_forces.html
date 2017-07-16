@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/detail_view.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-xs-12">
+        <a href="../" class="btn btn-success btn-sm back-btn" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
+    </div>
+
+    <div class="col-xs-12">
+
+        <div class="col-md-5 col-sm-6">
+            <div class="thumbnail">
+
+                {% if airline.logo %}
+                <img src="{{ airline.logo.url }}" alt="Airline logo" class="img-responsive">
+                {% endif %}
+
+                <div class="caption">
+
+                    <h1 class="caption-title">{{ security_forces.name }} <span>Name</span></h1>
+                    <h4 class="caption-fields"><span>License No:</span> {{ security_forces.license_no }}</h4>
+
+                    <br>
+                    <p>{{ security_forces.info }}</p>
+
+                        {% if request.user.is_superuser or request.user.is_staff %}
+                        <div class="btn-group options-div" role="group" aria-label="...">
+                            <a href="edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
+                            <a href="delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span>&nbsp; Delete</a>
+                        </div>
+                        {% endif %}
+
+                </div><!-- end caption -->
+
+            </div><!-- end thumbnail -->
+
+        </div><!-- end div left pane -->
+    </div>
+
+{% block script %}
+<script src="{% static 'js/flight_info/detail_view.js' %}"></script>
+{% endblock %}

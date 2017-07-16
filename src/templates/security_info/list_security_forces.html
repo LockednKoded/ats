@@ -1,10 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--need to add this, as its enclosed in a table-->
+<div class="col-sm-12">
+
+    <div class="row page-header">
+        <div class="col-sm-8">
+            <h3>List of Security forces</h3><br>
+        </div>
+        <div class="col-sm-4">
+
+            <form id="search" method="GET" action="">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="tabbable">
+
+                <br>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="departureTab">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+
+                                    <th>Name</th>
+                                    <th>License No</th>
+
+                                </thead>
+                                <tbody>
+                                    {% for line in airline_list %}
+
+                                    <tr data-href="{{ line.get_absolute_url }}">
+
+                                        <td class="logo">
+                                            {% if line.logo %}
+                                            <img src="{{ line.logo.url }}" height="50" alt="Airline Logo">
+                                            {% else %}
+                                            <img src="{% static 'images/flight_info/no_airline_img.png'%}" height="50" alt="Airline Logo">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ line.name }}</td>
+                                        <td>{{ line.license_no }}</td>
+
+                                    </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="7">No Security forces</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+                    </div><!-- end tab pane departure -->
+
+
+
+
+                </div><!-- end tab-content -->
+            </div><!-- end tabbable -->
+
+
+        </div>
+    </div>
+
+</div>
+<a href="add"> <button name="add" class="myButton">Add Security forces</button></a>
+<a href="../"> <button name="flights" class="myButton">View Flights</button></a>
+<a href="../crew"> <button name="airlines" class="myButton">View Force Employee Members</button></a>
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'js/flight_info/list_airlines.js' %}"></script>
+{% endblock %}

@@ -1,10 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'common/base.html' %}
 
-</body>
-</html>
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/flight_info/detail_view.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-xs-12">
+        <a href="../" class="btn btn-success btn-sm back-btn" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Back</a>
+    </div>
+
+    <div class="col-xs-12">
+
+        <div class="col-md-5 col-sm-6">
+            <div class="thumbnail">
+
+                {% if flight.airline.logo %}
+                <img src="{{ flight.airline.logo.url }}" alt="Airline logo" class="img-responsive">
+                {% endif %}
+
+                <div class="caption">
+
+                    <h1 class="caption-title">
+                        <small><em>{{ flight.airline.name }}</em></small>
+                        <br>
+                        {{ flight.airline.flight_prefix }}&nbsp;{{ flight.flight_no }}
+                    </h1>
+                    <h4 class="caption-fields"><span>Origin:</span> {{ flight.origin }}</h4>
+                    <h4 class="caption-fields"><span>Destination:</span> {{ flight.destination }}</h4>
+                    <h4 class="caption-fields"><span>Operation Days:</span></h4>
+                    {% for day in days %}
+                            <span class="day">{{ day }}</span>
+                    {% endfor %}
+                    <h4 class="caption-fields"><span>Fare:</span> &#8377; {{ flight.fare }}</h4>
+                    <br>
+
+                    <div class="timings-terminal">
+                    <h4 class="caption-fields"><span>Terminal:</span> {{ flight.terminal }}</h4>
+                    <h4 class="caption-fields"><span>Concourse:</span> {{ flight.concourse }}</h4>
+
+                    </div>
+
+
+
+                        {% if request.user.is_superuser or request.user.is_staff %}
+                        <div class="btn-group options-div" role="group" aria-label="...">
+                            <a href="edit" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
+                            <a href="delete" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash"></span>&nbsp; Delete</a>
+                        </div>
+                        {% endif %}
+
+                </div><!-- end caption -->
+
+            </div><!-- end thumbnail -->
+
+        </div><!-- end div left pane -->
+        <div class="col-md-7 col-sm-6">
+
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover">
+
+                    <thead>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Experience (yrs)</th>
+                    </thead>
+                    <tbody>
+                        {% for crew in flight.crew_set.all %}
+                        {% if crew.pilot == True %}
+
+                            <tr data-href="{{ crew.get_absolute_url }}">
+                                <td>
+                                    {% if crew.photo %}
+                                    <img src="{{ crew.photo.url }}" class="img-circle" alt="Crew Photo">
+                                    {% else %}
+                                    <img src="{% static 'images/flight_info/no_profile_img.gif' %}" class="img-circle" alt="Crew Photo">
+                                    {% endif %}
+                                </td>
+                                <td>{{ crew.name }}</td>
+                                <td>{{ crew.experience }}</td>
+                                <td>
+                                    {% if crew.in_service == True %}
+                                        <div class="label label-info"><span>In Service</span></div>
+                                    {% else %}
+                                        <div class="label label-warning"><span>Off Service</span></div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% empty %}
+
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- end pilots div -->
+
+            <br>
+            <br>
+
+            <h3>Other Crew: </h3>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover">
+
+                    <thead>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Experience (yrs)</th>
+                    </thead>
+                    <tbody>
+                        {% for crew in flight.crew_set.all %}
+                        {% if crew.pilot == False %}
+
+                            <tr data-href="{{ crew.get_absolute_url }}">
+                                <td>
+                                    {% if crew.photo %}
+                                    <img src="{{ crew.photo.url }}" class="img-circle" alt="Crew Photo">
+                                    {% else %}
+                                    <img src="{% static 'images/flight_info/no_profile_img.gif' %}" class="img-circle" alt="Crew Photo">
+                                    {% endif %}
+                                </td>
+                                <td>{{ crew.name }}</td>
+                                <td>{{ crew.experience }}</td>
+                                <td>
+                                    {% if crew.in_service == True %}
+                                        <div class="label label-info"><span>In Service</span></div>
+                                    {% else %}
+                                        <div class="label label-warning"><span>Off Service</span></div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% empty %}
+                        <tr>
+                            <td colspan="3">No other force_employee</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- end other div -->
+
+        </div><!-- end div right pane -->
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/flight_info/detail_view.js' %}"></script>
+{% endblock %}
