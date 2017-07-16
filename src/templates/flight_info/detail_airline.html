@@ -19,6 +19,8 @@
 
                 {% if airline.logo %}
                 <img src="{{ airline.logo.url }}" alt="Airline logo" class="img-responsive">
+                {% else %}
+                <img src="{% static 'images/flight_info/no_airline_img.png' %}" alt="Airline logo" class="img-responsive">
                 {% endif %}
 
                 <div class="caption">
