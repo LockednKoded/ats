@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Cargo',
+            name='cargo',
             fields=[
                 ('cargo_no', models.PositiveIntegerField(primary_key=True, serialize=False)),
                 ('cargo_airline', models.CharField(max_length=100)),
@@ -23,6 +23,11 @@ class Migration(migrations.Migration):
                 ('terminal', models.PositiveSmallIntegerField()),
                 ('fare', models.FloatField()),
                 ('weight', models.FloatField()),
+               # ('scheduled_arrival', models.DateTimeField(null=True)),
+                #('scheduled_departure', models.DateTimeField(null=True)),
+               # ('revised_arrival', models.DateTimeField(null=True)),
+                #('revised_departure', models.DateTimeField(null=True)),
+                #('time_last_updated', models.DateField(auto_now_add=True)),
             ],
         ),
     ]
