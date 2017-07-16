@@ -1,9 +1,25 @@
+/* Styles for styling page header which has title and search form */
 .page-header {
     margin-top: 20px;
 }
 .page-header h3 {
     margin-bottom: 0;
     margin-top: 0;
+}
+
+/* Styles for profile photo column */
+.logo {
+    width: 90px;
+}
+.logo img {
+    margin-left: 10px;
+}
+
+
+/* Being specific to override bootstrap default styles
+    Vertically center aligning text in table cell */
+.table-bordered tbody tr td {
+    line-height: 3.5;
 }
 
 

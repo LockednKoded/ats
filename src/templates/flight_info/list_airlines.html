@@ -45,25 +45,28 @@
 
                             <table class="table table-bordered table-hover">
                                 <thead>
+                                    <th class="logo">Logo</th>
                                     <th>Airline</th>
                                     <th>Flight Prefix</th>
                                     <th>License No</th>
                                     <th>No of Aircrafts</th>
-                                    <th>Logo</th>
                                 </thead>
                                 <tbody>
                                     {% for line in airline_list %}
 
                                     <tr data-href="{{ line.get_absolute_url }}">
+
+                                        <td class="logo">
+                                            {% if line.logo %}
+                                            <img src="{{ line.logo.url }}" height="50" alt="Airline Logo">
+                                            {% else %}
+                                            <img src="{% static 'images/flight_info/no_airline_img.png'%}" height="50" alt="Airline Logo">
+                                            {% endif %}
+                                        </td>
                                         <td>{{ line.name }}</td>
                                         <td>{{ line.flight_prefix }}</td>
                                         <td>{{ line.license_no }}</td>
                                         <td>{{ line.no_of_aircrafts }}</td>
-                                        <td>
-                                            {% if line.logo %}
-                                            <img src="{{ line.logo.url }}" height="50" alt="Airline Logo">
-                                            {% endif %}
-                                        </td>
 
                                     </tr>
                                     {% empty %}

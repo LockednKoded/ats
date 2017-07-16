@@ -75,7 +75,7 @@
                                                 {% endif %}
                                               " data-href="{{ flight.get_absolute_url }}">
                                         <td>{{ flight.airline.name }}</td>
-                                        <td>{{ flight.flight_no }}</td>
+                                        <td>{{ flight.airline.flight_prefix }}&nbsp;{{ flight.flight_no }}</td>
                                         <td>{{ flight.destination }}</td>
                                         <td>{{ flight.terminal }}</td>
                                         <td>{{ flight.concourse }}</td>
@@ -134,7 +134,7 @@
                                                 {% endif %}
                                               " data-href="{{ flight.get_absolute_url }}">
                                         <td>{{ flight.airline.name }}</td>
-                                        <td>{{ flight.flight_no }}</td>
+                                        <td>{{ flight.airline.flight_prefix }}&nbsp;{{ flight.flight_no }}</td>
                                         <td>{{ flight.origin }}</td>
                                         <td>{{ flight.terminal }}</td>
                                         <td>{{ flight.concourse }}</td>
@@ -194,7 +194,7 @@
                                                 {% endif %}
                                               " data-href="{{ flight.get_absolute_url }}">
                                         <td>{{ flight.airline.name }}</td>
-                                        <td>{{ flight.flight_no }}</td>
+                                        <td>{{ flight.airline.flight_prefix }}&nbsp;{{ flight.flight_no }}</td>
                                         <td>{{ flight.destination }}</td>
                                         <td>{{ flight.terminal }}</td>
                                         <td>{{ flight.concourse }}</td>

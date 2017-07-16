@@ -8,6 +8,7 @@
     font-size: 11px;
 }
 
+/* Styles for page header, that displays title and search form */
 .page-header {
     margin-top: 20px;
 }
@@ -15,6 +16,18 @@
     margin-bottom: 0;
     margin-top: 0;
 }
+
+/* Styles for logo column */
+.logo {
+    width: 140px;
+}
+
+/* Need to be specific for overriding bootstrap default styles,
+    vertically centering text in table-cell */
+.table-bordered tbody tr td {
+    line-height: 3.6;
+}
+
 
 
 tr[data-href] { cursor: pointer }
