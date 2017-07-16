@@ -20,7 +20,7 @@ class security_forces(models.Model):
 # Need to instantiate these model managers in their respective classes
 class SecurityManager(models.Manager):
     def active(self, *args, **kwargs):
-        return super(SecuritytManager, self).filter(approved_plan=True)
+        return super(SecurityManager, self).filter(approved_plan=True)
 
 
 class Flight(models.Model):
