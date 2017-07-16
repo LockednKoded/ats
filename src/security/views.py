@@ -6,13 +6,6 @@ from .models import Flight, force_employee
 # Create your views here.
 
 
-def list_flights(request):
-    return HttpResponse("<h1>Flights list</h1>")
-
-
-def view_flight(request, pk):
-    return HttpResponse("<h1>Details for " + pk + " flight</h1>")
-
 
 def list_force_employee(request):
     return HttpResponse("<h1>Force employee list</h1>")

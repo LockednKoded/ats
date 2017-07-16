@@ -5,19 +5,8 @@ app_name = "security"
 
 urlpatterns = [
 
-    # Flight Options:
 
-    # Homepage for flights, showing a list of all scheduled flights, /flights/
-    url(r'^$', list_flights, name="list-flights"),
-
-
-
-    # Option to view flight details, /flights/5/
-    url(r'^(?P<pk>[0-9]+)/$', view_flight, name="view-flight"),
-
-
-
-    # Crew Options:
+    # Force_employee Options:
 
     # Option to view all crew/pilots, /flights/crew
     url(r'^force_employee/$', list_force_employee, name="list-force_employee"),
