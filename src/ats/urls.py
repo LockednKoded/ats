@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls')),
     url(r'^maintenance/', include('maintenance.urls')),
     url(r'^$', homepage, name='homepage'),
+    url(r'^book/', include('book.urls')),
 ]
 
 

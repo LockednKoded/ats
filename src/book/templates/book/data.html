@@ -1,0 +1,98 @@
+{% extends 'common/base.html' %}
+
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/book/list_book.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!--need to add this, as its enclosed in a table-->
+<div class="col-sm-12">
+
+    <div class="row page-header">
+        <div class="col-sm-8">
+            <h3>Room Bookings</h3><br>
+        </div>
+        <div class="col-sm-4">
+
+            <form id="search" method="GET" action="">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="tabbable">
+
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#departureTab" data-toggle="tab">OUR CURRENT BOOKINGS</a></li>
+
+                </ul>
+
+                <br>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="departureTab">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <th>Name</th>
+                                <th>ROOM</th>
+                                    <th>DURATION</th>
+                                    <th>Check-in</th>
+                                    <th>Check-out</th>
+
+                                </thead>
+                                <tbody>
+                                    {%  for obj in object_list %}
+
+
+                                    <tr >
+                                        <td>{{ obj.Name }}</td>
+                                        <td>{{ obj.Room }}</td>
+                                        <td>{{ obj.duration }}</td>
+                                        <td>{{ obj.check_in }}</td>
+                                        <td>{{ obj.check_out }}</td>
+
+                                    </tr>
+
+
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div><!-- end table responsive -->
+                    </div><!-- end tab pane departure -->
+
+
+
+
+
+                </div><!-- end tab-content -->
+            </div><!-- end tabbable -->
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'js/flight_info/list_flights.js' %}"></script>
+{% endblock %}
