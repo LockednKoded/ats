@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Our apps
     'flight_info.apps.FlightInfoConfig',
     'parking.apps.ParkingConfig',
+    'baggage_handling.apps.BaggageHandlingConfig',
     'cargo.apps.CargoConfig',
     'accounts.apps.AccountsConfig',
     'maintenance.apps.MaintenanceConfig',
