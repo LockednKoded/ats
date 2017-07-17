@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to ATS</title>
+
+
+
 </head>
 <body>
 {% extends 'common/base.html' %}
@@ -11,6 +14,8 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+<link rel="stylesheet" href="{% static 'css/common/my-slider.css' %}">
+<script src="{% static 'js/common/ism-2.2.min.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -18,9 +23,27 @@
 <div class="col-sm-12">
 
     <div class="row page-header">
-        <div class="col-sm-8">
 
-        </div>
+            <!--Image slider-->
+
+            <div class="ism-slider" data-transition_type="zoom" data-play_type="loop" data-interval="3000" id="my-slider">
+  <ol>
+    <li>
+      <img src="static/images/common/1500317638519_843850.jpg"  >
+    </li>
+    <li>
+      <img src="static/images/common/aircraft-479772_1280.jpg">
+    </li>
+    <li>
+      <img src="static/images/common/1500317637936_211022.jpg">
+    </li>
+  </ol>
+</div>
+<p class="ism-badge" id="my-slider-ism-badge"><a class="ism-link" href="http://imageslidermaker.com" rel="nofollow">generated with ISM</a></p>
+
+<!--code for image slider ends-->
+
+
     </div>
 </div>
 {% endblock %}
