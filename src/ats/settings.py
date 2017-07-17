@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Django apps
-    'book',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +49,7 @@ INSTALLED_APPS = [
     'cargo.apps.CargoConfig',
     'accounts.apps.AccountsConfig',
     'maintenance.apps.MaintenanceConfig',
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [
