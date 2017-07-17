@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+{% load staticfiles %}
 <title>Cargo</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,9 +61,9 @@ Provide a safe working environment.</p>
       <p><br><br><blink><marquee><b><i>IGIA Cargo services,now an integral part of ATS..!!</i></b></blink></marquee></p>
     </div>
    <div class="w3-third w3-container">
-	<img src="C:\Users\Lakshay Suri\Documents\GitHub\env1\ats\src\static\images\cargo\inventory.jpg" style="width:100%;margin-bottom:-6px">
+	<img src="{% static 'images\cargo\inventory.jpg' %}" style="width:100%;margin-bottom:-6px">
 	      <p></p>
-	<img src="C:\Users\Lakshay Suri\Documents\GitHub\env1\ats\src\static\images\cargo\load.jpg" style="width:100%;margin-top:-6px">
+	<img src="{% static 'images\cargo\load.jpg' %}" style="width:100%;margin-top:-6px">
 
     </div>
   </div>

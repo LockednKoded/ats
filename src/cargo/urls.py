@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/delete/$', delete_cargo, name="delete-cargo"),
 
     # Option to edit cargo details, /cargo/5/edit
-    url(r'^(?P<pk>[0-9]+)/edit/$', edit_cargo, name="edit-cargo"),
+    url(r'^edit/(?P<pk>[0-9]+)/$', edit_cargo, name="edit-cargo"),
 
     url(r'^faq$', views.faq, name="faq"),
 
