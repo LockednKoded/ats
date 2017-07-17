@@ -22,8 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'n8b%z+wkbmy-jogezai()1zc3br$epz6lfy&zo5$-of9)pa51$'
 
+# //// DEBUG is overridden by local.py //////
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'atsproject.pythonanywhere.com', 'localhost']
 
@@ -85,13 +86,27 @@ WSGI_APPLICATION = 'ats.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# /////// This setting is overridden in local.py ////////
+# Falls to using the default SQLite db if MySQLdb cannot be imported
+try:
+    import MySQLdb
+except ImportError:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'atsproject$atsprojectdb',
+            'USER': 'atsproject',
+            'PASSWORD': 'pass1234',
+            'HOST': 'atsproject.mysql.pythonanywhere-services.com',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -147,3 +162,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Default login redirect page
 # LOGIN_REDIRECT_URL = 'homepage'
+
+# //// SECURE_SSL_REDIRECT is overridden by local.py //////
+# Set this to true, of you want every request to redirect to https
+SECURE_SSL_REDIRECT = True
