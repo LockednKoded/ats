@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def home_page(request):
@@ -20,6 +19,3 @@ def staff(request):
 
 def about_us(request):
     return render(request, 'common/about_us.html', {})
-
-    # text = "Home Page"
-    # return HttpResponse(text)
