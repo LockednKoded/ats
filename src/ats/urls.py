@@ -1,3 +1,5 @@
+
+
 """ats URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -17,11 +19,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^flights/', include('flight_info.urls')),
     url(r'^parking/', include('parking.urls')),
+    url(r'^$', home_page, name='home_page'),
+    url(r'^contact/', contact_us, name='contact_us'),
+    url(r'^services/', services, name='services'),
+    url(r'^staff/', staff, name='staff'),
+    url(r'^about/', about_us, name='about_us'),
 ]
 
 if settings.DEBUG:
