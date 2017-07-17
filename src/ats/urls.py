@@ -22,12 +22,14 @@ from .views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^cargo/',include('cargo.urls')),
     url(r'^flights/', include('flight_info.urls')),
     url(r'^parking/', include('parking.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^maintenance/', include('maintenance.urls')),
     url(r'^$', homepage, name='homepage'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
