@@ -1,47 +1,47 @@
 from django import forms
 
-from .models import Flight, security_forces, force_employee
+from .models import  security_forces, force_employee
 
 
-class FlightForm(forms.ModelForm):
-
-    DAY_LIST = (
-        ('mon', 'Monday'),
-        ('tue', 'Tuesday'),
-        ('wed', 'Wednesday'),
-        ('thu', 'Thursday'),
-        ('fri', 'Friday'),
-        ('sat', 'Saturday'),
-        ('sun', 'Sunday'),
-    )
-
-    days_operational = forms.MultipleChoiceField(choices=DAY_LIST, widget=forms.CheckboxSelectMultiple)
-    flight_no = forms.IntegerField(help_text="Enter a unique flight no", label="Flight No")
-    approved_plan = forms.BooleanField(help_text="Check if plan is approved", label="Plan approved", required=False)
-
-    class Meta:
-        model = Flight
-        fields = [
-            'flight_no',
-            'airline',
-            'origin',
-            'destination',
-            'terminal',
-            'concourse',
-            'approved_plan',
-            'operation_days'
-
-        ]
-
-
-
-        def clean__flight_no(self):
-            flight_no = self.cleaned_data.get('flight_no')
-
-            flights_qs = Flight.objects.get(flight_no=flight_no)
-            if flights_qs.exists():
-                raise forms.ValidationError("Flight with same no. already exists")
-
+# class FlightForm(forms.ModelForm):
+#
+#     DAY_LIST = (
+#         ('mon', 'Monday'),
+#         ('tue', 'Tuesday'),
+#         ('wed', 'Wednesday'),
+#         ('thu', 'Thursday'),
+#         ('fri', 'Friday'),
+#         ('sat', 'Saturday'),
+#         ('sun', 'Sunday'),
+#     )
+#
+#     days_operational = forms.MultipleChoiceField(choices=DAY_LIST, widget=forms.CheckboxSelectMultiple)
+#     flight_no = forms.IntegerField(help_text="Enter a unique flight no", label="Flight No")
+#     approved_plan = forms.BooleanField(help_text="Check if plan is approved", label="Plan approved", required=False)
+#
+#     class Meta:
+#         model = Flight
+#         fields = [
+#             'flight_no',
+#             'airline',
+#             'origin',
+#             'destination',
+#             'terminal',
+#             'concourse',
+#             'approved_plan',
+#             'operation_days'
+#
+#         ]
+#
+#
+#
+#         def clean__flight_no(self):
+#             flight_no = self.cleaned_data.get('flight_no')
+#
+#             flights_qs = Flight.objects.get(flight_no=flight_no)
+#             if flights_qs.exists():
+#                 raise forms.ValidationError("Flight with same no. already exists")
+#
 
 
 

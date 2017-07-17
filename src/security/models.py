@@ -17,18 +17,6 @@ class security_forces(models.Model):
         return self.name
 
 
-class Flight(models.Model):
-    flight_no = models.PositiveIntegerField(primary_key=True)
-    airline = models.ForeignKey(security_forces)
-    origin = models.CharField(max_length=100)
-    destination = models.CharField(max_length=100)
-    terminal = models.PositiveSmallIntegerField()
-    concourse = models.PositiveSmallIntegerField()
-    approved_plan = models.BooleanField(default=False)
-    operation_days = models.CharField(max_length=13)  # eg. 1,0,1,0,1,0,0 for a flight (M,W,F)
-
-
-
 
 class force_employee(models.Model):
     employee_id = models.IntegerField(primary_key=True)
@@ -40,7 +28,7 @@ class force_employee(models.Model):
     in_service = models.BooleanField(default=True)
 
     # blank=True --> There may be unassigned crew, Crew table doesn't have total participation
-    flights = models.ManyToManyField('flight_info.Flight', blank=True)
+    # flights = models.ManyToManyField('flight_info.Flight', blank=True)
 
 
     def get_absolute_url(self):
