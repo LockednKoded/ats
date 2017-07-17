@@ -69,7 +69,7 @@ def edit_baggage(request, pk):
             form = BaggageForm(instance=baggage_instance)
 
         return render(request, 'baggage_handling/form.html', {
-            'title_message': 'Edit edit baggage details',
+            'title_message': 'Edit baggage details',
             'submit_message': 'Save',
             'form': form,
         })
