@@ -194,5 +194,5 @@ Temporary Items
 media_cdn/*
 !media_cdn/.gitkeep
 
-# migrations/*
-# !migrations/__init__.py
+migrations/*
+!migrations/__init__.py
