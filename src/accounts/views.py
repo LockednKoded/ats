@@ -18,7 +18,7 @@ def login_view(request):
                 user = authenticate(username=username, password=raw_password)
                 login(request, user)
 
-                return redirect("homepage")  # can also write return redirect("/")
+                return redirect("home_page")  # can also write return redirect("/")
 
         else:
             form = LoginForm()  # deliver empty form on GET request
@@ -30,12 +30,12 @@ def login_view(request):
         })
 
     else:
-        return redirect("homepage")  # redirect is user if already authenticated
+        return redirect("home_page")  # redirect is user if already authenticated
 
 
 def logout_view(request):
     logout(request)
-    return redirect("homepage")
+    return redirect("home_page")
 
 
 def register_view(request):
@@ -59,7 +59,7 @@ def register_view(request):
             new_user = authenticate(username=user.username, password=raw_password)
             login(request, new_user)
 
-            return redirect('homepage')
+            return redirect('home_page')
 
     else:
         form = RegisterForm()  # deliver empty form on get request
@@ -93,7 +93,7 @@ def profile_edit_view(request, pk):
                 profile_instance = form.save(commit=False)
                 profile_instance.save()
 
-                return redirect('homepage')
+                return redirect('home_page')
         else:
             form = form_class(instance=profile_instance)
 
