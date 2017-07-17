@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # Django apps
+    'book',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +47,9 @@ INSTALLED_APPS = [
     'flight_info.apps.FlightInfoConfig',
     'parking.apps.ParkingConfig',
     'baggage_handling.apps.BaggageHandlingConfig',
+    'cargo.apps.CargoConfig',
+    'accounts.apps.AccountsConfig',
+    'maintenance.apps.MaintenanceConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +145,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")  # stores file
 
 # For crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Default login redirect page
+# LOGIN_REDIRECT_URL = 'homepage'
