@@ -1,44 +1,33 @@
-.glyphicon-map-marker
+.glyphicon-cog
 {
-    font-size:2em;
 	color:#0B0B61;
+	margin-left: 5px;
 }
-.black
+p
+{   text-align: justify;
+    text-justify: inter-word;
+}
+.m-top
 {
-    color:black;
+ margin-top: 25px;
 }
 .blue
 {   color:#0B0B61;
-}
-.red
-{   color:red;
-}
-.white
-{   color: white;
 }
 .thick
 {
     font-weight:bold;
 }
-.panel
+.black
 {
-    margin:5%;
+    color:black;
 }
-.panel-heading
-{
-    background-color:#0B0B61!important
-}
-.center
-{
-    text-align: center;
+.white
+{   color: white;
 }
 .padding
 {
     padding:2%;
-}
-p
-{   text-align: justify;
-    text-justify: inter-word;
 }
 table
 {
@@ -51,6 +40,14 @@ td,th
 tr:nth-child(even)
 {
     background-color: #f2f2f2
+}
+.panel
+{
+    margin:5%;
+}
+.panel-heading
+{
+    background-color:#0B0B61!important
 }
 a:hover,a:visited,a:active,a:link
 {

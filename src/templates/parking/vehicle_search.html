@@ -1,0 +1,40 @@
+<div id="search_collapse" class="panel-collapse collapse">
+    <form method="get" action="{% url 'parking:search' %}"><br/>
+        Vehicle no:<input type="text" name="vno"/>
+        <input class="btn btn-default" type="submit" value="Search" /><br/><br/>
+    </form>
+</div>
+{% if result %}
+<table>
+    <tr>
+        <td>Vehicle no.</td>
+        <td>Vehicle Type</td>
+        <td>Date</td>
+        <td>Time in</td>
+        <td>Time out</td>
+    </tr>
+    <tr>
+        <td>{{ result.vehicle_no }}</td>
+        <td>{{ result.vehicle_type }}-wheeler</td>
+        <td>{{ result.date }}</td>
+        <td>{{ result.time_in }}</td>
+        <td>{{ result.time_out }}</td>
+    </tr>
+</table>
+<form action="/parking/{{result.vehicle_no}}/delete"><br/>
+        <input class="btn btn-default" type="submit" value="Delete" /><br/><br/>
+</form>
+{% elif no_match %}
+<table>
+    <tr>
+        <td>Vehicle no.</td>
+        <td>Vehicle Type</td>
+        <td>Date</td>
+        <td>Time in</td>
+        <td>Time out</td>
+    </tr>
+    <tr>
+        <td class="red" colspan="5">NO MATCH FOUND</td>
+    </tr>
+</table>
+{% endif %}

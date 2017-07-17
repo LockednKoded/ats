@@ -2,6 +2,22 @@
 
 ATS is a system to digitise the services offered by an airport terminal, for both both passengers and employees.
 
+### Dependencies
+To run this project you need to install these packages/dependencies in your virtual environment(preferrably):
+
+- Python 3
+- Django v1.11
+
+- Pillow <br>
+`pip install pillow`
+
+- Django Crispy forms <br>
+`pip install django-crispy-forms`
+
+- Django datetime widget <br>
+`pip install django-datetime-widget`
+
+
 ### Instructions
   
   - Name your branches in the pattern <br>
@@ -46,7 +62,9 @@ ATS is a system to digitise the services offered by an airport terminal, for bot
     
     also load static files at the top of your template, like so:<br>
     `{% load staticfiles %}` below the `{% extends 'common/base.html' %}`
-    
+
+### Trobleshooting
+- If you're facing problems in making migrations after make changes to models or after pulling from GitHub, delete all files in migrations folder in your app, except `__init__.py`, and then tru to make migrations again. You can also try doing this and also deleting the database and then try making migrations, and migrate.
 
 ### Development
 
