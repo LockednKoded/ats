@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
+<link rel="stylesheet" href="{% static 'css/book/list_book.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -50,6 +50,7 @@
 
                             <table class="table table-bordered table-hover">
                                 <thead>
+                                <th>Name</th>
                                 <th>ROOM</th>
                                     <th>DURATION</th>
                                     <th>Check-in</th>
@@ -61,6 +62,7 @@
 
 
                                     <tr >
+                                        <td>{{ obj.Name }}</td>
                                         <td>{{ obj.Room }}</td>
                                         <td>{{ obj.duration }}</td>
                                         <td>{{ obj.check_in }}</td>
@@ -77,124 +79,7 @@
                     </div><!-- end tab pane departure -->
 
 
-                    <div class="tab-pane" id="arrivalTab">
-                        <div class="table-responsive">
 
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <th>Airline</th>
-                                    <th>Flight No</th>
-                                    <th>Origin</th>
-                                    <th>Terminal</th>
-                                    <th>Concourse</th>
-                                    <th>Arrival Time</th>
-                                    <th>Status</th>
-                                </thead>
-                                <tbody>
-                                    {% for flight in flight_list %}
-                                    {% if flight.revised_arrival > current_time %}
-
-                                    <tr class="
-                                                {% if flight.approved_plan == True %}
-                                                    {% if flight.revised_arrival == flight.scheduled_arrival %}
-                                                        success
-                                                    {% else %}
-                                                        warning
-                                                    {% endif %}
-                                                {% else %}
-                                                    info
-                                                {% endif %}
-                                              " data-href="{{ flight.get_absolute_url }}">
-                                        <td>{{ flight.airline.name }}</td>
-                                        <td>{{ flight.flight_no }}</td>
-                                        <td>{{ flight.origin }}</td>
-                                        <td>{{ flight.terminal }}</td>
-                                        <td>{{ flight.concourse }}</td>
-                                        <td>{{ flight.revised_arrival|date:'d M H:i' }} hrs</td>
-                                        <td>
-                                            {% if flight.approved_plan == True %}
-                                                {% if flight.revised_arrival == flight.scheduled_arrival %}
-                                                    <div class="label label-success"><span>On Time</span></div>
-                                                {% else %}
-                                                    <div class="label label-warning"><span>Delayed</span></div>
-                                                {% endif %}
-                                            {% else %}
-                                                <div class="label label-info"><span>Un-Approved</span></div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-
-                                    {% endif %}
-                                    {% empty %}
-                                        <tr>
-                                            <td colspan="7">No Flights</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-
-                        </div><!-- end table responsive -->
-                    </div><!-- end tab pane arrival -->
-
-
-                    <div class="tab-pane" id="pastFlightsTab">
-                        <div class="table-responsive">
-
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <th>Airline</th>
-                                    <th>Flight No</th>
-                                    <th>Destination</th>
-                                    <th>Terminal</th>
-                                    <th>Concourse</th>
-                                    <th>Departure Time</th>
-                                    <th>Status</th>
-                                </thead>
-                                <tbody>
-                                    {% for flight in flight_list %}
-                                    {% if flight.revised_departure < current_time %}
-
-                                    <tr class="
-                                                {% if flight.approved_plan == True %}
-                                                    {% if flight.revised_departure == flight.scheduled_departure %}
-                                                        success
-                                                    {% else %}
-                                                        warning
-                                                    {% endif %}
-                                                {% else %}
-                                                    info
-                                                {% endif %}
-                                              " data-href="{{ flight.get_absolute_url }}">
-                                        <td>{{ flight.airline.name }}</td>
-                                        <td>{{ flight.flight_no }}</td>
-                                        <td>{{ flight.destination }}</td>
-                                        <td>{{ flight.terminal }}</td>
-                                        <td>{{ flight.concourse }}</td>
-                                        <td>{{ flight.revised_departure|date:'d M H:i' }} hrs</td>
-                                        <td>
-                                            {% if flight.approved_plan == True %}
-                                                {% if flight.revised_departure == flight.scheduled_departure %}
-                                                    <div class="label label-success"><span>On Time</span></div>
-                                                {% else %}
-                                                    <div class="label label-warning"><span>Delayed</span></div>
-                                                {% endif %}
-                                            {% else %}
-                                                <div class="label label-info"><span>Un-Approved</span></div>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-
-                                    {% endif %}
-                                    {% empty %}
-                                        <tr>
-                                            <td colspan="7">No Flights</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-
-                        </div><!-- end table responsive -->
-                    </div><!-- end tab pane past flights -->
 
 
                 </div><!-- end tab-content -->

@@ -9,11 +9,12 @@ from django.core.urlresolvers import reverse
 
 
 class Album(models.Model):
+    Name = models.CharField(max_length=50)
     Room = models.CharField(max_length=50)
-    check_in = models.CharField(max_length=250)
-    check_out = models.CharField(max_length=250)
-    duration = models.CharField(max_length=250)
-    amt = models.CharField(max_length=250)
+    check_in = models.DateTimeField(auto_now=False,auto_now_add=False)
+    check_out = models.DateTimeField(auto_now=False,auto_now_add=False)
+    duration = models.PositiveSmallIntegerField(default=1)
+
 
 
 

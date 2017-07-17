@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
 from .models import Album
@@ -20,25 +20,16 @@ def index(request):
 
 
 def post_create(request):
-    form=postform
-    MyProfileForm = postform(request.POST, request.FILES)
+    if request.method == "POST":
+        form = postform(request.POST)
 
-    if request.method=="POST":
-        print request.POST.get("Room")
-        print request.POST.get("duration")
-        print request.POST.get("check_in")
-        print request.POST.get("check_out")
-
-    if MyProfileForm.is_valid():
-        profile = Album()
-        profile.Room = MyProfileForm.cleaned_data["Room"]
-        profile.check_in = MyProfileForm.cleaned_data["check_in"]
-        profile.check_out = MyProfileForm.cleaned_data["check_out"]
-        profile.duration = MyProfileForm.cleaned_data["duration"]
-        profile.save()
-        saved = True
-
-    context = {}
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.save()
+            return redirect("book:listbookings")
+    else:
+        form = postform()
+    context = {'form':postform}
     return render(request, 'book/album_form.html', context)
 
 def post_details(request):
