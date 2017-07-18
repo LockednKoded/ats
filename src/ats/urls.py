@@ -19,7 +19,7 @@ urlpatterns = [
 
     url(r'^contact/', contact_us, name='contact_us'),
     url(r'^services/', services, name='services'),
-    url(r'^staff/', staff, name='staff'),
+    url(r'^developedby/', developedby, name='developedby'),
     url(r'^about/', about_us, name='about_us'),
 
     

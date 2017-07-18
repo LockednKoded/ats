@@ -13,8 +13,8 @@ def services(request):
     return render(request, 'common/services.html', {})
 
 
-def staff(request):
-    return render(request, 'common/staff.html', {})
+def developedby(request):
+    return render(request, 'common/developedby.html', {})
 
 
 def about_us(request):
