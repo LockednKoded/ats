@@ -101,7 +101,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'atsproject$atsprojectdb',
+            'NAME': 'atsproject$atsprojectdb2',
             'USER': 'atsproject',
             'PASSWORD': 'pass1234',
             'HOST': 'atsproject.mysql.pythonanywhere-services.com',
