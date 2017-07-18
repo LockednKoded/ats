@@ -116,3 +116,7 @@ ul li > span {
         width: 100px;
     }
 }
+
+.edit-btn {
+    text-align: center;
+}
