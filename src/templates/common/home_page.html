@@ -1,51 +1,127 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to ATS</title>
-
-
-
-</head>
-<body>
 {% extends 'common/base.html' %}
 
 {% load staticfiles %}
 
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/flight_info/list_flights.css' %}">
 <link rel="stylesheet" href="{% static 'css/common/my-slider.css' %}">
-<script src="{% static 'js/common/ism-2.2.min.js' %}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/common/social-media.css' %}">
 {% endblock %}
 
 {% block content %}
 
 <div class="col-sm-12">
 
-    <div class="row page-header">
+    <div class="row">
 
-            <!--Image slider-->
+            <div class="col-xs-12">
+                <!--Image slider-->
 
-            <div class="ism-slider" data-transition_type="zoom" data-play_type="loop" data-interval="3000" id="my-slider">
-  <ol>
-    <li>
-      <img src="static/images/common/1500317638519_843850.jpg"  >
-    </li>
-    <li>
-      <img src="static/images/common/aircraft-479772_1280.jpg">
-    </li>
-    <li>
-      <img src="static/images/common/1500317637936_211022.jpg">
-    </li>
-  </ol>
-</div>
-<p class="ism-badge" id="my-slider-ism-badge"><a class="ism-link" href="http://imageslidermaker.com" rel="nofollow">generated with ISM</a></p>
+                <div class="ism-slider" data-transition_type="zoom" data-play_type="loop" data-interval="3000" id="my-slider">
 
-<!--code for image slider ends-->
+                    <ol>
+                        <li>
+                          <img src="static/images/common/1500317638519_843850.jpg"  >
+                        </li>
+                        <li>
+                          <img src="static/images/common/aircraft-479772_1280.jpg">
+                        </li>
+                        <li>
+                          <img src="static/images/common/1500317637936_211022.jpg">
+                        </li>
+                    </ol>
 
+                </div>
+                <p class="ism-badge" id="my-slider-ism-badge"><a class="ism-link" href="http://imageslidermaker.com" rel="nofollow">generated with ISM</a></p>
+
+                <!--code for image slider ends-->
+            </div>
+
+            <div class="col-xs-12">
+                <div class="row">
+
+                    <div class="col-sm-4">
+                        <div class="panel panel-info">
+
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Welcome</h3>
+                          </div>
+                          <div class="panel-body">
+                            <p>
+                                Welcome to our website.
+                            </p>
+                            <p>
+                                It offers services for both our employees as well as travellers.
+                                Here, at ATS, Delhi we strive to provide the best experience to travellers. We offer a
+                                wide range of services like: Parking assistance, baggage handling, flight info display,
+                                lounge facilities and security.
+                            </p>
+                            <p>
+                                This website is also a central resource for our staff where they can check profiles/update them
+                                , as well as manage flight info, baggage, parking, cargo, security details.
+                            </p>
+                              <p>
+                                  Happy Travelling <span class="glyphicon glyphicon-send"></span>
+                              </p>
+
+                          </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="panel panel-success">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Parent Organisation</h3>
+                      </div>
+                      <div class="panel-body">
+
+                          <h4>Airports Authority Of India</h4>
+                          <p>
+                              The Airports Authority of India or AAI under the Ministry of Civil Aviation is responsible
+                              for creating, upgrading, maintaining and managing civil aviation infrastructure in India.
+                              It provides Air traffic management (ATM) services over Indian airspace and adjoining
+                              oceanic areas.
+                          </p>
+
+                          <p>
+                              AAI manages 11
+                              International Airports, 08 Customs Airports, 81 Domestic Airports and 25 Civil Enclaves
+                              at Defence Airfields.
+                          </p>
+
+                          <p><a href="#" class="btn btn-primary" role="button">Learn More</a> <a href="www.aai.aero" class="btn btn-success" role="button">Visit AAI website</a></p>
+
+                      </div>
+                    </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="thumbnail">
+
+                          <img src="{% static 'images/common/contact.png' %}" style="height: 140px;" alt="Contact Image">
+                          <div class="caption">
+                              <h4>Customer Care:</h4>
+                              <p>+91-11-24632950</p>
+
+                              <h4>Follow Us:</h4>
+                              <p>
+                                <a href="#" class="fa fa-facebook"></a>
+                                <a href="#" class="fa fa-twitter"></a>
+                                <a href="#" class="fa fa-google"></a>
+                              </p>
+                          </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
     </div>
 </div>
 {% endblock %}
-</body>
-</html>
+
+{% block script %}
+<script src="{% static 'js/common/ism-2.2.min.js' %}"></script>
+{% endblock %}
