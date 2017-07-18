@@ -83,7 +83,7 @@ def get_days_field(days):
 
 
 def add_flight(request):
-    if request.user.is_superuser or request.user.is_superuser:
+    if request.user.is_superuser or request.user.is_staff:
 
         if request.method == "POST":
             form = FlightForm(request.POST)
