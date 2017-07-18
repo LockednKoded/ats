@@ -1,6 +1,10 @@
 # Airport Terminal Services (ats) system
 
 ATS is a system to digitise the services offered by an airport terminal, for both both passengers and employees.
+<br>
+Check out [ATS hosted project](https://atsproject.pythonanywhere.com)
+<br>
+Developed for: [Airports Authority of India](www.aai.aero/) by AAI Interns 2017
 
 ### Dependencies
 To run this project you need to install these packages/dependencies in your virtual environment(preferrably):
@@ -9,7 +13,7 @@ To run this project you need to install these packages/dependencies in your virt
 - Django v1.11
 
 - Pillow <br>
-`pip install pillow`
+`pip install Pillow`
 
 - Django Crispy forms <br>
 `pip install django-crispy-forms`
@@ -17,8 +21,36 @@ To run this project you need to install these packages/dependencies in your virt
 - Django datetime widget <br>
 `pip install django-datetime-widget`
 
+- MySQL client <br>
+`pip install mysqlclient`
 
-### Instructions
+Also, to run locally you need to have a file "local.py" in the following directory: src/ats/settings/ having the following code:
+~~~~
+# This file is gitignored to keep production and local settings seprate
+
+import os
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+DEBUG = True
+
+SECURE_SSL_REDIRECT = False
+
+~~~~
+
+### How to run:
+  - Install/satify the above mentioned dependencies, including creating "local.py" file <br>
+  - Make migrations, and migrate
+
+### Instructions for collabprators:
   
   - Name your branches in the pattern <br>
     `your_module_name - branch_name`
@@ -73,4 +105,9 @@ Want to contribute? Great! Fork me!
 ### License
 MIT
 
+### Say Hi
+[LinkedIn Links](https://atsproject.pythonanywhere.com/staff/)
+
 **If collaborator: Please edit this readme for adding any more important instructions**
+
+*last uplated: 18 July 2017*
