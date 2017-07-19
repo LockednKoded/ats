@@ -13,8 +13,10 @@
     <h3> Weight: {{baggage.weight}} </h3>
     <h3> Conveyor No: {{baggage.conveyor_no}} </h3>
 
+{% if request.user.is_superuser or request.user.is_staff %}
 <a class="btn btn-info" href="{% url 'baggage_handling:edit-baggage' baggage.pk %}"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
 <a class="btn btn-danger" href="{% url 'baggage_handling:delete-baggage' baggage.pk %}"> <span class="glyphicon glyphicon-trash"></span> Delete</a>
+{% endif %}
 
 {% endblock %}
 
