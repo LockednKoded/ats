@@ -1,25 +1,17 @@
-.page-header {
-    margin-top: 20px;
+p
+{   text-align: justify;
+    text-justify: inter-word;
 }
-.page-header h3 {
-    margin-bottom: 0;
-    margin-top: 0;
+.padding
+{
+padding:5%;
 }
-
-
-tr[data-href] { cursor: pointer }
-
-/* ///////////////////////////
-    Styles for table rows
-   /////////////////////////// */
-
-/* Override this to change table ow hover color
-
-.table-hover > tbody > tr.success > td {
-    background-color: #1870da;
+.bg
+{
+background:#263238!important;
+color:#ffffff!important;
 }
-
-.table-hover > tbody > tr.success:hover > td {
-    background-color: #1870da;
+.margin
+{
+margin:5%;
 }
-*/

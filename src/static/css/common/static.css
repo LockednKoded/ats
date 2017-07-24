@@ -1,0 +1,42 @@
+body
+{
+  background: #b0bec5;
+  color: black;
+}
+h3
+{
+  font-weight:bold;
+}
+p
+{   text-align: justify;
+    text-justify: inter-word;
+}
+.padding
+{
+    padding:2%;
+}
+.box
+{
+    color:white;
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    padding: 5%;
+    background: -moz-linear-gradient(right, #546e7a, #263238);
+    background: -webkit-linear-gradient(right, #546e7a, #263238);
+    background: -o-linear-gradient(right, #546e7a, #263238);
+    background: linear-gradient(right, #546e7a, #263238);
+    box-shadow: 10px 10px 25px #000000;
+}
+.box-shadow
+{
+    box-shadow: 10px 10px 25px #000000;
+}
+.bg
+{
+    color:white;
+    background: -moz-linear-gradient(right, #37474f, #263238);
+    background: -webkit-linear-gradient(right, #37474f, #263238);
+    background: -o-linear-gradient(right, #37474f, #263238);
+    background: linear-gradient(right, #37474f, #263238);
+}

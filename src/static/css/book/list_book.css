@@ -1,0 +1,17 @@
+p
+{   text-align: justify;
+    text-justify: inter-word;
+}
+.padding
+{
+padding:5%;
+}
+.bg
+{
+background:#263238!important;
+color:#ffffff!important;
+}
+.margin
+{
+margin:5%;
+}

@@ -1,70 +1,80 @@
 {% extends 'common/base.html' %}
+{% load staticfiles %}
 
+{% block title %}
+<title>ATS - Accounts</title>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/accounts/accounts.css' %}">
+{% endblock %}
 
 {% block content %}
 
-    <table>
-        <tr>
-            <td><b>Username</b></td>
-            <td>{{ user.username }}</td>
-        </tr>
-        <tr>
-            <td><b>First Name</b></td>
-            <td>{% if user.first_name %}{{ user.first_name }}{% else %}Not Set{% endif %}</td>
-        </tr>
-        <tr>
-            <td><b>Last Name</b></td>
-            <td>{% if user.last_name %}{{ user.last_name }}{% else %}Not Set{% endif %}</td>
-        </tr>
-        <tr>
-            <td><b>User Type</b></td>
-            <td>{{ user.profile.user_type }}</td>
-        </tr>
-        <tr>
-            <td><b>Contact No</b></td>
-            <td>{% if user.profile.contact_no %}{{ user.profile.contact_no }}{% else %}Not Set{% endif %}</td>
-        </tr>
-        <tr>
-            <td><b>Photo</b></td>
-            <td>{% if user.profile.photo %}<img src="{{ user.profile.photo.url }}" alt="User profile here">{% else %} Photo not set {% endif %}</td>
-        </tr>
-        {% if is_traveller %}
-            <tr>
-                <td><b>Ticket No</b></td>
-                <td>{% if user.profile.ticket_no %}{{ user.profile.ticket_no }}{% else %}Not Set{% endif %}</td>
-            </tr>
-            <tr>
-                <td><b>Flight No</b></td>
-                <td>{% if user.profile.flight_no %}{{ user.profile.flight_no }}{% else %}Not Set{% endif %}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td><b>Employee ID</b></td>
-                <td>{% if user.profile.employee_id %}{{ user.profile.employee_id }}{% else %}Not Set{% endif %}</td>
-            </tr>
-            <tr>
-                <td><b>DOJ</b></td>
-                <td>{% if user.profile.DOJ %}{{ user.profile.DOJ }}{% else %}Not Set{% endif %}</td>
-            </tr>
-            <tr>
-                <td><b>DOB</b></td>
-                <td>{% if user.profile.DOB %}{{ user.profile.DOB }}{% else %}Not Set{% endif %}</td>
-            </tr>
-            <tr>
-                <td><b>Designation</b></td>
-                <td>{% if user.profile.designation %}{{ user.profile.designation }}{% else %}Not Set{% endif %}</td>
-            </tr>
-            <tr>
-                <td><b>Department</b></td>
-                <td>{% if user.profile.department %}{{ user.profile.department }}{% else %}Not Set{% endif %}</td>
-            </tr>
-            <tr>
-                <td><b>Salary</b></td>
-                <td>{% if user.profile.salary %}{{ user.profile.salary }}{% else %}Not Set{% endif %}</td>
-            </tr>
-        {% endif %}
-    </table>
-
-    <a href="{% url 'accounts:edit-profile' user.pk %}"  class="btn btn-default btn-primary">Edit</a>
+<table>
+    <tr>
+        <td><b>Username</b></td>
+        <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+        <td><b>First Name</b></td>
+        <td>{% if user.first_name %}{{ user.first_name }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>Last Name</b></td>
+        <td>{% if user.last_name %}{{ user.last_name }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>User Type</b></td>
+        <td>{{ user.profile.user_type }}</td>
+    </tr>
+    <tr>
+        <td><b>Contact No</b></td>
+        <td>{% if user.profile.contact_no %}{{ user.profile.contact_no }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>Photo</b></td>
+        <td>{% if user.profile.photo %}<img src="{{ user.profile.photo.url }}" alt="User profile here">{% else %} Photo
+            not set {% endif %}
+        </td>
+    </tr>
+    {% if is_traveller %}
+    <tr>
+        <td><b>Ticket No</b></td>
+        <td>{% if user.profile.ticket_no %}{{ user.profile.ticket_no }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>Flight No</b></td>
+        <td>{% if user.profile.flight_no %}{{ user.profile.flight_no }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td><b>Employee ID</b></td>
+        <td>{% if user.profile.employee_id %}{{ user.profile.employee_id }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>DOJ</b></td>
+        <td>{% if user.profile.DOJ %}{{ user.profile.DOJ }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>DOB</b></td>
+        <td>{% if user.profile.DOB %}{{ user.profile.DOB }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>Designation</b></td>
+        <td>{% if user.profile.designation %}{{ user.profile.designation }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>Department</b></td>
+        <td>{% if user.profile.department %}{{ user.profile.department }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    <tr>
+        <td><b>Salary</b></td>
+        <td>{% if user.profile.salary %}{{ user.profile.salary }}{% else %}Not Set{% endif %}</td>
+    </tr>
+    {% endif %}
+</table>
+<br/>
+<a href="{% url 'accounts:edit-profile' user.pk %}" class="btn btn-default btn-primary">Edit</a>
 
 {% endblock %}

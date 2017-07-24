@@ -13,9 +13,8 @@ class VehicleDetail(models.Model):
     )
     vehicle_no = models.CharField(max_length=12, primary_key=True)
     vehicle_type = models.IntegerField(choices=VEH_TYPES)
-    date = models.DateField()
-    time_in = models.TimeField()
-    time_out = models.TimeField()
+    time_in = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
+    time_out = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
 
     def __str__(self):
         return self.vehicle_no

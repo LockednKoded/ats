@@ -1,0 +1,33 @@
+body
+{
+  background: #b0bec5;
+}
+h3
+{
+  font-weight:bold;
+}
+.box
+{
+    color:white;
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    padding: 5%;
+    background: -moz-linear-gradient(right, #37474f, #263238);
+    background: -webkit-linear-gradient(right, #37474f, #263238);
+    background: -o-linear-gradient(right, #37474f, #263238);
+    background: linear-gradient(right, #37474f, #263238);
+    box-shadow: 10px 10px 25px #000000;
+}
+table
+{
+    width:  100%;
+}
+td,th
+{
+    border: 1px solid black;
+}
+tr:nth-child(even)
+{
+    background-color: #f2f2f2
+}
