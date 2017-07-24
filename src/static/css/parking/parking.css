@@ -1,7 +1,7 @@
 .glyphicon-map-marker
 {
     font-size:2em;
-	color:#0B0B61;
+	color:#263238;
 }
 .black
 {
@@ -26,7 +26,8 @@
 }
 .panel-heading
 {
-    background-color:#0B0B61!important
+    color: white!important;
+    background-color:#263238!important
 }
 .center
 {

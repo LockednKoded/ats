@@ -24,7 +24,7 @@
     <!-- Custom app/module CSS-->
     {% block style %}{% endblock %}
 
-    <link rel="shortcut icon" href="{% static 'images/common/favicon.ico' %}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{% static 'images/common/favicon.ico' %}" type="image/x-icon"/>
 
     <!-- Include Modernizr in the head, before any other Javascript -->
     <script src="{% static 'bootstrap/js/modernizr-2.6.2.min.js' %}"></script>
@@ -32,156 +32,162 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-            <!-- Inside container but still occupies full-width because its positioned fixed -->
-            <div class="container">
-
-                <div class="navbar-header">
-
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Airport Terminal Services</a>
-                </div><!-- end navbar-header-->
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="topNavbar">
-                    <ul class="nav navbar-nav">
-
-                        <li class="dropdown {% block services_active %}{% endblock %}">
-
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Services<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-                                <li><a href="{% url 'flight_info:list-flights' %}">Flights</a></li>
-								<li><a href="{% url 'parking:details' %}">Parking</a></li>
-								<li><a href="{% url 'baggage_handling:index' %}">Baggage Handl.</a></li>
-								<li><a href="{% url 'book:listbookings' %}">Retiring Rooms</a></li>
-                                <li><a href="#">Security</a></li>
-                                <li><a href="#">Terminals</a></li>
-								<li class="divider"></li>
-								<li class="dropdown-header">More Services</li>
-								<li><a href="{% url 'cargo:index' %}">Cargo Ship.</a></li>
-								<li><a href="{% url 'maintenance:test-view' %}">Maintenance</a></li>
-							</ul><!--end opened-menu-->
-
-						</li><!--end dropdown list-->
-                        <li class="{% block about_us_active %}{% endblock %}"><a href="{% url 'about_us' %}">About Us</a></li>
-                        <li><a href="{% url 'contact_us' %}" class="{% block contact_us_active %}{% endblock %}">Contact Us</a></li>
-                        <li><a href="{% url 'developedby' %}" class="{% block staff_active %}{% endblock %}">Developers</a></li>
-
-                    </ul><!--end nav ul lisr-->
-
-                    <ul class="nav navbar-nav navbar-right">
-
-                        {% if request.user.is_authenticated %}
-                            <li><a href="#">Hello,
-                                {{ request.user.username }}
-                            </a></li>
-
-                            <li class="dropdown">
-
-    							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Account<span class="caret"></span></a>
-    							<ul class="dropdown-menu">
-                                    <li><a href="{% url 'accounts:view-profile' request.user.pk %}">Profile</a></li>
-    								<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-    							</ul><!--end opened-menu-->
-
-    						</li><!--end dropdown list-->
-
-                        {% else %}
-                            <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a></li>
-                            <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Sign Up</a></li>
-                        {% endif %}
-
-                    </ul><!-- end nav-ul -->
-
-                </div><!--end navbar-collapse-->
-
-            </div><!-- end navbar content container-->
-        </nav><!-- end navbar -->
-
-
-
-
-        <div class="row actual_content">
-            {% block content %}
-            Add your content here.
-            {% endblock %}
-        </div>
-
-
-    </div><!-- end global container-->
-
-
-
-    <footer>
-
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <!-- Inside container but still occupies full-width because its positioned fixed -->
         <div class="container">
 
-            <div class="row">
+            <div class="navbar-header">
 
-                <div class="col-sm-2">
-                    <h6>Copyright &copy; 2017 AAI</h6>
-                </div><!-- end sol-sm-2-->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNavbar"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                <div class="col-sm-4">
-					<h6>About Us</h6>
-					<p>ATS is a system to digitise the services offered by an airport terminal, for both both passengers and employees.</p>
-				</div><!--end col-sm-4-->
+                <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Airport
+                    Terminal Services</a>
+            </div><!-- end navbar-header-->
 
-                <div class="col-sm-2">
-					<h6>Navigation</h6>
-					<ul class="unstyled">
-						<li><a href="/">Home</a></li>
-						<li><a href="/services/">Services</a></li>
-						<li><a href="/contact/">Contact Us</a></li>
-					</ul>
-				</div><!--end colsm-2-->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <ul class="nav navbar-nav">
 
-                <div class="col-sm-2">
-					<h6>Follow Us</h6>
-					<ul class="unstyled">
-						<li><a href="https://twitter.com/hashtag/aai?lang=en" target="_blank">Twitter</a></li>
-						<li><a href="https://www.facebook.com/AAINEWDELHI/" target="_blank">Facebook</a></li>
-						<li><a href="https://plus.google.com/101311792574146194013" target="_blank">Google+</a></li>
-					</ul>
-				</div><!--end colsm-2-->
+                    <li class="dropdown {% block services_active %}{% endblock %}">
 
-                <div class="col-sm-2">
-					<h6>Coded with <span class="glyphicon glyphicon-heart"></span> by AAI Interns 2017</h6>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'flight_info:list-flights' %}">Flights</a></li>
+                            <li><a href="{% url 'parking:details' %}">Parking</a></li>
+                            <li><a href="{% url 'baggage_handling:index' %}">Baggage Handling</a></li>
+                            <li><a href="{% url 'book:index' %}">Retiring Rooms</a></li>
+                            <li><a href="{% url 'maintenance:test-view' %}">Maintenance</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">More Services</li>
+                            <li><a href="{% url 'cargo:index' %}">Cargo Ship.</a></li>
+                        </ul><!--end opened-menu-->
 
-				</div><!--end colsm-2-->
+                    </li><!--end dropdown list-->
+                    <li class="{% block about_us_active %}{% endblock %}"><a href="{% url 'about_us' %}">About Us</a>
+                    </li>
+                    <li><a href="{% url 'contact_us' %}" class="{% block contact_us_active %}{% endblock %}">Contact
+                        Us</a></li>
+                    <li><a href="{% url 'developedby' %}" class="{% block staff_active %}{% endblock %}">Developers</a>
+                    </li>
 
-            </div><!--end row-->
+                </ul><!--end nav ul lisr-->
 
-        </div><!--end footer container-->
+                <ul class="nav navbar-nav navbar-right">
 
-    </footer><!-- end footer-->
+                    {% if request.user.is_authenticated %}
+                    <li><a href="#">Hello,
+                        {{ request.user.username }}
+                    </a></li>
+
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                                class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Account<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'accounts:view-profile' request.user.pk %}">Profile</a></li>
+                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                        </ul><!--end opened-menu-->
+
+                    </li><!--end dropdown list-->
+
+                    {% else %}
+                    <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Login</a>
+                    </li>
+                    <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Sign
+                        Up</a></li>
+                    {% endif %}
+
+                </ul><!-- end nav-ul -->
+
+            </div><!--end navbar-collapse-->
+
+        </div><!-- end navbar content container-->
+    </nav><!-- end navbar -->
 
 
+    <div class="row actual_content">
+        {% block content %}
+        Add your content here.
+        {% endblock %}
+    </div>
 
-    <!-- All Javascript at the bottom of the page for faster page loading -->
 
-	<!-- First try for the online version of jQuery-->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</div><!-- end global container-->
 
-	<!-- If no online access, fallback to our hardcoded version of jQuery -->
-	<script>window.jQuery || document.write('<script src="{% static 'bootstrap/js/jquery-3.2.1.min.js' %}"><\/script>')</script>
 
-	<!-- Bootstrap JS -->
-	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<footer>
 
-	<!-- Custom Base JS -->
-	<script src="{% static 'js/common/base.js' %}"></script>
+    <div class="container">
 
-    <!-- Custom app/module JS-->
-    {% block script %}{% endblock %}
+        <div class="row">
+
+            <div class="col-sm-2">
+                <h6>Copyright &copy; 2017 AAI</h6>
+            </div><!-- end sol-sm-2-->
+
+            <div class="col-sm-4">
+                <h6>About Us</h6>
+                <p>ATS is a system to digitise the services offered by an airport terminal, for both both passengers and
+                    employees.</p>
+            </div><!--end col-sm-4-->
+
+            <div class="col-sm-2">
+                <h6>Navigation</h6>
+                <ul class="unstyled">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">Services</a></li>
+                    <li><a href="/contact/">Contact Us</a></li>
+                </ul>
+            </div><!--end colsm-2-->
+
+            <div class="col-sm-2">
+                <h6>Follow Us</h6>
+                <ul class="unstyled">
+                    <li><a href="https://twitter.com/hashtag/aai?lang=en" target="_blank">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/AAINEWDELHI/" target="_blank">Facebook</a></li>
+                    <li><a href="https://plus.google.com/101311792574146194013" target="_blank">Google+</a></li>
+                </ul>
+            </div><!--end colsm-2-->
+
+            <div class="col-sm-2">
+                <h6>Coded with <span class="glyphicon glyphicon-heart"></span> by AAI Interns 2017</h6>
+
+            </div><!--end colsm-2-->
+
+        </div><!--end row-->
+
+    </div><!--end footer container-->
+
+</footer><!-- end footer-->
+
+
+<!-- All Javascript at the bottom of the page for faster page loading -->
+
+<!-- First try for the online version of jQuery-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<!-- If no online access, fallback to our hardcoded version of jQuery -->
+<script>window.jQuery || document.write('<script src="{% static 'bootstrap/js/jquery-3.2.1.min.js' %}"><\/script>')
+</script>
+
+<!-- Bootstrap JS -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- Custom Base JS -->
+<script src="{% static 'js/common/base.js' %}"></script>
+
+<!-- Custom app/module JS-->
+{% block script %}{% endblock %}
 
 </body>
 </html>

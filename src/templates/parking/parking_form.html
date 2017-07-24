@@ -8,22 +8,28 @@
 
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/parking/parking.css' %}">
+<link rel="stylesheet" href="{% static 'css/common/jquery.datetimepicker.min.css' %}">
 {% endblock %}
 
 {% block content %}
 {% if request.user.is_superuser or request.user.is_staff %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">{{ title_message }}</div>
-        <div class="center padding">
-            <!--enctype added since we are also accepting images by this form in some cases-->
-            <form action="" method="post" class="" enctype="multipart/form-data">
+<div class="panel panel-primary">
+    <div class="panel-heading">{{ title_message }}</div>
+    <div class="center padding">
+        <!--enctype added since we are also accepting images by this form in some cases-->
+        <form action="" method="post" class="" enctype="multipart/form-data">
 
             {% csrf_token %}
             {{ form |crispy }}
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">{{ submit_message }}</button>
-            </form>
-        </div>
+            <button class="btn btn-lg btn-default btn-block" type="submit">{{ submit_message }}</button>
+        </form>
     </div>
+</div>
 {% endif %}
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/common/jquery.datetimepicker.full.min.js' %}"></script>
+<script src="{% static 'js/flight_info/form.js' %}"></script>
 {% endblock %}

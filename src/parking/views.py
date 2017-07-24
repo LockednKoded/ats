@@ -2,11 +2,12 @@ from .models import ParkingSpot, VehicleDetail
 from .forms import VehicleForm, ParkingForm
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect, get_object_or_404
+
+
 # Create your views here.
 
 
 def parking_details(request):
-
     try:
         spots = ParkingSpot.objects.latest('last_updated')
 
@@ -63,7 +64,6 @@ def update_spots(request):
 
 
 def search_vehicle(request):
-
     if request.user.is_superuser or request.user.is_superuser:
 
         try:
@@ -78,7 +78,7 @@ def search_vehicle(request):
                 result = VehicleDetail.objects.get(vehicle_no=query)
                 context.update({'result': result})
         except (KeyError, VehicleDetail.DoesNotExist):
-                context.update({'no_match': 1})
+            context.update({'no_match': 1})
 
         return render(request, 'parking/parking.html', context)
 
@@ -87,7 +87,6 @@ def search_vehicle(request):
 
 
 def add_vehicle(request):
-
     if request.user.is_superuser or request.user.is_staff:
 
         if request.method == "POST":
@@ -113,7 +112,6 @@ def add_vehicle(request):
 
 
 def delete_vehicle(request, pk):
-
     if request.user.is_superuser or request.user.is_staff:
         vehicle = get_object_or_404(VehicleDetail, vehicle_no=pk)
         vehicle.delete()

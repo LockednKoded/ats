@@ -9,7 +9,6 @@ html {
 
 body {
     font-family: 'Open Sans', sans-serif;
-
     /*Added for fixing footer to bottom of page*/
     min-height: 100%;
     position: relative; /*So that we can absolutely position footer inside it*/
@@ -21,7 +20,7 @@ body {
 */
 
 .navbar {
-    background-color: #0B0B61;
+    background-color: #263238;
 }
 
 /* For styling normal nav elements*/
@@ -34,15 +33,15 @@ body {
 
 /* Styling to override default style for active class*/
 .navbar .navbar-nav li.active a {
-    background-color: #0B0B61;
+    background-color: #37474f;
     border-bottom: 4px solid #0080FF;
 }
 .navbar .navbar-nav li.active a:hover {
-    background-color: #0B0B61;
+    background-color: #37474f;
     color: #A9E2F3;
 }
 .navbar .navbar-nav li.active a:focus{
-    background-color: #0B0B61;
+    background-color: #37474f;
     color: #A9E2F3;
 }
 
@@ -74,10 +73,10 @@ body {
     border-color: #EEE;
 }
 .navbar .navbar-toggle:hover {
-    background-color: #29088A;
+    background-color: #37474f;;
 }
 .navbar .navbar-toggle:focus {
-    background-color: #29088A;
+    background-color: #37474f;
 }
 
 /*Putting border on the right in collapsed state*/
@@ -92,12 +91,12 @@ body {
 
 /*Overriding default bootstrap styles*/
 .navbar .nav .dropdown.open > a { /*When the drop-down button is clicked*/
-    background-color: #0B0B61;
+    background-color: #37474f;
     color: #A9E2F3;
 }
 
 .navbar .nav .dropdown .dropdown-menu {
-    background-color: #0B0B61;
+    background-color: #37474f;
 }
 
 .navbar .nav .dropdown .dropdown-menu a {
@@ -105,11 +104,11 @@ body {
 }
 .navbar .nav .dropdown .dropdown-menu a:hover {
     color: #A9E2F3;
-    background-color: #0B0B61;
+    background-color: #37474f;
 }
 
 .navbar .nav .dropdown .dropdown-menu .divider {
-    background-color: #A9D0F5;
+    background-color: #37474f;
 }
 
 .navbar .nav .dropdown .dropdown-menu .dropdown-header {
@@ -139,7 +138,7 @@ body {
 
     /*Added for fixing footer to bottom of page*/
     /*Increase this value if footer is covering any content*/
-    padding-bottom: 30em;
+    padding-bottom: 25em;
 }
 
 /*  ******************
@@ -148,7 +147,7 @@ body {
 */
 
 footer {
-    background: #333;
+    background: #263238;
     color: #EEE;
     font-size: 12px;
     padding: 20px;

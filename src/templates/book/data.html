@@ -37,7 +37,8 @@
             <div class="tabbable">
 
                 <ul class="nav nav-tabs">
-                    <li role="presentation" class="active"><a href="#departureTab" data-toggle="tab">OUR CURRENT BOOKINGS</a></li>
+                    <li role="presentation" class="active"><a href="#departureTab" data-toggle="tab">OUR CURRENT
+                        BOOKINGS</a></li>
 
                 </ul>
 
@@ -52,26 +53,26 @@
                                 <thead>
                                 <th>Name</th>
                                 <th>ROOM</th>
-                                    <th>DURATION</th>
-                                    <th>Check-in</th>
-                                    <th>Check-out</th>
+                                <th>CONTACT NO</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
 
                                 </thead>
                                 <tbody>
-                                    {%  for obj in object_list %}
+                                {% for obj in object_list %}
 
 
-                                    <tr >
-                                        <td>{{ obj.Name }}</td>
-                                        <td>{{ obj.Room }}</td>
-                                        <td>{{ obj.duration }}</td>
-                                        <td>{{ obj.check_in }}</td>
-                                        <td>{{ obj.check_out }}</td>
+                                <tr>
+                                    <td>{{ obj.Name }}</td>
+                                    <td>{{ obj.Room }}</td>
+                                    <td>{{ obj.contact_no }}</td>
+                                    <td>{{ obj.check_in }}</td>
+                                    <td>{{ obj.check_out }}</td>
 
-                                    </tr>
+                                </tr>
 
 
-                                    {% endfor %}
+                                {% endfor %}
                                 </tbody>
                             </table>
 
@@ -79,14 +80,19 @@
                     </div><!-- end tab pane departure -->
 
 
-
-
-
                 </div><!-- end tab-content -->
             </div><!-- end tabbable -->
 
 
         </div>
+    </div>
+
+    <div class="buttons-row">
+        {% if request.user.is_superuser or request.user.is_staff %}
+        <a href="{% url 'book:register' %}">
+            <button class="myButton">Add Booking</button>
+        </a>&nbsp;
+        {% endif %}
     </div>
 
 </div>

@@ -19,7 +19,6 @@ class VehicleForm(forms.ModelForm):
         fields = [
             'vehicle_no',
             'vehicle_type',
-            'date',
             'time_in',
             'time_out',
         ]
