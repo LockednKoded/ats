@@ -2,7 +2,7 @@
 
 ATS is a system to digitise the services offered by an airport terminal, for both both passengers and employees.
 <br>
-Check out [ATS hosted project](https://atsproject.pythonanywhere.com)
+Check out [ATS hosted project](https://ats2017.pythonanywhere.com)
 <br>
 Developed for: [Airports Authority of India](www.aai.aero/) by AAI Interns 2017
 
@@ -106,8 +106,8 @@ Want to contribute? Great! Fork me!
 MIT
 
 ### Say Hi
-[LinkedIn Links](https://atsproject.pythonanywhere.com/staff/)
+[LinkedIn Links](https://ats2017.pythonanywhere.com/developedby/)
 
 **If collaborator: Please edit this readme for adding any more important instructions**
 
-*last uplated: 18 July 2017*
+*last uplated: 29 July 2017*
