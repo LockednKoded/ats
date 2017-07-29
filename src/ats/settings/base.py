@@ -101,10 +101,10 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'atsproject$atsprojectdb2',
-            'USER': 'atsproject',
-            'PASSWORD': 'pass1234',
-            'HOST': 'atsproject.mysql.pythonanywhere-services.com',
+            'NAME': 'ats2017$default',
+            'USER': 'ats2017',
+            'PASSWORD': 'DySmutqh',
+            'HOST': 'ats2017.mysql.pythonanywhere-services.com',
             'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", },
         }
     }
