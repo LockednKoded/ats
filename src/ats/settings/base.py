@@ -26,7 +26,7 @@ SECRET_KEY = 'n8b%z+wkbmy-jogezai()1zc3br$epz6lfy&zo5$-of9)pa51$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'atsproject.pythonanywhere.com', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'ats2017.pythonanywhere.com', 'localhost']
 
 # Application definition
 
